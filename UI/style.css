@@ -1,0 +1,221 @@
+
+body,html{
+  height:100%;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
+
+/* globals */
+.container{
+  width:85%;
+  margin: auto;
+  overflow: hidden;
+}
+
+.home{
+  border-bottom:1px solid #2626d9;
+}
+
+ul{
+  padding: 0;
+  list-style-type: none;
+  margin:0;
+}
+
+.background{
+  height:100%;
+  background-image: url(./img/ali-yahya-636068-unsplash.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:cover;
+  transition: margin-right .5s
+}
+
+/* Header */
+header{
+  color: white;
+  margin:0;
+}
+
+header li{
+  display: inline;
+  float: left;
+  padding:10px;
+  margin-left: 20px;
+}
+
+header nav{
+  float: right;
+  margin-top:15px;
+}
+
+header nav a{
+  text-decoration: none;
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 13px;
+  text-transform: uppercase;
+  color:white;
+}
+
+header #brand{
+  float: left;
+}
+header #brand h1{
+  margin-top:10px;
+  padding:0;
+  color:orange;
+  font-family: cursive;
+}
+
+header .icon{
+  display: none;
+}
+
+header .signup{
+  background-color:#006699;
+  border:1px solid #006699;
+  border-radius: 3px;
+}
+
+header .signin{
+  border:1px solid white;
+  margin-left: 40px;
+  border-radius: 3px;
+}
+
+header .signin:hover,header .signup:hover{
+  background-color: #3399ff;
+  border:1px solid #3399ff;
+  transition: border .2s, background-color .2s;
+}
+
+header nav .normlink:hover{
+  border-bottom:3px solid blue;
+}
+
+header nav .icon{
+  display: none;
+}
+
+/* showcase */
+#showcase{
+  text-align: center;
+  margin-top: 40px;
+  color:white;
+  font-family: cursive;
+}
+
+#showcase h1{
+  font-size:30px;
+  color:white;
+}
+
+#showcase p{
+  font-size:13px;
+}
+
+#showcase button{
+  width:150px;
+  height:40px;
+  font-family: cursive;
+  color:white;
+  background-color:purple;
+  border:0;
+  border-radius: 3px;
+  margin-top: 30px;
+}
+
+#showcase button:hover{
+  background-color: #cc00cc;
+}
+
+/* collapsible sidebar */
+.sidemenu{
+  position:fixed;
+  height: 100%;
+  width: 0;
+  z-index: 1;
+  top:0;
+  right:0;
+  transition: .5s;
+  overflow: auto;
+}
+
+.sidemenu div{
+  margin-bottom: 30px;
+}
+
+.sidemenu nav{
+  margin-top: 80px;
+}
+
+.sidemenu nav > a{
+  text-align:left;
+  font-size: 18px;
+  padding: 14px 30px;
+  transition: .3s;
+  color: #4c4c4c;
+}
+
+.sidemenu nav > a:not(.home){
+  border-bottom:1px solid #f4f4f4;
+}
+
+.sidemenu a{
+  text-decoration: none;
+  font-family:'inconsolata', monospace;
+  display:block;
+}
+
+.sidemenu a:hover{
+  background-color:#f2f2f2;
+}
+
+.sidemenu .close-icon{
+   position: absolute;
+   top:0;
+   left:10px;
+   color:#4c4c4c;
+   font-size:30px;
+}
+
+.sidemenu .signup a{
+  display: inline-block;
+  padding: 10px;
+  background-color: blue;
+  margin-left:135px;
+  color: white;
+  border-radius: 3px;
+}
+
+.sidemenu .signup a:hover{
+  background-color: #1a53ff;
+}
+
+/* small screen devices */
+@media (max-width:700px){
+  header nav li{
+    display: none;
+  }
+  header nav .icon{
+    display: inline;
+    font-size: 20px;
+  }
+}
+
+
+@media only screen and (max-height:400px){
+  .background{
+    background-image: none;
+  }
+  body{
+    background-color:#004466;
+  }
+  .sidemenu{
+    background-color: white;
+  }
+}
