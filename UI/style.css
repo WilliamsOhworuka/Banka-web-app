@@ -16,6 +16,10 @@ body{
   overflow: hidden;
 }
 
+a{
+  text-decoration: none;
+}
+
 .home{
   border-bottom:1px solid #2626d9;
 }
@@ -38,6 +42,7 @@ ul{
 /* Header */
 header{
   color: white;
+  min-height: 30px;
   margin:0;
 }
 
@@ -54,7 +59,6 @@ header nav{
 }
 
 header nav a{
-  text-decoration: none;
   font-family: Tahoma, Geneva, sans-serif;
   font-size: 13px;
   text-transform: uppercase;
@@ -87,7 +91,7 @@ header .signin{
   border-radius: 3px;
 }
 
-header .signin:hover,header .signup:hover{
+header .signin:hover,header .signup:hover,.signinForm input[type='submit']:hover{
   background-color: #3399ff;
   border:1px solid #3399ff;
   transition: border .2s, background-color .2s;
@@ -159,9 +163,6 @@ header nav .icon{
   padding: 14px 30px;
   transition: .3s;
   color: #4c4c4c;
-}
-
-.sidemenu nav > a:not(.home){
   border-bottom:1px solid #f4f4f4;
 }
 
@@ -196,6 +197,86 @@ header nav .icon{
   background-color: #1a53ff;
 }
 
+/* sign in page*/
+/* header*/
+#signin-header{
+  background-color: white;
+  margin-bottom: 100px;
+  border: 2px solid #DDD;
+}
+
+#signin-header nav p{
+  color:#888;
+  float: right;
+  padding:10px;
+  margin:0;
+  font-size:14px;
+  font-family:'inconsolata', monospace;
+}
+
+#signin-header #brand a{
+  color:orange;
+}
+
+#signin-header nav a{
+  display:block;
+  color:white;
+  float:right;
+  padding: 10px;
+}
+
+/* body */
+#signin-pageContent{
+  background-color: #f2f2f2;
+}
+
+/* form */
+.signinForm{
+  width:400px;
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+  margin: auto;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size: 15px;
+  border:2px solid #DDD;
+}
+
+.signinForm input:not([type='submit']){
+  margin-bottom: 18px;
+  padding:12px;
+  font-size:15px;
+  width: 300px;
+  border:1px solid black;
+  border-radius: 3px;
+}
+
+.signinForm .label{
+  text-align: left;
+  margin-left:35px;
+  color:#888;
+}
+
+.signinForm input[type='submit']{
+  padding: 10px;
+  background-color:#006699;
+  color: white;
+  border: none;
+  width: 100px;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid #006699;
+}
+
+
+.signinForm a{
+  color:#126483;
+}
+
+.signinForm a:hover{
+  border-bottom: 1px solid #126483;
+}
+
 /* small screen devices */
 @media (max-width:700px){
   header nav li{
@@ -212,7 +293,7 @@ header nav .icon{
   .background{
     background-image: none;
   }
-  body{
+  #index-pageContent{
     background-color:#004466;
   }
   .sidemenu{
