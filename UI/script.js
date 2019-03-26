@@ -1,3 +1,4 @@
+//home page
 let nav=document.getElementById('sidebar')
 let pageContent=document.getElementById('page-content');
 
@@ -12,4 +13,12 @@ function closeMenu(){
   nav.style.width='0';
   pageContent.style.marginRight='0';
   pageContent.style.marginLeft='0';
+}
+
+function closeModal(){
+  document.getElementById('confirmation-modal').style.display='none';
+}
+
+function openModal(){
+  document.getElementById('confirmation-modal').style.display='block';
 }

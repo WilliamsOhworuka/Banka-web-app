@@ -3,13 +3,14 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <title></title>
   </head>
   <body id="signin-pageContent">
-      <header id="signin-header">
+      <header class="form-header signin-header">
         <div class="container">
           <div id="brand">
-            <h1><a href='#'>Banka<a></h1>
+            <h1><a href='#'>Ban<span>ka</span><a></h1>
           </div>
           <nav>
             <a href="#" class='signup'>sign up</a>
@@ -17,13 +18,13 @@
           </nav>
         </div>
       </header>
-      <form class="signinForm" action="index.html" method="post">
-        <h3>Sign in to Banka</h3>
+      <form class="signinForm small-form" action="index.html" method="post">
+        <h2>Sign in to Banka</h2>
         <p class="label">Email</p>
-        <input type="text" name="email" value=""><br>
+        <input type="email" name="email" required autofocus><br>
         <p class='label'>password</p>
-        <input type="password" name="password" value=""><br>
-        <input type="submit" value="SIGN IN"><br>
+        <input type="Password" name="password" required><br>
+        <input type="submit" value="Sign in" class="enabled-submit"><br>
         <p><a href="#">Forgot password?</a></p>
       </form>
   </body>

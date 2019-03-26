@@ -20,10 +20,6 @@ a{
   text-decoration: none;
 }
 
-.home{
-  border-bottom:1px solid #2626d9;
-}
-
 ul{
   padding: 0;
   list-style-type: none;
@@ -32,16 +28,28 @@ ul{
 
 .background{
   height:100%;
-  background-image: url(./img/ali-yahya-636068-unsplash.jpg);
+  background-image: url(./img/67037.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size:cover;
   transition: margin-right .5s
 }
 
+.small-form{
+  max-width: 400px;
+  padding: 20px;
+  text-align: center;
+  background-color: white;
+  margin: auto;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size: 15px;
+  border:1px solid #DDD;
+  border-radius:3px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 /* Header */
 header{
-  color: white;
   min-height: 30px;
   margin:0;
 }
@@ -59,20 +67,25 @@ header nav{
 }
 
 header nav a{
-  font-family: Tahoma, Geneva, sans-serif;
-  font-size: 13px;
+  font-family:'Open Sans',sans-serif;
+  font-size: 14px;
   text-transform: uppercase;
-  color:white;
+  color:black;
 }
 
 header #brand{
   float: left;
 }
-header #brand h1{
+
+header h1{
   margin-top:10px;
   padding:0;
+  color:#660066;
+  font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+header h1 span, .signin-header #brand span, header #logo span{
   color:orange;
-  font-family: cursive;
 }
 
 header .icon{
@@ -80,25 +93,30 @@ header .icon{
 }
 
 header .signup{
-  background-color:#006699;
-  border:1px solid #006699;
+  background-color:#660066;
+  border:1px solid #660066;
   border-radius: 3px;
+}
+
+header .signup a{
+  color:white;
 }
 
 header .signin{
-  border:1px solid white;
+  border:1px solid #660066;
   margin-left: 40px;
   border-radius: 3px;
+  color:black;
 }
 
-header .signin:hover,header .signup:hover,.signinForm input[type='submit']:hover{
-  background-color: #3399ff;
-  border:1px solid #3399ff;
-  transition: border .2s, background-color .2s;
+header .signin:hover, header .signup:hover, input[type='submit']:hover{
+  background-color: #800080;
+  border:1px solid #800080;
+  transition: border .3s, background-color .3s;
 }
 
 header nav .normlink:hover{
-  border-bottom:3px solid blue;
+  border-bottom:2px solid #800080;
 }
 
 header nav .icon{
@@ -108,18 +126,13 @@ header nav .icon{
 /* showcase */
 #showcase{
   text-align: center;
-  margin-top: 40px;
-  color:white;
+  margin-top: 80px;
+  color:#242424;
   font-family: cursive;
 }
 
 #showcase h1{
   font-size:30px;
-  color:white;
-}
-
-#showcase p{
-  font-size:13px;
 }
 
 #showcase button{
@@ -130,7 +143,7 @@ header nav .icon{
   background-color:purple;
   border:0;
   border-radius: 3px;
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 #showcase button:hover{
@@ -187,25 +200,24 @@ header nav .icon{
 .sidemenu .signup a{
   display: inline-block;
   padding: 10px;
-  background-color: blue;
+  background-color:#660066;
   margin-left:135px;
   color: white;
   border-radius: 3px;
 }
 
 .sidemenu .signup a:hover{
-  background-color: #1a53ff;
+  background-color: #800080;
 }
 
 /* sign in page*/
 /* header*/
-#signin-header{
+.form-header{
   background-color: white;
-  margin-bottom: 100px;
-  border: 2px solid #DDD;
+  margin-bottom: 80px;
 }
 
-#signin-header nav p{
+.signin-header nav p{
   color:#888;
   float: right;
   padding:10px;
@@ -214,11 +226,11 @@ header nav .icon{
   font-family:'inconsolata', monospace;
 }
 
-#signin-header #brand a{
-  color:orange;
+.signin-header #brand a{
+  color:#660066;
 }
 
-#signin-header nav a{
+.signin-header nav a{
   display:block;
   color:white;
   float:right;
@@ -231,72 +243,138 @@ header nav .icon{
 }
 
 /* form */
-.signinForm{
-  width:400px;
-  text-align: center;
-  padding: 20px;
-  background-color: white;
-  margin: auto;
-  font-family:Tahoma, Geneva, sans-serif;
-  font-size: 15px;
-  border:2px solid #DDD;
-}
 
-.signinForm input:not([type='submit']){
-  margin-bottom: 18px;
-  padding:12px;
+input:not([type='submit']){
+  margin-bottom: 15px;
+  padding:15px;
   font-size:15px;
-  width: 300px;
-  border:1px solid black;
+  width: 350px;
+  background-color:#FAFAFA;
+  border:1px solid #868686;
   border-radius: 3px;
 }
 
-.signinForm .label{
+form .label{
   text-align: left;
-  margin-left:35px;
+  margin-left:10px;
   color:#888;
 }
 
-.signinForm input[type='submit']{
-  padding: 10px;
-  background-color:#006699;
+input[type='submit']{
+  padding: 15px;
+  background-color:#660066;
   color: white;
   border: none;
-  width: 100px;
+  width: 150px;
+  font-size:15px;
   border-radius: 3px;
   cursor: pointer;
-  border: 1px solid #006699;
+  border: 1px solid #660066;
 }
 
-
 .signinForm a{
-  color:#126483;
+  color:#660066;
 }
 
 .signinForm a:hover{
-  border-bottom: 1px solid #126483;
+  border-bottom: 1px solid  #800080;
+}
+
+/* signup */
+header #logo a{
+  color:#660066;
+}
+
+header #logo{
+  text-align: center;
+}
+
+.signupForm{
+  margin-top:50px;
+}
+
+form h2, #signin-question p, #signin-question a,.password-form{
+  font-family: 'Roboto', sans-serif;
+}
+
+.signupForm h2{
+  margin-bottom: 30px;
+}
+
+#signin-question{
+    text-align: center;
+    margin-top: 10px;
+    margin-left: auto;
+    color:#5f5f5f;
+}
+
+#signin-question p,#signin-question a{
+  padding-top:10px;
+  padding-left:10px;
+  font-size: 14px;
+}
+
+/* email comfirmation */
+.modal{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left:0;
+  top:0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal hr{
+  color: #FAFAFA;
+}
+
+.modal .modal-content{
+  color:#5f5f5f;
+}
+
+.modal .modal-content p{
+  margin-top: 25px;
+}
+
+.modal .modal-content{
+  position: relative;
+  max-width: 500px;
+  padding: 20px;
+  text-align: center;
+  background-color: white;
+  margin: auto;
+  font-family:;
+  font-size: 15px;
+  border:1px solid #DDD;
+  border-radius:3px;
+  font-family:cursive;
+}
+
+.modal-content .close-icon{
+ position: absolute;
+  top:0;
+  right:10px;
+  color: black;
+  font-size: 40px;
+}
+
+/* password setting */
+.password-form h4{
+  font-weight: normal;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  margin-top: 10px;
 }
 
 /* small screen devices */
-@media (max-width:700px){
+@media (max-width:800px){
   header nav li{
     display: none;
   }
   header nav .icon{
     display: inline;
     font-size: 20px;
-  }
-}
-
-
-@media only screen and (max-height:400px){
-  .background{
-    background-image: none;
-  }
-  #index-pageContent{
-    background-color:#004466;
-  }
-  .sidemenu{
-    background-color: white;
   }
 }
