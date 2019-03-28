@@ -65,7 +65,7 @@ header nav{
 }
 
 header nav a{
-  font-family:Ubuntu, Arial, sans-serif;
+  font-family:'Amiko';
   font-size: 14px;
   color:black;
 }
@@ -570,6 +570,11 @@ header #logo{
   color: #660066;
   text-align: left;
   padding-right:20px;
+}
+
+/*edit details*/
+.dashboard form{
+  margin-left: 130px;
 }
 /* small screen devices */
 @media (max-width:800px){
