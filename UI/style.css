@@ -547,7 +547,32 @@ form h2, #signin-question p, #signin-question a,.password-form{
   color:#660066;
 }
 
+/*transaction history*/
+.history-table{
+  border-collapse: collapse;
+  border:1px solid #cccccc;
+}
 
+.history-table td,.history-table th{
+  padding: 8px 35px 8px 35px;
+}
+
+.history-table th{
+  text-align: left;
+  background-color: #f7f6f9;
+  border-bottom: 1px solid #cccccc;
+  color:black;
+}
+
+.history-table td i{
+  color:#660066;
+}
+
+.dashboard .modal-content table td{
+  color: #660066;
+  text-align: left;
+  padding-right:20px;
+}
 /* small screen devices */
 @media (max-width:800px){
   header nav li{
