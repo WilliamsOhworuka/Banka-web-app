@@ -318,7 +318,7 @@ form h2, #signin-question p, #signin-question a,.password-form{
 .modal{
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 4;
   padding-top: 100px;
   left:0;
   top:0;
@@ -341,7 +341,7 @@ form h2, #signin-question p, #signin-question a,.password-form{
 
 .modal .modal-content{
   position: relative;
-  max-width: 500px;
+  max-width:300px;
   padding: 20px;
   text-align: center;
   background-color: white;
@@ -354,7 +354,7 @@ form h2, #signin-question p, #signin-question a,.password-form{
 }
 
 .modal-content .close-icon{
- position: absolute;
+  position: absolute;
   top:0;
   right:10px;
   color: black;
@@ -368,13 +368,211 @@ form h2, #signin-question p, #signin-question a,.password-form{
   margin-top: 10px;
 }
 
+/*user dashboard*/
+/* side nav bar */
+.side-nav{
+  position: fixed;
+  top:0;
+  left:0;
+  background-color:#f7f6f9;
+  width:250px;
+  height:100%;
+  transition: display .3s;
+}
+
+.side-nav .brand a,.side-nav .brand{
+  color:#660066;
+  font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.side-nav .brand{
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.side-nav p, .side-nav .brand,.side-nav a{
+  margin: 0;
+  padding: 15px 9px 9px 25px;
+}
+
+.side-nav > a{
+  display: block;
+  color:black;
+}
+
+.side-nav > a, .dashboard, .profile-info{
+  font-family:'Amiri';
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.side-nav p{
+  font-family:'Amiri';
+  font-size: 20px;
+}
+
+.side-nav .close-side-nav{
+  position: absolute;
+  top:0;
+  right:0;
+}
+
+.side-nav p i{
+  color: #660066;
+  margin-right:5px;
+}
+
+.side-nav > a i{
+  margin-right:7px;
+}
+
+.side-nav > a:not(.active) i{
+  color: #660066;
+}
+
+.side-nav span{
+  color:orange;
+}
+
+.side-nav .active{
+  color: white;
+  background-color: #660066;
+}
+
+.icon-side-nav{
+  position: fixed;
+  top:0;
+  left:0;
+  background-color:#660066;
+  width:45px;
+  height:100%;
+  text-align: center;
+  margin-left: -45px;
+  transition: margin .3s;
+  z-index:3;
+}
+
+.icon-side-nav a{
+  padding: 13px;
+  display: block;
+  color: white;
+  position: relative;
+}
+
+.icon-side-nav .active{
+  border:2px solid white;
+  border-radius: 3px;
+}
+
+
+.icon-side-nav a .tooltip{
+  width: 140px;
+  visibility: hidden;
+  background-color: #660066;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  top: 8px;
+  left: 110%;
+  opacity: 0;
+  font-family:'Amiko';
+  transition: opacity 0.3s;
+}
+
+.icon-side-nav a .tooltip::after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #660066 transparent transparent;
+}
+
+.icon-side-nav a:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* main content header */
+.profile-info{
+  margin-left: 241px;
+  padding-left:7px;
+  overflow:auto;
+  transition: margin .3s;
+}
+
+.profile-info h3{
+  margin-left: 20px;
+  margin-top:15px;
+  font-weight:lighter;
+}
+
+.profile-info header{
+  position:fixed;
+  top:0;
+  width: 100%;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-bottom: 2px solid #f2f2f2;
+  background-color: white;
+  z-index: 2;
+}
+
+.profile-info header h3{
+  margin-top: 10px;
+  margin-bottom:14px;
+  color: #660066;
+}
+
+.profile-info header h1{
+  position: absolute;
+  right:300px;
+  display: none;
+}
+
+/*main content*/
+.dashboard{
+  margin-top: 80px;
+  margin-left: 100px;
+  z-index: 1;
+}
+
+.dashboard p{
+  margin-left:20px;
+  font-size: 40px;
+  font-weight: 100;
+  color:#660066;
+}
+
+
 /* small screen devices */
 @media (max-width:800px){
   header nav li{
     display: none;
   }
+
   header nav .icon{
     display: inline;
     font-size: 20px;
+  }
+
+  .side-nav{
+    display: none;
+  }
+
+  .icon-side-nav{
+    margin-left:0;
+  }
+
+  .profile-info{
+    margin-left:45px;
+  }
+
+  .profile-info header h1{
+    display:inline-block;
+    right:60px;
   }
 }

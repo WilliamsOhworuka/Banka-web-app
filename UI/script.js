@@ -22,3 +22,18 @@ function closeModal(){
 function openModal(){
   document.getElementById('confirmation-modal').style.display='block';
 }
+
+function openSideNav(){
+  document.getElementById('icon-nav').style.marginLeft='-45px'
+  document.getElementById('profile-side-nav').style.display='block';
+  document.getElementById('acct-brand').style.display='none';
+  document.getElementById('profile').style.marginLeft='241px'
+}
+
+function closeSideNav(){
+  document.getElementById('icon-nav').style.marginLeft='0';
+  document.getElementById('profile-side-nav').style.display='none';
+  document.getElementById('acct-brand').style.display='inline-block';
+  document.getElementById('acct-brand').style.right='90px';
+  document.getElementById('profile').style.marginLeft='45px'
+}
