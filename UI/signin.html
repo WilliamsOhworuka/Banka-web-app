@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <title></title>
   </head>
   <body id="signin-pageContent">
@@ -20,11 +20,9 @@
       </header>
       <form class="signinForm small-form" action="index.html" method="post">
         <h2>Sign in to Banka</h2>
-        <p class="label">Email</p>
-        <input type="email" name="email" required autofocus><br>
-        <p class='label'>password</p>
-        <input type="Password" name="password" required><br>
-        <input type="submit" value="Sign in" class="enabled-submit"><br>
+        <input type="email" name="email" class="top-input" placeholder="Email" required autofocus><br>
+        <input type="Password" name="password" class="bottom-input" placeholder="Password" required><br>
+        <input type="submit" value="Sign in"><br>
         <p><a href="#">Forgot password?</a></p>
       </form>
   </body>

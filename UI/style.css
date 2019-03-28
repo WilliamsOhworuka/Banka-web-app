@@ -41,11 +41,9 @@ ul{
   text-align: center;
   background-color: white;
   margin: auto;
-  font-family:Tahoma, Geneva, sans-serif;
+  font-family:Ubuntu, Arial, sans-serif;
   font-size: 15px;
-  border:1px solid #DDD;
   border-radius:3px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 /* Header */
@@ -67,9 +65,8 @@ header nav{
 }
 
 header nav a{
-  font-family:'Open Sans',sans-serif;
+  font-family:Ubuntu, Arial, sans-serif;
   font-size: 14px;
-  text-transform: uppercase;
   color:black;
 }
 
@@ -214,7 +211,7 @@ header nav .icon{
 /* header*/
 .form-header{
   background-color: white;
-  margin-bottom: 80px;
+  margin-bottom: 20px;
 }
 
 .signin-header nav p{
@@ -239,29 +236,34 @@ header nav .icon{
 
 /* body */
 #signin-pageContent{
-  background-color: #f2f2f2;
+  background-color:white;
 }
 
 /* form */
-
 input:not([type='submit']){
-  margin-bottom: 15px;
-  padding:15px;
+  padding:14px 21px;
   font-size:15px;
-  width: 350px;
-  background-color:#FAFAFA;
-  border:1px solid #868686;
-  border-radius: 3px;
+  width: 320px;
+  border:1px solid rgb(230, 234, 237);
+
+}
+.small-form .top-input{
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
 }
 
-form .label{
-  text-align: left;
-  margin-left:10px;
-  color:#888;
+.small-form .bottom-input{
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+input:not([type='submit']):focus{
+border-color:#bf80ff;
 }
 
 input[type='submit']{
   padding: 15px;
+  margin-top:25px;
   background-color:#660066;
   color: white;
   border: none;
@@ -293,12 +295,8 @@ header #logo{
   margin-top:50px;
 }
 
-form h2, #signin-question p, #signin-question a,.password-form{
-  font-family: 'Roboto', sans-serif;
-}
-
 .signupForm h2{
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 #signin-question{
@@ -350,7 +348,7 @@ form h2, #signin-question p, #signin-question a,.password-form{
   font-size: 15px;
   border:1px solid #DDD;
   border-radius:3px;
-  font-family:cursive;
+  font-family:Ubuntu, Arial, sans-serif;
 }
 
 .modal-content .close-icon{

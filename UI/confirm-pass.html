@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <script defer type="text/javascript" src='script.js'></script>
     <meta charset="utf-8">
     <title></title>
@@ -16,12 +16,10 @@
       </div>
     </header>
     <form class="password-form small-form" action="index.html" method="post">
-      <h2>ALmost Done!</h2>
+      <h2>Almost Done!</h2>
       <h4>Set your password to start using Banka</h4>
-      <p class="label">Password</p>
-      <input type="password" name="password" id="pswd" required autofocus><br>
-      <p class='label'>Confirm password</p>
-      <input type="password" name="pswd" id="confirm-pswd" required><br>
+      <input type="password" name="password" id="pswd" class="top-input" placeholder="Password" required autofocus><br>
+      <input type="password" name="pswd" id="confirm-pswd" class='bottom-input' placeholder="Confirm password" required><br>
       <input type="submit" value="Sign in" class="enabled-submit" id="set-password-submit"><br>
     </form>
   </body>
