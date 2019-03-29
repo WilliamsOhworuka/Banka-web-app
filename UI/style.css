@@ -140,18 +140,20 @@ header nav .icon{
   font-size:30px;
 }
 
-#showcase button{
+#showcase a{
+  display:block;
   width:150px;
-  height:40px;
+  padding: 10px;
   font-family: cursive;
   color:white;
   background-color:purple;
   border:0;
   border-radius: 3px;
-  margin-top: 40px;
+  margin: 50px auto;
+
 }
 
-#showcase button:hover{
+#showcase a:hover{
   background-color: #cc00cc;
 }
 
@@ -432,15 +434,13 @@ header #logo{
   transition: display .3s;
 }
 
-.side-nav .brand a,.brand{
-  color:#660066;
-  font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
-}
 .side-nav {
   font-family:'Amiri';
 }
 
 .side-nav .brand{
+  color:#660066;
+  font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
   border-bottom: 1px solid #e6e6e6;
 }
 
@@ -449,12 +449,12 @@ header #logo{
   padding: 15px 9px 9px 25px;
 }
 
-.side-nav > a{
+.side-nav a{
   display: block;
   color:black;
 }
 
-.side-nav > a, .dashboard, .profile-info{
+.side-nav a, .dashboard, .profile-info{
   font-family:'Amiri';
   font-size: 18px;
   line-height: 1.5;
@@ -480,7 +480,7 @@ header #logo{
   margin-right:7px;
 }
 
-.side-nav > a:not(.active) i{
+.side-nav a:not(.active) i{
   color: #660066;
 }
 
