@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Amiri' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Amiko' rel='stylesheet'>
+    <script defer type="text/javascript" src='script.js'></script>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <nav class='side-nav' id="profile-side-nav">
+        <a href="javascript:void(0);" class="close-side-nav" id="cancel-side-nav" onclick="closeSideNav()"><i class="far fa-minus-square"></i></a>
+        <h1 class="brand"><a href="#">Ban<span>ka</span></a></h1>
+        <p id="admin">ADMIN</p>
+        <p><i class="far fa-user"></i>Jones Smith</p>
+        <a href="#" class="account"><i class="fas fa-university"></i>Account</a>
+        <a href="#" class="history"><i class="fas fa-history"></i>Transaction history</a>
+        <a href="#" class="details active"><i class="far fa-edit"></i>Edit details</a>
+    </nav>
+    <nav class='icon-side-nav' id="icon-nav">
+        <a href="javascript:void(0);" class="open-side-nav" onclick="openSideNav()"><i class="fas fa-bars"></i></a>
+        <a href="javascript:void(0);" class="user"><i class="far fa-user"></i><span class="tooltip">Williams Smith</span></a>
+        <a href="#" class="account"><i class="fas fa-university"></i><span class="tooltip">Account</span></a>
+        <a href="#" class="history"><i class="fas fa-history"></i><span class="tooltip">Transaction history</span></a>
+        <a href="#" class="details active"><i class="far fa-edit"></i><span class="tooltip">Edit details</span></a>
+    </nav>
+    <section class="profile-info" id="profile">
+      <header>
+        <h1 class="brand" id="acct-brand">Ban<span>ka</span></h1>
+        <h3>Edit details</h3>
+      </header>
+      <div class="dashboard">
+        <form class="small-form" action="index.html" method="post">
+          <input type="text" name="firstname" class="top-input" value="Williams" placeholder="First name"><br>
+          <input type="text" name="lastName" value="Smith" placeholder="Last name"><br>
+          <input type="email" name="email" class="bottom-input" placeholder="Email"><br>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    </section>
+  </body>
+</html>
