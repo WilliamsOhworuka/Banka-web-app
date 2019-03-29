@@ -7,13 +7,13 @@
     <link href='https://fonts.googleapis.com/css?family=Amiko' rel='stylesheet'>
     <script defer type="text/javascript" src='script.js'></script>
     <meta charset="utf-8">
-    <title>Staff Credit Account</title>
+    <title>Staff debit Account</title>
   </head>
   <body>
     <nav class='side-nav' id="profile-side-nav">
         <a href="javascript:void(0);" class="close-side-nav" id="cancel-side-nav" onclick="closeSideNav()"><i class="far fa-minus-square"></i></a>
         <h1 class="brand">Ban<span>ka</span></h1>
-        <p id="admin">STAFF</p>
+        <p id="staff">STAFF</p>
         <p><i class="far fa-user"></i>Vontae Jones</p>
         <a href="./staff-accountDashboard.html" class="account active"><i class="fas fa-university"></i>Accounts</a>
         <a href="./staff-editDetails.html" class="details"><i class="far fa-edit"></i>Edit details</a>
@@ -29,16 +29,11 @@
     <section class="profile-info" id="profile">
       <header>
         <h1 class="brand" id="acct-brand">Ban<span>ka</span></h1>
-        <h3>Credit Account</h3>
+        <h3>Debit Account</h3>
       </header>
-      <div class="dashboard">
-        <form class="small-form" action="./creditConfirmaion.html" method="post">
-          <input type="text" name="accountNumber" class="top-input" value="3077145675" placeholder="Account Number" required><br>
-          <input type="number" name="Amount" placeholder="Amount" required><br>
-          <input type="text" name="Narration" placeholder="Narration" required>
-          <input type="password" name="password" class="bottom-input" placeholder="Password" required>
-          <input type="submit" value="Submit">
-        </form>
+      <div class="dashboard success">
+        <p class='msg'><i class="fas fa-check-circle"></i></p>
+        <p>Credit of #1.28 from 3077145675 was successful</p>
       </div>
     </section>
   </body>

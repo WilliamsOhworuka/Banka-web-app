@@ -647,7 +647,7 @@ header #logo{
 }
 
 /*admin dashboard*/
-#admin{
+#admin,#staff{
   text-align: center;
   font-family:'Amiko';
   color:purple;
