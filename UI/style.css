@@ -642,6 +642,10 @@ header #logo{
   position: absolute;
 }
 
+.pass{
+  display: none;
+}
+
 /*admin dashboard*/
 #admin{
   text-align: center;

@@ -46,3 +46,14 @@ function menu(){
     ul.style.display = "block";
   }
 }
+
+function resetPassword(obj){
+  var selectedValue = obj.options[obj.selectedIndex].value;
+  if(selectedValue==='Yes'){
+    document.getElementById('old-pswd').style.display='block';
+    document.getElementById('new-pswd').style.display='block';
+  }else{
+    document.getElementById('old-pswd').style.display='none';
+    document.getElementById('new-pswd').style.display='none';
+  }
+}
