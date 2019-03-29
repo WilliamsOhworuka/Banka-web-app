@@ -33,20 +33,9 @@
         <h1 class="brand" id="acct-brand">Ban<span>ka</span></h1>
         <h3>Edit details</h3>
       </header>
-      <div class="dashboard">
-        <form class="small-form" action=".\admin-editDetailsConfirmation.html" method="post">
-          <input type="text" name="firstname" class="top-input" value="Williams" placeholder="First name"><br>
-          <input type="text" name="lastName" value="Smith" placeholder="Last name"><br>
-          <input type="email" name="email" class="bottom-input" placeholder="Email"><br><br>
-          <label for="reset-pass">Reset password:</label>
-          <select class="resetPass" name="resetPswd" onchange="resetPassword(this)">
-            <option value="No">No</option>
-            <option value="Yes">Yes</option>
-          </select><br><br>
-          <input type="password" name="Oldpassword" id="old-pswd" class="pass" placeholder="Old Password" required autofocus><br>
-          <input type="password" name="Newpassword" id="new-pswd" class='bottom-input pass' placeholder="New password" required><br>
-          <input type="submit" value="Submit">
-        </form>
+      <div class="success">
+        <p class='msg'><i class="fas fa-check-circle"></i></p>
+        <p>Account detail updated</p>
       </div>
     </section>
   </body>
