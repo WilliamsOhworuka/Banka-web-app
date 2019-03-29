@@ -655,8 +655,17 @@ header #logo{
 /*Debit successful*/
 .success .msg{
   font-size:100px;
+  margin-top: 100px;
   margin-bottom: 0;
   margin-left: 300px;
+}
+
+.success p:not(.msg){
+  margin-left: 250px;
+}
+
+.success{
+  color: purple;
 }
 
 /* small screen devices */
