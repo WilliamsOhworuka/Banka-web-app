@@ -369,7 +369,7 @@ header #logo{
   font-family: 'Amiri';
 }
 
-.confirm-modal .modal-content{
+.modal .modal-content{
   text-align:center;
 }
 
@@ -653,21 +653,6 @@ header #logo{
   color:purple;
 }
 
-.modal-body .fas{
-  font-size: 50px;
-  color: purple;
-}
-
-.confirm-creation{
-  width: 200px;
-  height: 150px;
-  border: 1px solid purple;
-  border-radius: 5px;
-}
-
-.confirm-creation .modal-body{
-  text-align: center;
-}
 /* small screen devices */
 @media (max-width:800px){
   header nav li{
