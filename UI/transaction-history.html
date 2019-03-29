@@ -11,7 +11,7 @@
   </head>
   <body>
     <nav class='side-nav' id="profile-side-nav">
-        <a href="javascript:void(0);" class="close-side-nav" id="cancel-side-nav" onclick="closeSideNav()"><i class="far fa-times-circle"></i></a>
+        <a href="javascript:void(0);" class="close-side-nav" id="cancel-side-nav" onclick="closeSideNav()"><i class="far fa-minus-square"></i></a>
         <h1 class="brand"><a href="#">Ban<span>ka</span></a></h1>
         <p><i class="far fa-user"></i>Williams Smith</p>
         <a href="#" class="account"><i class="fas fa-university"></i>Account</a>
@@ -31,7 +31,7 @@
         <h3>Transaction history</h3>
       </header>
       <div class="dashboard">
-          <table class="history-table">
+          <table class="dashboard-table">
             <tr class="trans-history">
               <th>Date</th>
               <th>Amount</th>
@@ -41,66 +41,57 @@
               <td>30/05/2017</td>
               <td>#3000</td>
               <td>Cr</td>
-              <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-eye"></i></a></td>
+              <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-external-link-alt"></i></a></td>
             </tr>
             <tr class="trans-history">
               <td>30/05/2017</td>
               <td>#3000</td>
               <td>Cr</td>
-              <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-eye"></i></a></td>
+              <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-external-link-alt"></i></a></td>
             </tr>
             <tr class="trans-history">
               <td>30/05/2017</td>
               <td>#3000</td>
               <td>Cr</td>
-              <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-eye"></i></a></td>
+              <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-external-link-alt"></i></a></td>
             </tr>
             <tr class="trans-history">
               <td>30/05/2017</td>
               <td>#3000</td>
               <td>Cr</td>
-              <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-eye"></i></a></td>
+              <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-external-link-alt"></i></a></td>
             </tr>
             <tr class="trans-history">
               <td>30/05/2017</td>
               <td>#3000</td>
               <td>Cr</td>
-              <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-eye"></i></a></td>
+              <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-external-link-alt"></i></a></td>
             </tr>
             <tr class="trans-history">
               <td>30/05/2017</td>
               <td>#3000</td>
               <td>Cr</td>
-              <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-eye"></i></a></td>
+              <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-external-link-alt"></i></a></td>
             </tr>
           </table>
         </div>
     </section>
-    <div class="modal" id="confirmation-modal">
+    <div class="modal profile-modal" id="confirmation-modal">
       <div class="modal-content">
-        <a href="javascript:void(0);" class="close-icon" onclick="closeModal()">&times;</a>
-        <table>
-          <tr>
-            <td>Amount</td>
-            <td>#3000</td>
-          </tr>
-          <tr>
-            <td>Transaction Date</td>
-            <td>30/05/2017</td>
-          </tr>
-          <tr>
-            <td>Account Number</td>
-            <td>3077145675</td>
-          </tr>
-          <tr>
-            <td>Narration</td>
-            <td>Atm</td>
-          </tr>
-          <tr>
-            <td>Transaction Type</td>
-            <td>Credit</td>
-          </tr>
-        </table>
+        <a href="javascript:void(0);" class="close-icon" onclick="closeModal()"><i class="far fa-minus-square"></i></a>
+        <div class="modal-head"></div>
+        <div class="modal-body">
+            <p class="title">Amount:</p>
+            <p>#3000</p>
+            <p class="title">Transaction Date:</td>
+            <p>30/05/2017</p>
+            <p class="title">Account Number:</p>
+            <p>3077145675</p>
+            <p class="title">Narration:</p>
+            <p>Atm</p>
+            <p class="title">Transaction Type:</p>
+            <p>Credit</p>
+        </div>
       </div>
     </div>
   </body>

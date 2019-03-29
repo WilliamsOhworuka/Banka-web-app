@@ -37,3 +37,12 @@ function closeSideNav(){
   document.getElementById('acct-brand').style.right='90px';
   document.getElementById('profile').style.marginLeft='45px'
 }
+
+function menu(){
+  let ul=document.getElementById('drop-down-menu');
+  if (ul.style.display === "block") {
+    ul.style.display = "none";
+  } else {
+    ul.style.display = "block";
+  }
+}

@@ -46,6 +46,10 @@ ul{
   border-radius:3px;
 }
 
+.side-nav > a:not(.close-side-nav):hover{
+  background-color:orange;
+}
+
 /* Header */
 header{
   min-height: 30px;
@@ -312,7 +316,7 @@ header #logo{
   font-size: 14px;
 }
 
-/* email comfirmation */
+/* modal */
 .modal{
   display: none;
   position: fixed;
@@ -325,45 +329,91 @@ header #logo{
   background-color: rgba(0,0,0,0.4);
 }
 
-.modal hr{
-  color: #FAFAFA;
-}
-
-.modal .modal-content{
-  color:#5f5f5f;
-}
-
 .modal .modal-content p{
   margin-top: 25px;
 }
 
 .modal .modal-content{
   position: relative;
-  max-width:300px;
-  padding: 20px;
-  text-align: center;
+  max-width:500px;
   background-color: white;
   margin: auto;
-  font-family:;
+}
+
+.modal .modal-content .modal-body{
+  padding: 40px;
   font-size: 15px;
-  border:1px solid #DDD;
-  border-radius:3px;
-  font-family:Ubuntu, Arial, sans-serif;
+  font-family: 'Amiko';
+}
+
+.modal .modal-content .signup-modal-body{
+  padding: 40px;
+  font-size: 20px;
+  font-family:'Amiri';
+}
+
+.modal-head{
+  height:50px;
+  background-color: purple;
+}
+
+.modal-head h3{
+  color: white;
+  padding-top: 15px;
+  font-family: 'Amiri';
+}
+
+.confirm-modal .modal-content{
+  text-align:center;
 }
 
 .modal-content .close-icon{
   position: absolute;
-  top:0;
+  top:10px;
   right:10px;
-  color: black;
-  font-size: 40px;
+  color: white;
+  font-size: 25px;
+}
+
+.profile-modal .modal-content .title{
+  color:#5f5f5f;
+}
+
+.modal-drop-down{
+  position: absolute;
+  top:110px;
+  left:130px;
+}
+
+.modal-drop-down ul{
+  display: none;
+  font-family: 'Amiko';
+  background-color: purple;
+  color:white;
+  padding: 5px;
+}
+
+.modal-drop-down .drop-down-icon{
+  color:purple;
+}
+
+.modal-drop-down ul li{
+  padding: 5px;
+}
+
+.modal-drop-down ul li:hover{
+  background-color: #8c1aff;
 }
 
 /* password setting */
 .password-form h4{
   font-weight: normal;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size: 20px;
   margin-top: 10px;
+}
+
+.password-form h2,.password-form h4{
+  font-family:'Amiri';
 }
 
 /*user dashboard*/
@@ -378,9 +428,12 @@ header #logo{
   transition: display .3s;
 }
 
-.side-nav .brand a,.side-nav .brand{
+.side-nav .brand a,.brand{
   color:#660066;
   font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+.side-nav {
+  font-family:'Amiri';
 }
 
 .side-nav .brand{
@@ -546,23 +599,23 @@ header #logo{
 }
 
 /*transaction history*/
-.history-table{
+.dashboard-table{
   border-collapse: collapse;
   border:1px solid #cccccc;
 }
 
-.history-table td,.history-table th{
+.dashboard-table td,.dashboard-table th{
   padding: 8px 35px 8px 35px;
 }
 
-.history-table th{
+.dashboard-table th{
   text-align: left;
   background-color: #f7f6f9;
   border-bottom: 1px solid #cccccc;
   color:black;
 }
 
-.history-table td i{
+.dashboard-table td i{
   color:#660066;
 }
 
@@ -572,10 +625,27 @@ header #logo{
   padding-right:20px;
 }
 
+.profile-modal .modal-content{
+  text-align:left;
+}
+
 /*edit details*/
 .dashboard form{
   margin-left: 130px;
 }
+
+ul{
+  position: absolute;
+}
+
+/*admin dashboard*/
+#admin{
+  text-align: center;
+  font-family:'Amiko';
+  color:purple;
+}
+
+
 /* small screen devices */
 @media (max-width:800px){
   header nav li{
