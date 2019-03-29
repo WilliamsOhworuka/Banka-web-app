@@ -652,6 +652,12 @@ header #logo{
   font-family:'Amiko';
   color:purple;
 }
+/*Debit successful*/
+.success .msg{
+  font-size:100px;
+  margin-bottom: 0;
+  margin-left: 300px;
+}
 
 /* small screen devices */
 @media (max-width:800px){
