@@ -50,6 +50,10 @@ ul{
   background-color:orange;
 }
 
+label{
+  font-size: 18px;
+}
+
 /* Header */
 header{
   min-height: 30px;
@@ -341,7 +345,7 @@ header #logo{
 }
 
 .modal .modal-content .modal-body{
-  padding: 40px;
+  padding: 25px;
   font-size: 15px;
   font-family: 'Amiko';
 }
@@ -412,7 +416,7 @@ header #logo{
   margin-top: 10px;
 }
 
-.password-form h2,.password-form h4{
+.password-form h2,.password-form h4,label{
   font-family:'Amiri';
 }
 
@@ -634,7 +638,7 @@ header #logo{
   margin-left: 130px;
 }
 
-ul{
+.modal-dropdown-menu{
   position: absolute;
 }
 
@@ -645,7 +649,21 @@ ul{
   color:purple;
 }
 
+.modal-body .fas{
+  font-size: 50px;
+  color: purple;
+}
 
+.confirm-creation{
+  width: 200px;
+  height: 150px;
+  border: 1px solid purple;
+  border-radius: 5px;
+}
+
+.confirm-creation .modal-body{
+  text-align: center;
+}
 /* small screen devices */
 @media (max-width:800px){
   header nav li{
