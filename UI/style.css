@@ -62,7 +62,6 @@ header{
 
 header li{
   display: inline;
-  float: left;
   padding:10px;
   margin-left: 20px;
 }
@@ -114,7 +113,7 @@ header .signin{
   color:black;
 }
 
-header .signin:hover, header .signup:hover, input[type='submit']:hover{
+header .signin:hover, header .signup:hover, .small-form .button:hover{
   background-color: #800080;
   border:1px solid #800080;
   transition: border .3s, background-color .3s;
@@ -271,9 +270,10 @@ input:not([type='submit']):focus{
 border-color:#bf80ff;
 }
 
-input[type='submit']{
+.small-form .button{
+  display: block;
   padding: 15px;
-  margin-top:25px;
+  margin:25px auto 0 auto;
   background-color:#660066;
   color: white;
   border: none;
