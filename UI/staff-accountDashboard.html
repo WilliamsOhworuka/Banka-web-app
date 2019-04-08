@@ -13,6 +13,7 @@
   <body>
     <nav class='side-nav' id="profile-side-nav">
         <a href="javascript:void(0);" class="close-side-nav" id="cancel-side-nav" onclick="closeSideNav()"><i class="far fa-minus-square"></i></a>
+        <a href="javascript:void(0);" class="small-close-side-nav" onclick="mobileCloseSideNav()"><i class="far fa-minus-square"></i></a>
         <h1 class="brand">Ban<span>ka</span></h1>
         <p id="admin">STAFF</p>
         <p><i class="far fa-user"></i>Vontae Jones</p>
@@ -27,10 +28,17 @@
         <a href="./staff-editDetails.html" class="details"><i class="far fa-edit"></i><span class="tooltip">Edit details</span></a>
         <a href="./signin.html" class="Signout"><i class="fas fa-sign-out-alt"></i><span class="tooltip">Sign out</span></a>
     </nav>
+    <nav class='icon-top-nav' id='icon-top-bar'>
+        <a href="./staff-accountDashboard.html" class="account active"><i class="fas fa-university"></i><span>Accounts</span></a>
+        <a href="./staff-editDetails.html" class="details"><i class="far fa-edit"></i><span>Edit details</span></a>
+        <a href="./signin.html" class="Signout"><i class="fas fa-sign-out-alt"></i><span>Sign out</span></a>
+    </nav>
     <section class="profile-info" id="profile">
       <header>
+        <a href="javascript:void(0);" class="open-side-nav" onclick="mobileOpenSideNav()"><i class="fas fa-bars"></i></a>
         <h1 class="brand" id="acct-brand">Ban<span>ka</span></h1>
         <h3>Accounts</h3>
+        <h4>Welcome Vontae Smith</h4>
       </header>
       <div class="dashboard">
         <table class="dashboard-table">

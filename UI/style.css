@@ -1,6 +1,8 @@
 
 body,html{
   height:100%;
+  margin: 0;
+  padding: 0;
 }
 
 body{
@@ -36,7 +38,7 @@ ul{
 }
 
 .small-form{
-  max-width: 400px;
+  width:400px;
   padding: 20px;
   text-align: center;
   background-color: white;
@@ -62,7 +64,6 @@ header{
 
 header li{
   display: inline;
-  float: left;
   padding:10px;
   margin-left: 20px;
 }
@@ -432,9 +433,6 @@ header #logo{
   width:250px;
   height:100%;
   transition: display .3s;
-}
-
-.side-nav {
   font-family:'Amiri';
 }
 
@@ -465,10 +463,14 @@ header #logo{
   font-size: 20px;
 }
 
-.side-nav .close-side-nav{
+.side-nav .close-side-nav,.side-nav .small-close-side-nav{
   position: absolute;
   top:0;
   right:0;
+}
+
+.side-nav .small-close-side-nav{
+  display: none;
 }
 
 .side-nav p i{
@@ -493,17 +495,45 @@ header #logo{
   background-color: #660066;
 }
 
-.icon-side-nav{
+.icon-side-nav,.icon-top-nav{
   position: fixed;
-  top:0;
   left:0;
   background-color:#660066;
-  width:45px;
   height:100%;
   text-align: center;
+  z-index:3;
+}
+
+.icon-top-nav{
+  height:67px;
+  width: 100%;
+  top:95px;
+  display:none;
+}
+
+.icon-top-nav a{
+  padding: 3% 3% 2% 3%;
+  display: inline-block;
+  color: white;
+  border-bottom: 3px solid #660066;
+  text-align: center;
+}
+
+.icon-top-nav .active{
+  background-color: orange;
+}
+
+.icon-top-nav span{
+  display: block;
+  font-size: 13px;
+  margin-top:2px;
+}
+
+.icon-side-nav{
+  width:45px;
   margin-left: -45px;
   transition: margin .3s;
-  z-index:3;
+  top:0;
 }
 
 .icon-side-nav a{
@@ -556,7 +586,6 @@ header #logo{
   margin-left: 241px;
   padding-left:7px;
   overflow:auto;
-  transition: margin .3s;
 }
 
 .profile-info h3{
@@ -595,6 +624,17 @@ header #logo{
   z-index: 1;
 }
 
+.profile-info h4{
+  display: none;
+}
+
+.profile-info header .open-side-nav{
+  position: absolute;
+  left:20px;
+  top: 20px;
+  color:purple;
+  display: none;
+}
 .dashboard p{
   margin-left:20px;
   font-size: 40px;
@@ -609,7 +649,7 @@ header #logo{
 }
 
 .dashboard-table td,.dashboard-table th{
-  padding: 8px 35px 8px 35px;
+  padding:15px;
 }
 
 .dashboard-table th{
@@ -634,7 +674,7 @@ header #logo{
 }
 
 /*edit details*/
-.dashboard form{
+.dashboard .small-form{
   margin-left: 130px;
 }
 
@@ -688,5 +728,87 @@ header #logo{
 
   .modal{
     padding-top: 0;
+  }
+  
+  .signup-question{
+    display: none;
+  }
+
+  .small-form{
+    width: 85%;
+  }
+
+  .small-form input:not([type='submit']){
+    width: 267px;
+  }
+
+  .dashboard{
+    margin-left:0;
+  }
+
+  .dashboard .small-form{
+    margin:auto;
+  }
+
+  .dashboard .small-form input{
+    width:200px;
+  }
+}
+
+@media screen and (max-width: 480px){
+
+  .dashboard{
+    margin-top:170px; 
+    margin-left: 0;
+  }
+
+  .dashboard-table td,.dashboard-table th{
+    padding:10px;
+  }
+
+  .dashboard-table{
+    margin: auto;
+  }
+
+  .profile-info{
+    margin-left:0;
+    padding-left:0; 
+  }
+
+  .profile-info h4{
+    display: block;
+  }
+
+  .profile-info header h3{
+   display: none;
+  }
+  
+  .profile-info header h1{
+    position:static;
+    text-align: center;
+    display: block;
+  }
+  .icon-top-nav{
+    display: block;
+  }
+  .icon-side-nav,.side-nav .close-side-nav{
+    display: none;
+  }
+
+  .profile-info header .open-side-nav,.side-nav .small-close-side-nav{
+    display: inline;
+  }
+  .profile-info h4{
+    color: purple;
+    text-align: center;
+    margin:-15px;
+    padding: 3px;
+  }
+  .icon-top-nav a:hover{
+    border-bottom-color: white;
+  } 
+
+  .profile-info header{
+    border:none;
   }
 }

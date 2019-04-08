@@ -27,7 +27,14 @@ function openSideNav(){
   document.getElementById('icon-nav').style.marginLeft='-45px'
   document.getElementById('profile-side-nav').style.display='block';
   document.getElementById('acct-brand').style.display='none';
-  document.getElementById('profile').style.marginLeft='241px'
+  document.getElementById('profile').style.marginLeft='245px';
+  document.getElementById('icon-top-bar').style.left='251px';
+}
+
+function mobileOpenSideNav(){
+  document.getElementById('profile-side-nav').style.display='block';
+  document.getElementById('profile').style.marginLeft='245px';
+  document.getElementById('icon-top-bar').style.left='251px';
 }
 
 function closeSideNav(){
@@ -35,7 +42,15 @@ function closeSideNav(){
   document.getElementById('profile-side-nav').style.display='none';
   document.getElementById('acct-brand').style.display='inline-block';
   document.getElementById('acct-brand').style.right='90px';
-  document.getElementById('profile').style.marginLeft='45px'
+  document.getElementById('profile').style.marginLeft='45px';
+  document.getElementById('icon-top-bar').style.left='0';
+}
+
+function mobileCloseSideNav(){
+  document.getElementById('icon-nav').style.marginLeft='-45px';
+  document.getElementById('profile-side-nav').style.display='none';
+  document.getElementById('profile').style.marginLeft='0';
+  document.getElementById('icon-top-bar').style.left='0';
 }
 
 function menu(){
@@ -48,7 +63,7 @@ function menu(){
 }
 
 function resetPassword(obj){
-  var selectedValue = obj.options[obj.selectedIndex].value;
+  let selectedValue = obj.options[obj.selectedIndex].value;
   if(selectedValue==='Yes'){
     document.getElementById('old-pswd').style.display='block';
     document.getElementById('new-pswd').style.display='block';
