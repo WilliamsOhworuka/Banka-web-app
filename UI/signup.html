@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amiri" rel="stylesheet">
+    <script defer type="text/javascript" src='script.js'></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>sign up</title>
+  </head>
+  <body>
+    <header>
+      <div id="logo">
+      <h1><a href='index.html'>Ban<span>ka</span><a></h1>
+      </div>
+    </header>
+    <form class="signupForm small-form" action="./confirm-pass.html" method="post">
+      <h2>Start using Banka</h2>
+      <input type="text" name="name" class="top-input" placeholder="First name" required autofocus>
+      <input type="text" name="name" placeholder="Last name" required>
+      <input type="email" name="email" class="bottom-input" placeholder="Email" required><br>
+      <input type="submit" value="Next">
+    </form>
+    <p id="signin-question">Already have an account? <a href="signin.html">Sign In</a></p>
+    <div class="modal confirm-modal" id="confirmation-modal">
+      <div class="modal-content">
+          <a href="javascript:void(0);" class="close-icon" onclick="closeModal()"><i class="far fa-minus-square"></a>
+          <div class="modal-head"><h3>Check your email!</h3></div>
+          <div class="signup-modal-body">
+            <p>Please check your mail, a confirmation email with a link to set your password has been sent to you. Set your pasword to start using Banka!</p>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

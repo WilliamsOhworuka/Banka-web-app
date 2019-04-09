@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <title>sign in</title>
+  </head>
+  <body id="signin-pageContent">
+      <header class="form-header signin-header">
+        <div class="container">
+          <div id="brand">
+            <h1><a href='./index.html'>Ban<span>ka</span><a></h1>
+          </div>
+          <nav>
+            <a href="./signup.html" class='signup'>Sign up</a>
+            <p class="signup-question">DON'T HAVE AN ACCOUNT?</p>
+          </nav>
+        </div>
+      </header>
+      <form class="signinForm small-form" action="./account-dashboard.html" method="post">
+        <h2>Sign in to Banka</h2>
+        <input type="email" name="email" class="top-input" placeholder="Email" required autofocus><br>
+        <input type="Password" name="password" class="bottom-input" placeholder="Password" required><br>
+        <input type="submit" value="Sign in"><br>
+        <p><a href="forgotPassword.html">Forgot password?</a></p>
+      </form>
+  </body>
+</html>

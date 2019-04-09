@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Amiri' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Amiko' rel='stylesheet'>
+    <script defer type="text/javascript" src='script.js'></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Accounts dashboard</title>
+  </head>
+  <body>
+    <nav class='side-nav' id="profile-side-nav">
+        <a href="javascript:void(0);" class="close-side-nav" onclick="closeSideNav()"><i class="far fa-minus-square"></i></a>
+        <a href="javascript:void(0);" class="small-close-side-nav" onclick="mobileCloseSideNav()"><i class="far fa-minus-square"></i></a>
+        <h1 class="brand">Ban<span>ka</span></h1>
+        <p id="admin">ADMIN</p>
+        <p><i class="far fa-user"></i>Jones Smith</p>
+        <a href="./admin-dashboard.html" class="account active"><i class="fas fa-university"></i>Accounts</a>
+        <a href="./admin-editDetails.html" class="details"><i class="far fa-edit"></i>Edit details</a>
+        <a href="./admin-createUser.html" class="create-user"><i class="fas fa-user-plus"></i>Create user</a>
+        <a href="./signin.html" class="Signout"><i class="fas fa-sign-out-alt"></i>Sign out</a>
+    </nav>
+    <nav class='icon-side-nav' id="icon-nav">
+        <a href="javascript:void(0);" class="open-side-nav" onclick="openSideNav()"><i class="fas fa-bars"></i></a>
+        <a href="javascript:void(0);" class="user"><i class="far fa-user"></i><span class="tooltip">Jones Smith</span></a>
+        <a href="./admin-dashboard.html" class="account active"><i class="fas fa-university"></i><span class="tooltip">Accounts</span></a>
+        <a href="./admin-editDetails.html" class="details"><i class="far fa-edit"></i><span class="tooltip">Edit details</span></a>
+        <a href="./admin-createUser.html" class="create-user"><i class="fas fa-user-plus"></i><span class="tooltip">Create user</span></a>
+        <a href="./signin.html" class="Signout"><i class="fas fa-sign-out-alt"></i><span class="tooltip">Sign out</span></a>
+    </nav>
+    <nav class='icon-top-nav' id='icon-top-bar'>
+      <a href="./admin-dashboard.html" class="account active"><i class="fas fa-university"></i><span>Accounts</span></a>
+      <a href="./admin-editDetails.html" class="details"><i class="far fa-edit"></i><span>Edit details</span></a>
+      <a href="./admin-createUser.html" class="create-user"><i class="fas fa-user-plus"></i><span>Create user</span></a>
+      <a href="./signin.html" class="Signout"><i class="fas fa-sign-out-alt"></i><span>Sign out</span></a>
+    </nav>
+    <section class="profile-info" id="profile">
+      <header>
+        <a href="javascript:void(0);" class="open-side-nav" onclick="mobileOpenSideNav()"><i class="fas fa-bars"></i></a>
+        <h1 class="brand" id="acct-brand">Ban<span>ka</span></h1>
+        <h3>Accounts</h3>
+        <h4>Welcome Jones Smith</h4>
+      </header>
+      <div class="dashboard">
+        <table class="dashboard-table">
+          <tr>
+            <th>Account number</th>
+            <th>Account owner</th>
+            <th colspan="2">Date created</th>
+          </tr>
+          <tr>
+            <td>3077145675</td>
+            <td>Craig norse</td>
+            <td>01/07/2012</td>
+            <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-external-link-alt"></i></a></td>
+          </tr>
+          <tr>
+            <td>3077234567</td>
+            <td>Mr Vone Dam</td>
+            <td>04/11/2000</td>
+            <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-external-link-alt"></i></a></td>
+          </tr>
+          <tr class="trans-history">
+            <td>3456355123</td>
+            <td>Martha Stewert</td>
+            <td>07/12/2005</td>
+            <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-external-link-alt"></i></a></td>
+          </tr>
+          <tr class="trans-history">
+            <td>3124586868</td>
+            <td>Jonathan lantham</td>
+            <td>07/12/2005</td>
+            <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-external-link-alt"></i></a></td>
+          </tr>
+          <tr class="trans-history">
+            <td>3056749900</td>
+            <td>Jaime Fraser</td>
+            <td>24/08/2012</td>
+            <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-external-link-alt"></i></a></td>
+          </tr>
+          <tr class="trans-history">
+            <td>3000230555</td>
+            <td>John Bastille</td>
+            <td>01/10/1014</td>
+            <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-external-link-alt"></i></a></td>
+          </tr>
+        </table>
+      </div>
+    </section>
+    <div class="modal profile-modal" id="confirmation-modal">
+      <div class="modal-content">
+        <a href="javascript:void(0);" class="close-icon" onclick="closeModal()"><i class="far fa-minus-square"></i></a>
+        <div class="modal-head"></div>
+        <div class="modal-body">
+          <h3>John Lark</h3>
+          <p class='title'>Account Number:</p>
+          <p>3000230555</p>
+          <p class='title'>Account Type:</p>
+          <p>Current</p>
+          <p class='title'>Account Balance:</p>
+          <p>#30000</p>
+          <p class='title'>Date Created:</p>
+          <p>07/04/2011</p>
+        </div>
+        <div class="modal-drop-down">
+          <a href="javascript:void(0);" class="drop-down-icon" onclick="menu()"><i class="far fa-caret-square-down"></i></a>
+          <ul id="drop-down-menu" class='modal-dropdown-menu'>
+            <li><a>Activate</a></li>
+            <li><a>Deactivate</a></li>
+            <li><a>Delete</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

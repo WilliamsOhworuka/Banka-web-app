@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Amiri' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Amiko' rel='stylesheet'>
+    <script defer type="text/javascript" src='script.js'></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Transaction History</title>
+  </head>
+  <body>
+    <nav class='side-nav' id="profile-side-nav">
+        <a href="javascript:void(0);" class="close-side-nav" id="cancel-side-nav" onclick="closeSideNav()"><i class="far fa-minus-square"></i></a>
+        <a href="javascript:void(0);" class="small-close-side-nav" onclick="mobileCloseSideNav()"><i class="far fa-minus-square"></i></a>
+        <h1 class="brand">Ban<span>ka</span></h1>
+        <p><i class="far fa-user"></i>Williams Smith</p>
+        <a href="./account-dashboard.html" class="account"><i class="fas fa-university"></i>Account</a>
+        <a href="./transaction-history.html" class="history active"><i class="fas fa-history"></i>Transaction history</a>
+        <a href="./edit-detail.html" class="details"><i class="far fa-edit"></i>Edit details</a>
+        <a href="./signin.html" class="Signout"><i class="fas fa-sign-out-alt"></i>Sign out</a>
+    </nav>
+    <nav class='icon-side-nav' id="icon-nav">
+        <a href="javascript:void(0);" class="open-side-nav" onclick="openSideNav()"><i class="fas fa-bars"></i></a>
+        <a href="javascript:void(0);" class="user"><i class="far fa-user"></i><span class="tooltip">Williams Smith</span></a>
+        <a href="./account-dashboard.html" class="account"><i class="fas fa-university"></i><span class="tooltip">Account</span></a>
+        <a href="./transaction-history.html" class="history active"><i class="fas fa-history"></i><span class="tooltip">Transaction history</span></a>
+        <a href="./edit-detail.html" class="details"><i class="far fa-edit"></i><span class="tooltip">Edit details</span></a>
+        <a href="./signin.html" class="Signout"><i class="fas fa-sign-out-alt"></i><span class="tooltip">Sign out</span></a>
+    </nav>
+    <nav class='icon-top-nav' id='icon-top-bar'>
+        <a href="./account-dashboard.html" class="account"><i class="fas fa-university"></i><span>Accounts</span></a>
+        <a href="./edit-detail.html" class="details"><i class="far fa-edit"></i><span>Edit details</span></a>
+        <a href="./transaction-history.html" class="history active"><i class="fas fa-history"></i><span>Transaction history</span></a>
+        <a href="./signin.html" class="Signout"><i class="fas fa-sign-out-alt"></i><span>Sign out</span></a>
+    </nav>
+    <section class="profile-info" id="profile">
+      <header>
+        <a href="javascript:void(0);" class="open-side-nav" onclick="mobileOpenSideNav()"><i class="fas fa-bars"></i></a>
+        <h1 class="brand" id="acct-brand">Ban<span>ka</span></h1>
+        <h3>Transaction history</h3>
+      </header>
+      <div class="dashboard">
+          <table class="dashboard-table">
+            <tr class="trans-history">
+              <th>Date</th>
+              <th>Amount</th>
+              <th colspan="2">Type</th>
+            </tr>
+            <tr class="trans-history">
+              <td>30/05/2017</td>
+              <td>#3000</td>
+              <td>Cr</td>
+              <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-external-link-alt"></i></a></td>
+            </tr>
+            <tr class="trans-history">
+              <td>30/05/2017</td>
+              <td>#3000</td>
+              <td>Cr</td>
+              <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-external-link-alt"></i></a></td>
+            </tr>
+            <tr class="trans-history">
+              <td>30/05/2017</td>
+              <td>#3000</td>
+              <td>Cr</td>
+              <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-external-link-alt"></i></a></td>
+            </tr>
+            <tr class="trans-history">
+              <td>30/05/2017</td>
+              <td>#3000</td>
+              <td>Cr</td>
+              <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-external-link-alt"></i></a></td>
+            </tr>
+            <tr class="trans-history">
+              <td>30/05/2017</td>
+              <td>#3000</td>
+              <td>Cr</td>
+              <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-external-link-alt"></i></a></td>
+            </tr>
+            <tr class="trans-history">
+              <td>30/05/2017</td>
+              <td>#3000</td>
+              <td>Cr</td>
+              <td><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-external-link-alt"></i></a></td>
+            </tr>
+          </table>
+        </div>
+    </section>
+    <div class="modal profile-modal" id="confirmation-modal">
+      <div class="modal-content">
+        <a href="javascript:void(0);" class="close-icon" onclick="closeModal()"><i class="far fa-minus-square"></i></a>
+        <div class="modal-head"></div>
+        <div class="modal-body">
+            <p class="title">Amount:</p>
+            <p>#3000</p>
+            <p class="title">Transaction Date:</p>
+            <p>30/05/2017</p>
+            <p class="title">Account Number:</p>
+            <p>3077145675</p>
+            <p class="title">Narration:</p>
+            <p>Atm</p>
+            <p class="title">Transaction Type:</p>
+            <p>Credit</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

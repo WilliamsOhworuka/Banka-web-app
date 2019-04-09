@@ -1,0 +1,814 @@
+
+body,html{
+  height:100%;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
+
+/* globals */
+.container{
+  width:85%;
+  margin: auto;
+  overflow: hidden;
+}
+
+a{
+  text-decoration: none;
+}
+
+ul{
+  padding: 0;
+  list-style-type: none;
+  margin:0;
+}
+
+.background{
+  height:100%;
+  background-image: url(./img/67037.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:cover;
+  transition: margin-right .5s
+}
+
+.small-form{
+  width:400px;
+  padding: 20px;
+  text-align: center;
+  background-color: white;
+  margin: auto;
+  font-family:Ubuntu, Arial, sans-serif;
+  font-size: 15px;
+  border-radius:3px;
+}
+
+.side-nav > a:not(.close-side-nav):hover{
+  background-color:orange;
+}
+
+label{
+  font-size: 18px;
+}
+
+/* Header */
+header{
+  min-height: 30px;
+  margin:0;
+}
+
+header li{
+  display: inline;
+  padding:10px;
+  margin-left: 20px;
+}
+
+header nav{
+  float: right;
+  margin-top:15px;
+}
+
+header nav a{
+  font-family:'Amiko';
+  font-size: 14px;
+  color:black;
+}
+
+header #brand{
+  float: left;
+}
+
+header h1{
+  margin-top:10px;
+  padding:0;
+  color:#660066;
+  font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+header h1 span, .signin-header #brand span, header #logo span{
+  color:orange;
+}
+
+header .icon{
+  display: none;
+}
+
+header .signup{
+  background-color:#660066;
+  border:1px solid #660066;
+  border-radius: 3px;
+}
+
+header .signup a{
+  color:white;
+}
+
+header .signin{
+  border:1px solid #660066;
+  margin-left: 40px;
+  border-radius: 3px;
+  color:black;
+}
+
+header .signin:hover, header .signup:hover, input[type='submit']:hover{
+  background-color: #800080;
+  border:1px solid #800080;
+  transition: border .3s, background-color .3s;
+}
+
+header nav .normlink:hover{
+  border-bottom:2px solid #800080;
+}
+
+header nav .icon{
+  display: none;
+}
+
+/* showcase */
+#showcase{
+  text-align: center;
+  margin-top: 80px;
+  color:#242424;
+  font-family: cursive;
+}
+
+#showcase h1{
+  font-size:30px;
+}
+
+#showcase a{
+  display:block;
+  width:150px;
+  padding: 10px;
+  font-family: cursive;
+  color:white;
+  background-color:purple;
+  border:0;
+  border-radius: 3px;
+  margin: 50px auto;
+
+}
+
+#showcase a:hover{
+  background-color: #cc00cc;
+}
+
+/* collapsible sidebar */
+.sidemenu{
+  position:fixed;
+  height: 100%;
+  width: 0;
+  z-index: 1;
+  top:0;
+  right:0;
+  transition: .5s;
+  overflow: auto;
+}
+
+.sidemenu div{
+  margin-bottom: 30px;
+}
+
+.sidemenu nav{
+  margin-top: 80px;
+}
+
+.sidemenu nav > a{
+  text-align:left;
+  font-size: 18px;
+  padding: 14px 30px;
+  transition: .3s;
+  color: #4c4c4c;
+  border-bottom:1px solid #f4f4f4;
+}
+
+.sidemenu a{
+  text-decoration: none;
+  font-family:'inconsolata', monospace;
+  display:block;
+}
+
+.sidemenu a:hover{
+  background-color:#f2f2f2;
+}
+
+.sidemenu .close-icon{
+   position: absolute;
+   top:0;
+   left:10px;
+   color:#4c4c4c;
+   font-size:30px;
+}
+
+.sidemenu .signup a{
+  display: inline-block;
+  padding: 10px;
+  background-color:#660066;
+  margin-left:135px;
+  color: white;
+  border-radius: 3px;
+}
+
+.sidemenu .signup a:hover{
+  background-color: #800080;
+}
+
+/* sign in page*/
+/* header*/
+.form-header{
+  background-color: white;
+  margin-bottom: 20px;
+}
+
+.signin-header nav p{
+  color:#888;
+  float: right;
+  padding:10px;
+  margin:0;
+  font-size:14px;
+  font-family:'inconsolata', monospace;
+}
+
+.signin-header #brand a{
+  color:#660066;
+}
+
+.signin-header nav a{
+  display:block;
+  color:white;
+  float:right;
+  padding: 10px;
+}
+
+/* body */
+#signin-pageContent{
+  background-color:white;
+}
+
+/* form */
+input:not([type='submit']){
+  padding:14px 21px;
+  font-size:15px;
+  width: 320px;
+  border:1px solid rgb(230, 234, 237);
+
+}
+.small-form .top-input{
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+.small-form .bottom-input{
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+input:not([type='submit']):focus{
+border-color:#bf80ff;
+}
+
+input[type='submit']{
+  padding: 15px;
+  margin-top:25px;
+  background-color:#660066;
+  color: white;
+  border: none;
+  width: 150px;
+  font-size:15px;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid #660066;
+}
+
+.signinForm a{
+  color:#660066;
+}
+
+.signinForm a:hover{
+  border-bottom: 1px solid  #800080;
+}
+
+/* signup */
+header #logo a{
+  color:#660066;
+}
+
+header #logo{
+  text-align: center;
+}
+
+.signupForm{
+  margin-top:50px;
+}
+
+.signupForm h2{
+  margin-bottom: 40px;
+}
+
+#signin-question{
+    text-align: center;
+    margin-top: 10px;
+    margin-left: auto;
+    color:#5f5f5f;
+}
+
+#signin-question p,#signin-question a{
+  padding-top:10px;
+  padding-left:10px;
+  font-size: 14px;
+}
+
+/* modal */
+.modal{
+  display: none;
+  position: fixed;
+  z-index: 4;
+  padding-top: 100px;
+  left:0;
+  top:0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal .modal-content p{
+  margin-top: 25px;
+}
+
+.modal .modal-content{
+  position: relative;
+  width:500px;
+  background-color: white;
+  margin: auto;
+}
+
+.modal .modal-content .modal-body{
+  padding: 25px;
+  font-size: 15px;
+  font-family: 'Amiko';
+}
+
+.modal .modal-content .signup-modal-body{
+  padding: 40px;
+  font-size: 20px;
+  font-family:'Amiri';
+}
+
+.modal-head{
+  height:50px;
+  background-color: purple;
+}
+
+.modal-head h3{
+  color: white;
+  padding-top: 15px;
+  font-family: 'Amiri';
+}
+
+.modal .modal-content{
+  text-align:center;
+}
+
+.modal-content .close-icon{
+  position: absolute;
+  top:10px;
+  right:10px;
+  color: white;
+  font-size: 25px;
+}
+
+.profile-modal .modal-content .title{
+  color:#5f5f5f;
+}
+
+.modal-drop-down{
+  position: absolute;
+  top:110px;
+  left:130px;
+}
+
+.modal-drop-down ul{
+  display: none;
+  font-family: 'Amiko';
+  background-color: purple;
+  color:white;
+  padding: 5px;
+}
+
+.modal-drop-down .drop-down-icon{
+  color:purple;
+}
+
+.modal-drop-down ul li{
+  padding: 5px;
+}
+
+.modal-drop-down ul li:hover{
+  background-color: #8c1aff;
+}
+
+/* password setting */
+.password-form h4{
+  font-weight: normal;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.password-form h2,.password-form h4,label{
+  font-family:'Amiri';
+}
+
+/*user dashboard*/
+/* side nav bar */
+.side-nav{
+  position: fixed;
+  top:0;
+  left:0;
+  background-color:#f7f6f9;
+  width:250px;
+  height:100%;
+  transition: display .3s;
+  font-family:'Amiri';
+}
+
+.side-nav .brand{
+  color:#660066;
+  font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.side-nav p, .side-nav .brand,.side-nav a{
+  margin: 0;
+  padding: 15px 9px 9px 25px;
+}
+
+.side-nav a{
+  display: block;
+  color:black;
+}
+
+.side-nav a, .dashboard, .profile-info{
+  font-family:'Amiri';
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.side-nav p{
+  font-family:'Amiri';
+  font-size: 20px;
+}
+
+.side-nav .close-side-nav,.side-nav .small-close-side-nav{
+  position: absolute;
+  top:0;
+  right:0;
+}
+
+.side-nav .small-close-side-nav{
+  display: none;
+}
+
+.side-nav p i{
+  color: #660066;
+  margin-right:5px;
+}
+
+.side-nav > a i{
+  margin-right:7px;
+}
+
+.side-nav a:not(.active) i{
+  color: #660066;
+}
+
+.side-nav span{
+  color:orange;
+}
+
+.side-nav .active{
+  color: white;
+  background-color: #660066;
+}
+
+.icon-side-nav,.icon-top-nav{
+  position: fixed;
+  left:0;
+  background-color:#660066;
+  height:100%;
+  text-align: center;
+  z-index:3;
+}
+
+.icon-top-nav{
+  height:67px;
+  width: 100%;
+  top:95px;
+  display:none;
+}
+
+.icon-top-nav a{
+  padding: 3% 3% 2% 3%;
+  display: inline-block;
+  color: white;
+  border-bottom: 3px solid #660066;
+  text-align: center;
+}
+
+.icon-top-nav .active{
+  background-color: orange;
+}
+
+.icon-top-nav span{
+  display: block;
+  font-size: 13px;
+  margin-top:2px;
+}
+
+.icon-side-nav{
+  width:45px;
+  margin-left: -45px;
+  transition: margin .3s;
+  top:0;
+}
+
+.icon-side-nav a{
+  padding: 13px;
+  display: block;
+  color: white;
+  position: relative;
+}
+
+.icon-side-nav .active{
+  border:2px solid white;
+  border-radius: 3px;
+}
+
+
+.icon-side-nav a .tooltip{
+  width: 140px;
+  visibility: hidden;
+  background-color: #660066;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  top: 8px;
+  left: 110%;
+  opacity: 0;
+  font-family:'Amiko';
+  transition: opacity 0.3s;
+}
+
+.icon-side-nav a .tooltip::after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #660066 transparent transparent;
+}
+
+.icon-side-nav a:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* main content header */
+.profile-info{
+  margin-left: 241px;
+  padding-left:7px;
+  overflow:auto;
+}
+
+.profile-info h3{
+  margin-left: 20px;
+  margin-top:15px;
+  font-weight:lighter;
+}
+
+.profile-info header{
+  position:fixed;
+  top:0;
+  width: 100%;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-bottom: 2px solid #f2f2f2;
+  background-color: white;
+  z-index: 2;
+}
+
+.profile-info header h3{
+  margin-top: 10px;
+  margin-bottom:14px;
+  color: #660066;
+}
+
+.profile-info header h1{
+  position: absolute;
+  right:300px;
+  display: none;
+}
+
+/*main content*/
+.dashboard{
+  margin-top: 80px;
+  margin-left: 100px;
+  z-index: 1;
+}
+
+.profile-info h4{
+  display: none;
+}
+
+.profile-info header .open-side-nav{
+  position: absolute;
+  left:20px;
+  top: 20px;
+  color:purple;
+  display: none;
+}
+.dashboard p{
+  margin-left:20px;
+  font-size: 40px;
+  font-weight: 100;
+  color:#660066;
+}
+
+/*transaction history*/
+.dashboard-table{
+  border-collapse: collapse;
+  border:1px solid #cccccc;
+}
+
+.dashboard-table td,.dashboard-table th{
+  padding:15px;
+}
+
+.dashboard-table th{
+  text-align: left;
+  background-color: #f7f6f9;
+  border-bottom: 1px solid #cccccc;
+  color:black;
+}
+
+.dashboard-table td i{
+  color:#660066;
+}
+
+.dashboard .modal-content table td{
+  color: #660066;
+  text-align: left;
+  padding-right:20px;
+}
+
+.profile-modal .modal-content{
+  text-align:left;
+}
+
+/*edit details*/
+.dashboard .small-form{
+  margin-left: 130px;
+}
+
+.modal-dropdown-menu{
+  position: absolute;
+}
+
+.pass{
+  display: none;
+}
+
+/*admin dashboard*/
+#admin{
+  text-align: center;
+  font-family:'Amiko';
+  color:purple;
+}
+
+/* small screen devices */
+@media (max-width:800px){
+  header nav li{
+    display: none;
+  }
+
+  header nav .icon{
+    display: inline;
+    font-size: 20px;
+  }
+
+  .side-nav{
+    display: none;
+  }
+
+  .icon-side-nav{
+    margin-left:0;
+  }
+
+  .profile-info{
+    margin-left:45px;
+  }
+
+  .profile-info header h1{
+    display:inline-block;
+    right:60px;
+  }
+
+  .modal .modal-content{
+    width:100%;
+    height:100%;
+  }
+
+  .modal{
+    padding-top: 0;
+  }
+  
+  .signup-question{
+    display: none;
+  }
+
+  .small-form{
+    width: 85%;
+  }
+
+  .small-form input:not([type='submit']){
+    width: 267px;
+  }
+
+  .dashboard{
+    margin-left:0;
+  }
+
+  .dashboard .small-form{
+    margin:auto;
+  }
+
+  .dashboard .small-form input{
+    width:200px;
+  }
+}
+
+@media screen and (max-width: 480px){
+
+  .dashboard{
+    margin-top:170px; 
+    margin-left: 0;
+  }
+
+  .dashboard-table td,.dashboard-table th{
+    padding:10px;
+  }
+
+  .dashboard-table{
+    margin: auto;
+  }
+
+  .profile-info{
+    margin-left:0;
+    padding-left:0; 
+  }
+
+  .profile-info h4{
+    display: block;
+  }
+
+  .profile-info header h3{
+   display: none;
+  }
+  
+  .profile-info header h1{
+    position:static;
+    text-align: center;
+    display: block;
+  }
+  .icon-top-nav{
+    display: block;
+  }
+  .icon-side-nav,.side-nav .close-side-nav{
+    display: none;
+  }
+
+  .profile-info header .open-side-nav,.side-nav .small-close-side-nav{
+    display: inline;
+  }
+  .profile-info h4{
+    color: purple;
+    text-align: center;
+    margin:-15px;
+    padding: 3px;
+  }
+  .icon-top-nav a:hover{
+    border-bottom-color: white;
+  } 
+
+  .profile-info header{
+    border:none;
+  }
+}

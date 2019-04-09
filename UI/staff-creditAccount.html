@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Amiri' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Amiko' rel='stylesheet'>
+    <script defer type="text/javascript" src='script.js'></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Staff Credit Account</title>
+  </head>
+  <body>
+    <nav class='side-nav' id="profile-side-nav">
+        <a href="javascript:void(0);" class="close-side-nav" id="cancel-side-nav" onclick="closeSideNav()"><i class="far fa-minus-square"></i></a>
+        <a href="javascript:void(0);" class="small-close-side-nav" onclick="mobileCloseSideNav()"><i class="far fa-minus-square"></i></a>
+        <h1 class="brand">Ban<span>ka</span></h1>
+        <p id="admin">STAFF</p>
+        <p><i class="far fa-user"></i>Vontae Jones</p>
+        <a href="./staff-accountDashboard.html" class="account active"><i class="fas fa-university"></i>Accounts</a>
+        <a href="./staff-editDetails.html" class="details"><i class="far fa-edit"></i>Edit details</a>
+        <a href="./signin.html" class="Signout"><i class="fas fa-sign-out-alt"></i>Sign out</a>
+    </nav>
+    <nav class='icon-side-nav' id="icon-nav">
+        <a href="javascript:void(0);" class="open-side-nav" onclick="openSideNav()"><i class="fas fa-bars"></i></a>
+        <a href="javascript:void(0);" class="user"><i class="far fa-user"></i><span class="tooltip">Vontae Smith</span></a>
+        <a href="./staff-accountDashboard.html" class="account active"><i class="fas fa-university"></i><span class="tooltip">Accounts</span></a>
+        <a href="./staff-editDetails.html" class="details"><i class="far fa-edit"></i><span class="tooltip">Edit details</span></a>
+        <a href="./signin.html" class="Signout"><i class="fas fa-sign-out-alt"></i><span class="tooltip">Sign out</span></a>
+    </nav>
+    <nav class='icon-top-nav' id='icon-top-bar'>
+        <a href="./staff-accountDashboard.html" class="account active"><i class="fas fa-university"></i><span>Accounts</span></a>
+        <a href="./staff-editDetails.html" class="details"><i class="far fa-edit"></i><span>Edit details</span></a>
+        <a href="./signin.html" class="Signout"><i class="fas fa-sign-out-alt"></i><span>Sign out</span></a>
+    </nav>
+    <section class="profile-info" id="profile">
+      <header>
+        <a href="javascript:void(0);" class="open-side-nav" onclick="mobileOpenSideNav()"><i class="fas fa-bars"></i></a>
+        <h1 class="brand" id="acct-brand">Ban<span>ka</span></h1>
+        <h3>Credit Account</h3>
+        <h4>Welcome Vontae Smith</h4>
+      </header>
+      <div class="dashboard">
+        <form class="small-form" action="index.html" method="post">
+          <input type="text" name="accountNumber" class="top-input" value="3077145675" placeholder="Account Number" required><br>
+          <input type="number" name="Amount" placeholder="Amount" required><br>
+          <input type="text" name="Narration" placeholder="Narration" required><br>
+          <input type="password" name="password" class="bottom-input" placeholder="Password" required><br>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    </section>
+  </body>
+</html>
