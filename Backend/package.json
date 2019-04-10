@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "nodemon --exec babel-node src/app.js",
-    "test": " mocha --require @babel/register ",
+    "test": " nyc mocha --require @babel/register --exit || true",
     "lint": "./node_modules/.bin/eslint src/*.js",
     "build": "babel src --out-dir build",
     "serve": "node build/app.js",

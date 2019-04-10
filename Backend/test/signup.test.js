@@ -22,7 +22,7 @@ describe('Testing user signup', () => {
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
         expect(response.body.error).to.equal('First name is required');
+        done();
       });
-    done();
   });
 });
