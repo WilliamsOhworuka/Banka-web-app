@@ -5,7 +5,7 @@ import authRoute from '../routes/auth.route';
 const app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded(false));
 app.use('/api/v1/auth', authRoute);
 
 const port = process.env.PORT || 3000;

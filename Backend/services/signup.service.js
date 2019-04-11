@@ -1,9 +1,7 @@
 /* eslint-disable max-len */
-import jwt from 'jsonwebtoken';
 import users from '../models/storage.model';
 
 export default class Validate {
-  // eslint-disable-next-line no-unused-vars
   static checkValidInput(req, res, next) {
     const checkName = users.find(user => user.firstName + user.lastName === req.body.firstName + req.body.lastName);
     const checkMail = users.find(user => user.email === req.body.email);
@@ -77,30 +75,5 @@ export default class Validate {
       });
     }
     return next();
-  }
-
-  static sendToken(req, res) {
-    const secret = 'bufallo';
-    jwt.sign(
-      {
-        id: req.body.id,
-        isAdmin: req.body.isAdmin,
-        type: req.body.type,
-      },
-      secret,
-      (err, token) => {
-        res.status(200);
-        res.json({
-          status: 200,
-          data: {
-            token,
-            id: req.body.id,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-          },
-        });
-      },
-    );
   }
 }
