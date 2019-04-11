@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { Client, Staff } from '../models/user.model';
 import users from '../models/storage.model';
-import Signup from '../services/signup.service';
+import Token from '../services/token.service';
 
 export default class User {
   static generateId(req) {
@@ -19,7 +19,7 @@ export default class User {
       users.push(new Staff(req.body.id, req.body.email, req.body.firstName, req.body.lastName, hashPassword, 'staff', req.body.isAdmin));
     }
 
-    Signup.sendToken(req, res);
+    Token.sendToken(req, res);
     next();
   }
 }

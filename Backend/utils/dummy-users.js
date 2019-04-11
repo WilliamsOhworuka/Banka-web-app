@@ -1,10 +1,12 @@
+import bcrypt from 'bcrypt';
+
 const a = {
   id: 1,
   firstName: 'kid',
   lastName: 'kudi',
   email: 'kid@yahoo.com',
   type: 'client',
-  password: 'kiddy',
+  password: bcrypt.hashSync('kiddy', 8),
 };
 
 const b = {
@@ -13,7 +15,7 @@ const b = {
   lastName: 'banon',
   email: 'mike@yahoo.com',
   type: 'staff',
-  password: 'mikey',
+  password: bcrypt.hashSync('mikey', 8),
   isAdmin: true,
 };
 
@@ -23,7 +25,7 @@ const c = {
   lastName: 'kudi',
   email: 'kid@yahoo.com',
   type: 'staff',
-  password: 'kiddy',
+  password: bcrypt.hashSync('brock', 8),
   isAdmin: false,
 };
 
