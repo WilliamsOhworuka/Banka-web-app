@@ -1,13 +1,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import jsonWebToken from 'jsonwebtoken';
-import jwt_Decode from 'jwt-decode';
+import authRoute from '../routes/auth.route';
 
 const app = express();
 
-app.post('/api/v1/auth/signup', (req, res) => {
-  res.send({});
-});
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+app.use('/api/v1/auth', authRoute);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('Server is listening at 3000'));
