@@ -1,16 +1,11 @@
 import bcrypt from 'bcrypt';
 import { Client, Staff } from '../models/user.model';
 import users from '../models/storage.model';
-import Token from '../services/token.service';
+import Util from '../services/util.service';
 
 export default class User {
-  static generateId(req) {
-    const id = users.length + 1;
-    req.body.id = id;
-  }
-
   static create(req, res, next) {
-    User.generateId(req);
+    Util.generateId(req, users);
     const hashPassword = bcrypt.hashSync(req.body.password, 8);
 
     if (req.body.type === 'client') {
@@ -19,7 +14,7 @@ export default class User {
       users.push(new Staff(req.body.id, req.body.email, req.body.firstName, req.body.lastName, hashPassword, 'staff', req.body.isAdmin));
     }
 
-    Token.sendToken(req, res);
+    Util.sendToken(req, res);
     next();
   }
 }

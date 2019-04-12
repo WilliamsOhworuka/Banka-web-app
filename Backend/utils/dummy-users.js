@@ -4,7 +4,7 @@ const a = {
   id: 1,
   firstName: 'kid',
   lastName: 'kudi',
-  email: 'kid@yahoo.com',
+  email: 'kid@yahooo.com',
   type: 'client',
   password: bcrypt.hashSync('kiddy', 8),
 };
