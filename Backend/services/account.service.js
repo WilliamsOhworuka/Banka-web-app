@@ -20,7 +20,7 @@ export default class AccountService {
     if (!auth) {
       return res.status(403).json({
         status: 403,
-        error: 'Sign up to create bank account',
+        error: 'Access denied',
       });
     }
     const token = Util.getToken(req);
@@ -28,12 +28,22 @@ export default class AccountService {
       if (err) {
         return res.status(403).json({
           status: 403,
-          error: 'Sign up to create bank account',
+          error: 'Request denied',
         });
       }
       return next();
     });
-    return next();
+  }
+
+  static checkStaffAccess(req, res, next) {
+    const userInfo = Util.getInfoFromToken(req);
+    if (userInfo.type === 'staff') {
+      return next();
+    }
+    return res.status(403).json({
+      status: 403,
+      error: 'Request denied',
+    });
   }
 
   static generateAccountNumber(req, array) {
@@ -44,8 +54,10 @@ export default class AccountService {
   static create(req, res, next) {
     Util.generateId(req, accounts);
     AccountService.generateAccountNumber(req, accounts);
-    const owner = Util.ownerInfo(req);
+
+    const owner = Util.ownerInfo(req, res);
     accounts.push(new Account(req.body.id, req.body.accountNumber, Date.now(), owner.id, req.body.type, 'dormant', 0.00));
+
     res.status(201);
     res.json({
       status: 201,
@@ -59,5 +71,32 @@ export default class AccountService {
       },
     });
     next();
+  }
+
+  static getAccount(accountNumber) {
+    return accounts.find(item => item.accountNumber === +accountNumber);
+  }
+
+  static changeAccountStatus(req, res) {
+    const acct = AccountService.getAccount(req.params.accountNumber);
+    if (acct) {
+      const Oldstatus = acct.status;
+      if (Oldstatus === 'active') {
+        acct.status = 'dormant';
+      } else {
+        acct.status = 'active';
+      }
+      return res.status(200).json({
+        status: 200,
+        data: {
+          accountNumber: acct.accountNumber,
+          status: acct.status,
+        },
+      });
+    }
+    return res.status(404).json({
+      status: 404,
+      error: 'Account does not exist',
+    });
   }
 }

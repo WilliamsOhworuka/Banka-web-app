@@ -22,8 +22,8 @@ const b = {
 const c = {
   id: 3,
   firstName: 'kid',
-  lastName: 'kudi',
-  email: 'kid@yahoo.com',
+  lastName: 'kudih',
+  email: 'kidih@yahoo.com',
   type: 'staff',
   password: bcrypt.hashSync('brock', 8),
   isAdmin: false,

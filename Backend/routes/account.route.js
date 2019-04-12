@@ -1,8 +1,7 @@
 import express from 'express';
-import AccountService from '../services/account.service';
+import Account from '../services/account.service';
 
 const router = express.Router();
 
-router.post('/', AccountService.checkEmptyFields, AccountService.checkAuthorization, AccountService.create);
-
+router.patch('/:accountNumber', Account.checkAuthorization, Account.checkStaffAccess, Account.changeAccountStatus);
 export default router;

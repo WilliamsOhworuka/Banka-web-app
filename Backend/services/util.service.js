@@ -38,14 +38,14 @@ export default class Util {
     return bearer[1];
   }
 
-  static getIdFromToken(req) {
+  static getInfoFromToken(req) {
     const token = Util.getToken(req);
     const content = jwtDecode(token);
-    return content.id;
+    return content;
   }
 
-  static ownerInfo(req) {
-    const ownerId = Util.getIdFromToken(req);
+  static ownerInfo(req, res) {
+    const ownerId = Util.getInfoFromToken(req, res).id;
     const owner = users.find(item => item.id === ownerId);
     return {
       id: owner.id, firstName: owner.firstName, lastName: owner.lastName, email: owner.email,
