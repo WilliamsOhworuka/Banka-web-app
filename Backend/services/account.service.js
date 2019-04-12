@@ -99,4 +99,21 @@ export default class AccountService {
       error: 'Account does not exist',
     });
   }
+
+  static deleteAccount(req, res) {
+    const acct = AccountService.getAccount(req.params.accountNumber);
+    if (acct) {
+      const index = accounts.indexOf(acct);
+      accounts.splice(index, 1);
+
+      return res.status(200).json({
+        status: 200,
+        message: 'Account successfully deleted',
+      });
+    }
+    return res.status(404).json({
+      status: 404,
+      error: 'Account does not exist',
+    });
+  }
 }

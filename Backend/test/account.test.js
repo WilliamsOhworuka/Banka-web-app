@@ -89,4 +89,48 @@ describe('Testing user bank account creation', () => {
     Account.changeAccountStatus(req, res);
     expect(acct.status).to.equal('dormant');
   });
+
+  it('should return an error if account does not exist', (done) => {
+    chai.request(app)
+    // sending accoount that does not exist
+      .delete('/api/v1/accounts/3077200646')
+      .set('authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaXNBZG1pbiI6ZmFsc2UsInR5cGUiOiJzdGFmZiIsImlhdCI6MTU1NTA4NTMzMH0.eSwPEFzEXHOD4XexxTqA3_GJiZEU0uP2KqetjIqeNko')
+      .end((error, response) => {
+        expect(response).to.have.status(404);
+        expect(response.body.error).to.be.a('string');
+        expect(response.body).to.have.property('status');
+        expect(response.body).to.have.property('error');
+        expect(response.body.error).to.equal('Account does not exist');
+        done();
+      });
+  });
+
+  it('should return a success message when account is succesful deleted', (done) => {
+    chai.request(app)
+      .delete('/api/v1/accounts/30772002')
+      // sending token of a staff(authorized user)
+      .set('authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaXNBZG1pbiI6ZmFsc2UsInR5cGUiOiJzdGFmZiIsImlhdCI6MTU1NTA4NTMzMH0.eSwPEFzEXHOD4XexxTqA3_GJiZEU0uP2KqetjIqeNko')
+      .end((error, response) => {
+        expect(response).to.have.status(200);
+        expect(response.body.message).to.be.a('string');
+        expect(response.body).to.have.property('status');
+        expect(response.body.message).to.equal('Account successfully deleted');
+        done();
+      });
+  });
+
+  it('should return a error message when user  is not authorized', (done) => {
+    chai.request(app)
+      .delete('/api/v1/accounts/30772002')
+      // sending invalid token
+      .set('authorization', 'bearer eyJhbGciOiJIUzhdhhdI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaXNBZG1pbiI6ZmFsc2UsInR5cGUiOiJzdGFmZiIsImlhdCI6MTU1NTA4NTMzMH0.eSwPEFzEXHOD4XexxTqA3_GJiZEU0uP2KqetjIqeNko')
+      .end((error, response) => {
+        expect(response).to.have.status(403);
+        expect(response.body.error).to.be.a('string');
+        expect(response.body).to.have.property('status');
+        expect(response.body).to.have.property('error');
+        expect(response.body.error).to.equal('Request denied');
+        done();
+      });
+  });
 });
