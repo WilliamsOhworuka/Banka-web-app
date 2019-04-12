@@ -1,6 +1,8 @@
 import express from 'express';
-import jwt from 'jsonwebtoken';
+import AccountService from '../services/account.service';
 
 const router = express.Router();
 
-router.post('/', (req, res, next) => {});
+router.post('/', AccountService.checkEmptyFields, AccountService.checkAuthorization, AccountService.create);
+
+export default router;

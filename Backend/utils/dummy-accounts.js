@@ -1,12 +1,3 @@
-const a = {
-  id: 1,
-  accountNumber: 30772001,
-  createdOn: Date.now(),
-  owner: 1,
-  type: 'savings',
-  status: 'active',
-  balance: 30000.00,
-};
 
 const b = {
   id: 2,
@@ -28,5 +19,5 @@ const c = {
   balance: 3000.00,
 };
 
-const accounts = [a, b, c];
+const accounts = [b, c];
 export default accounts;
