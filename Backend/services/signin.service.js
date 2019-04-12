@@ -4,8 +4,11 @@ import users from '../models/storage.model';
 
 export default class {
   static getId(req, res, next) { 
-    const { id } = users.find(item => item.email === req.body.email);
+    const user = users.find(item => item.email === req.body.email);
+    const { id } = { ...user };
     req.body.id = id;
+    req.body.type = user.type;
+    req.body.isAdmin = user.isAdmin;
     next();
   }
 

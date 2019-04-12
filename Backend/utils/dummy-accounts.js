@@ -2,7 +2,7 @@
 const b = {
   id: 2,
   accountNumber: 30772002,
-  createdOn: Date.now(),
+  createdOn: new Date('December 17, 1995 03:24:00'),
   owner: 2,
   type: 'current',
   status: 'active',
@@ -12,7 +12,7 @@ const b = {
 const c = {
   id: 3,
   accountNumber: 30772003,
-  createdOn: Date.now(),
+  createdOn: new Date('December 17, 1995 03:24:00'),
   owner: 3,
   type: 'savings',
   status: 'dormant',
