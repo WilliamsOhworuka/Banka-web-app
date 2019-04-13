@@ -7,10 +7,10 @@
     "test": "test"
   },
   "scripts": {
-    "start": " node ./build/app.js",
+    "start": " node build/app.js",
     "test": " nyc mocha --require @babel/register --exit || true",
     "lint": "./node_modules/.bin/eslint ./Backend",
-    "build": "babel ./Backend --out-dir ./build",
+    "build": "babel ./Backend --out-dir build",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "keywords": [],
