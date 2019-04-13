@@ -13,6 +13,11 @@ app.use('/api/v1/accounts', accountRoute);
 app.use('/api/v1/account', statusUpdteRoute);
 app.use('/api/v1/transactions', transactionRoute);
 app.use('/api/v1/auth', authRoute);
+app.use('/', (req, res) => {
+  res.json({
+    message: 'welcome to Banka',
+  });
+});
 
 
 const port = process.env.PORT || 3000;
