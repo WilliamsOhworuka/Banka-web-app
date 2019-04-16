@@ -8,10 +8,11 @@
   },
   "scripts": {
     "start": "npm run build && node ./build/src/app.js",
-    "test": " nyc mocha --require @babel/register --exit || true",
+    "start-dev": "node ./build/src/app.js",
+    "test": " nyc mocha backend/test --require @babel/register --exit || true",
     "lint": "./node_modules/.bin/eslint ./Backend",
     "build-babel": "babel -d ./build ./Backend -s",
-    "build": "npm run clean && npm run build-babel",
+    "build": "npm run build-babel",
     "clean": "rm -rf ./build && mkdir ./build",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
