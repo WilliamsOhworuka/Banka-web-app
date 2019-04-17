@@ -7,18 +7,17 @@ import transactionRoute from '../routes/transaction.route';
 
 const app = express();
 
+app.get('/', (req, res) => {
+  res.json({
+    message: 'welcome to Banka',
+  });
+});
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api/v1/accounts', accountRoute);
 app.use('/api/v1/account', statusUpdteRoute);
 app.use('/api/v1/transactions', transactionRoute);
 app.use('/api/v1/auth', authRoute);
-app.use('/', (req, res) => {
-  res.json({
-    message: 'welcome to Banka',
-  });
-});
-
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('Server is listening at 3000'));

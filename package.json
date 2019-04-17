@@ -7,11 +7,12 @@
     "test": "test"
   },
   "scripts": {
-    "start": "npm run build && node ./build/app.js",
-    "test": " nyc mocha --require @babel/register --exit || true",
+    "start": "npm run build && node ./build/src/app.js",
+    "start-dev": "node ./build/src/app.js",
+    "test": " nyc mocha backend/test --require @babel/register --exit || true",
     "lint": "./node_modules/.bin/eslint ./Backend",
-    "build-babel": "babel -d ./build ./Backend",
-    "build": "npm run clean && npm run build-babel",
+    "build-babel": "babel -d ./build ./Backend -s",
+    "build": "npm run build-babel",
     "clean": "rm -rf ./build && mkdir ./build",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -20,6 +21,8 @@
   "license": "ISC",
   "dependencies": {
     "@babel/preset-env": "^7.4.3",
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
     "bcrypt": "^3.0.5",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
@@ -27,8 +30,6 @@
     "jwt-decode": "^2.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.3",
-    "@babel/core": "^7.4.3",
     "@babel/node": "^7.2.2",
     "@babel/register": "^7.4.0",
     "chai": "^4.2.0",
