@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import jwtDecode from 'jwt-decode';
-import users from '../models/storage.model';
+import users, { accounts } from '../models/storage.model';
 
 export default class Util {
   static sendToken(req, res) {
@@ -31,6 +31,15 @@ export default class Util {
   static generateId(req, array) {
     const id = array.length + 1;
     req.body.id = id;
+  }
+
+  static generateAccountNumber(req, array) {
+    const seed = 30772003;
+    req.body.accountNumber = seed + array.length + 3;
+  }
+
+  static getAccount(accountNumber) {
+    return accounts.find(item => item.accountNumber === +accountNumber);
   }
 
   static getToken(req) {

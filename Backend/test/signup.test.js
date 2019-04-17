@@ -121,7 +121,7 @@ describe('Testing user signup', () => {
       },
     };
 
-    User.create(req, null, () => {});
+    User.createUser(req, null, () => {});
     expect(req.body.email).to.equal(users.find(item => item.id === 4).email);
     done();
   });

@@ -1,9 +1,9 @@
 import chai, { expect } from 'chai';
 import chaihttp from 'chai-http';
 import deepEqualInAnyOrder from 'deep-equal-in-any-order';
+import AccountController from '../controllers/account.controller';
+import Util from '../helper/util.helper';
 import app from '../src/app';
-import Account from '../services/account.service';
-import Util from '../services/util.service';
 import { accounts } from '../models/storage.model';
 
 chai.use(chaihttp);
@@ -55,12 +55,12 @@ describe('Testing user bank account creation', () => {
       json() {},
     };
 
-    Account.create(req, res, () => {});
+    AccountController.createAccount(req, res, () => {});
     expect('kidih@yahoo.com').to.equal(Util.ownerInfo(req).email);
   });
 
   it('should return account object with matching account number', () => {
-    expect(Account.getAccount(30772002)).to.deep.equalInAnyOrder({
+    expect(Util.getAccount(30772002)).to.deep.equalInAnyOrder({
       id: 2,
       accountNumber: 30772002,
       createdOn: new Date('December 17, 1995 03:24:00'),
@@ -86,7 +86,7 @@ describe('Testing user bank account creation', () => {
         accountNumber,
       },
     };
-    Account.changeAccountStatus(req, res);
+    AccountController.changeAccountStatus(req, res);
     expect(acct.status).to.equal('dormant');
   });
 
