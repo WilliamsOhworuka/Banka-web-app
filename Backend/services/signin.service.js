@@ -34,7 +34,7 @@ export default class {
     const check = users.find(item => req.body.email === item.email);
     
     if (check) {
-      const resp = bcrypt.compareSync('brock', check.password);
+      const resp = bcrypt.compareSync(req.body.password, check.password);
       if (!resp) {
         res.status(401);
         return res.json({
