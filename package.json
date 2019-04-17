@@ -9,7 +9,7 @@
   "scripts": {
     "start": "npm run build && node ./build/src/app.js",
     "start-dev": "node ./build/src/app.js",
-    "test": " nyc mocha backend/test --require @babel/register --exit || true",
+    "test": " nyc mocha Backend/test --require @babel/register --exit || true",
     "lint": "./node_modules/.bin/eslint ./Backend",
     "build-babel": "babel -d ./build ./Backend -s",
     "build": "npm run build-babel",

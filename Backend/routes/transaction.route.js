@@ -1,9 +1,10 @@
 import express from 'express';
-import Account from '../services/account.service';
-import transactionService from '../services/transaction.service';
+import AccountMiddleware from '../middleware/account.middleware';
+import transactionMiddleware from '../middleware/transaction.middleware';
+import transactionController from '../controllers/account.controller';
 
 const router = express.Router();
 
-router.post('/:accountNumber/credit', Account.checkAuthorization, Account.checkStaffAccess, transactionService.creditAccount, transactionService.createTransaction);
-router.post('/:accountNumber/debit', Account.checkAuthorization, Account.checkStaffAccess, transactionService.debitAccount, transactionService.createTransaction);
+router.post('/:accountNumber/credit', AccountMiddleware.checkAuthorization, AccountMiddleware.checkStaffAccess, transactionMiddleware.creditAccount, transactionController.createTransaction);
+router.post('/:accountNumber/debit', AccountMiddleware.checkAuthorization, AccountMiddleware.checkStaffAccess, transactionMiddleware.debitAccount, transactionController.createTransaction);
 export default router;

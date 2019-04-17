@@ -1,10 +1,10 @@
 import bcrypt from 'bcrypt';
 import { Client, Staff } from '../models/user.model';
 import users from '../models/storage.model';
-import Util from '../services/util.service';
+import Util from '../helper/util.helper';
 
 export default class User {
-  static create(req, res, next) {
+  static createUser(req, res, next) {
     Util.generateId(req, users);
     const hashPassword = bcrypt.hashSync(req.body.password, 8);
 

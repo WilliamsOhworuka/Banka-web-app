@@ -1,8 +1,9 @@
 import express from 'express';
-import AccountService from '../services/account.service';
+import AccountMiddleware from '../middleware/account.middleware';
+import AccountController from '../controllers/account.controller';
 
 const router = express.Router();
 
-router.post('/', AccountService.checkEmptyFields, AccountService.checkAuthorization, AccountService.create);
-router.delete('/:accountNumber', AccountService.checkAuthorization, AccountService.checkStaffAccess, AccountService.deleteAccount);
+router.post('/', AccountMiddleware.checkEmptyFields, AccountMiddleware.checkAuthorization, AccountController.createAccount);
+router.delete('/:accountNumber', AccountMiddleware.checkAuthorization, AccountMiddleware.checkStaffAccess, AccountController.deleteAccount);
 export default router;

@@ -330,12 +330,13 @@ header #logo{
   display: none;
   position: fixed;
   z-index: 4;
-  padding-top: 100px;
+  padding-top: 30px;
   left:0;
   top:0;
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.4);
+  overflow: auto;
 }
 
 .modal .modal-content p{
@@ -685,6 +686,7 @@ header #logo{
   position: relative;
   padding: 15px;
   color: purple;
+  margin-right:200px;
 }
 
 .dashboard .user-trans-hist p{
@@ -717,6 +719,7 @@ header #logo{
 /*transaction history*/
 .dashboard-table{
   border-collapse: collapse;
+  width: 80%;
 }
 
 .dashboard-table td,.dashboard-table th{
