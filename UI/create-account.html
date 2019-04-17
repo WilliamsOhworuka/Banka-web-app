@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amiri" rel="stylesheet">
+    <script defer type="text/javascript" src='script.js'></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create bank Account</title>
+  </head>
+  <body>
+    <header>
+      <div id="logo">
+      <h1><a href='index.html'>Ban<span>ka</span><a></h1>
+      </div>
+    </header>
+    <form class="signupForm small-form" action="./account-dashboard.html" method="post">
+      <h4>Create bank account</h4>
+      <input type="text" name="accountName" class="top-input" placeholder="Account name" required autofocus>
+      <input type="email" name="email" placeholder="Email" required><br>
+      <input type="tel" name="mobileNumber" placeholder="Phone number" required><br>
+      <input type="text" name="address" class="bottom-input" placeholder="Address" required><br>
+      <label for="userType">Account Type:</label>
+      <select class="account-type" id="type" name="accountType">
+        <option value="current">Current</option>
+        <option value="savings">Savings</option>
+      </select><br>
+      <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>
