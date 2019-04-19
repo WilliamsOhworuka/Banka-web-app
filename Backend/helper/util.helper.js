@@ -3,8 +3,9 @@ import jwtDecode from 'jwt-decode';
 import users, { accounts } from '../models/storage.model';
 
 export default class Util {
-  static sendToken(req, res) {
+  static sendToken(req, res, action) {
     const secret = 'bufallo';
+    let stat;
     jwt.sign(
       {
         id: req.body.id,
@@ -13,9 +14,14 @@ export default class Util {
       },
       secret,
       (err, token) => {
-        res.status(200);
+        if (action === 'signin') {
+          stat = 200;
+        } else {
+          stat = 201;
+        }
+        res.status(stat);
         res.json({
-          status: 200,
+          status: stat,
           data: {
             token,
             id: req.body.id,
