@@ -31,11 +31,11 @@ describe('Testing user bank account creation', () => {
         type: 'savings',
       })
       .end((error, response) => {
-        expect(response).to.have.status(403);
+        expect(response).to.have.status(401);
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
-        expect(response.body.error).to.equal('Access denied');
+        expect(response.body.error).to.equal('Unauthorized');
         done();
       });
   });
@@ -125,11 +125,11 @@ describe('Testing user bank account creation', () => {
       // sending invalid token
       .set('authorization', 'bearer eyJhbGciOiJIUzhdhhdI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaXNBZG1pbiI6ZmFsc2UsInR5cGUiOiJzdGFmZiIsImlhdCI6MTU1NTA4NTMzMH0.eSwPEFzEXHOD4XexxTqA3_GJiZEU0uP2KqetjIqeNko')
       .end((error, response) => {
-        expect(response).to.have.status(403);
+        expect(response).to.have.status(401);
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
-        expect(response.body.error).to.equal('Request denied');
+        expect(response.body.error).to.equal('Unauthorized');
         done();
       });
   });

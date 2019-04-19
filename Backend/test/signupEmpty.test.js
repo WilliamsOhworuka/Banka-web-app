@@ -75,7 +75,7 @@ describe('Testing user signup for empty required fields', () => {
         confirmPassword: 'password',
       })
       .end((error, response) => {
-        expect(response).to.have.status(200);
+        expect(response).to.have.status(201);
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('data');
         expect(response.body.data).to.be.a('object');

@@ -3,7 +3,7 @@
 import chai, { expect } from 'chai';
 import chaihttp from 'chai-http';
 import app from '../src/app';
-import User from '../controllers/signup.controller';
+import User from '../controllers/authentication.controller';
 import users from '../models/storage.model';
 
 chai.use(chaihttp);
