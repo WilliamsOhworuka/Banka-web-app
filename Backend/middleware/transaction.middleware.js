@@ -32,11 +32,11 @@ export default class TransactionService {
     });
   }
 
-  static debitAccount(req, res, next) {
+  static async debitAccount(req, res, next) {
     const userInfo = Util.getInfoFromToken(req);
 
     if (!userInfo.isAdmin && userInfo.type === 'staff') {
-      const acct = Util.getAccount(req.params.accountNumber);
+      const acct = await Util.getAccount(res, req.params.accountNumber);
 
       if (!acct) {
         return res.status(404).json({
@@ -46,15 +46,17 @@ export default class TransactionService {
       }
 
       if (!isFinite(req.body.amount) || req.body.amount <= 0) {
-        return res.status(403).json({
-          status: 403,
-          error: 'forbidden operation',
+        return res.status(422).json({
+          status: 422,
+          error: 'Invalid Operation',
         });
       }
 
       if (acct.balance > req.body.amount) {
-        acct.balance -= Number(req.body.amount);
+        const newBalance = acct.balance - req.body.amount;
         req.body.type = 'debit';
+        req.body.oldBal = acct.balance;
+        await Util.updateTable(res, 'accounts', 'balance', newBalance, 'accountnumber', req.params.accountNumber);
         return next();
       }
 
