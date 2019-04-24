@@ -3,32 +3,10 @@
 import chai, { expect } from 'chai';
 import chaihttp from 'chai-http';
 import app from '../src/app';
-import User from '../controllers/authentication.controller';
-import users from '../models/storage.model';
 
 chai.use(chaihttp);
 
 describe('Testing user signup', () => {
-  it('should return an error if fullname exists', (done) => {
-    chai.request(app)
-      .post('/api/v1/auth/signup')
-      .send({
-        firstName: 'kid',
-        lastName: 'kudi',
-        email: 'test@test.com',
-        password: 'password',
-        confirmPassword: 'password',
-      })
-      .end((error, response) => {
-        expect(response).to.have.status(400);
-        expect(response.body.error).to.be.a('string');
-        expect(response.body).to.have.property('status');
-        expect(response.body).to.have.property('error');
-        expect(response.body.error).to.equal('Name already exists');
-        done();
-      });
-  });
-
   it('should return an error if password and confirm password are not equal', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
@@ -55,16 +33,16 @@ describe('Testing user signup', () => {
       .send({
         firstName: 'kid',
         lastName: 'masters',
-        email: 'mike@yahoo.com',
+        email: 'john@yahoo.com',
         password: 'password',
         confirmPassword: 'password',
       })
       .end((error, response) => {
-        expect(response).to.have.status(400);
+        expect(response).to.have.status(409);
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
-        expect(response.body.error).to.equal('email already exists');
+        expect(response.body.error).to.equal('Email already exists');
         done();
       });
   });
@@ -109,20 +87,26 @@ describe('Testing user signup', () => {
       });
   });
 
-  it('should return an updated user array', (done) => {
-    const req = {
-      body: {
-        firstName: 'kid',
+  it('should return object with user details on successful signup', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstName: 'kiddy',
         lastName: 'masters',
         email: 'will@gh.com',
-        password: 'pass',
-        confirmPassword: 'pass',
-        type: 'client',
-      },
-    };
-
-    User.createUser(req, null, () => {});
-    expect(req.body.email).to.equal(users.find(item => item.id === 4).email);
-    done();
+        password: 'pacific',
+        confirmPassword: 'pacific',
+      })
+      .end((error, response) => {
+        expect(response).to.have.status(201);
+        expect(response.body.data).to.be.a('object');
+        expect(response.body).to.have.property('status');
+        expect(response.body.data).to.have.property('token');
+        expect(response.body.data).to.have.property('id');
+        expect(response.body.data.firstName).to.be.a('string');
+        expect(response.body.data.lastName).to.be.a('string');
+        expect(response.body.data.email).to.be.a('string');
+        done();
+      });
   });
 });
