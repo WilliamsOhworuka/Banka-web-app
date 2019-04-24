@@ -1,28 +1,46 @@
 import { accounts, transactions } from '../models/storage.model';
 import Util from '../helper/util.helper';
-import Account from '../models/account.model';
+import database from '../db/index';
 import Transaction from '../models/transaction.model';
 
 export default class AccountMiddleware {
-  static createAccount(req, res) {
-    Util.generateId(req, accounts);
-    Util.generateAccountNumber(req, accounts);
+  static async createAccount(req, res) {
+    let owner;
 
-    const owner = Util.ownerInfo(req, res);
-    accounts.push(new Account(req.body.id, req.body.accountNumber, Date.now(), owner.id, req.body.type, 'dormant', 0.00));
+    try {
+      owner = await Util.ownerInfo(req, res);
+    } catch (err) {
+      res.json({
+        error: err.message,
+      });
+    }
+    const text = 'INSERT INTO accounts(createdon,owner,type) VALUES($1, $2, $3) RETURNING *';
+    const values = [
+      new Date(),
+      owner.id,
+      req.body.type,
+    ];
 
-    res.status(201);
-    res.json({
-      status: 201,
-      data: {
-        accountNumber: req.body.accountNumber,
-        firstName: owner.firstName,
-        lastName: owner.lastName,
-        email: owner.email,
-        type: req.body.type,
-        openingBalance: 0.00,
-      },
-    });
+    try {
+      const { rows } = await database.query(text, values);
+      const account = rows[0];
+      res.status(201).json({
+        status: 201,
+        data: {
+          accountNumber: account.accountnumber,
+          firstName: owner.firstname,
+          lastName: owner.lastname,
+          email: owner.email,
+          type: account.type,
+          openingBalance: parseFloat(account.balance),
+        },
+      });
+    } catch (err) {
+      res.status(400).json({
+        status: 400,
+        error: err.message,
+      });
+    }
   }
 
   static createTransaction(req, res) {
