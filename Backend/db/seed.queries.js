@@ -11,7 +11,7 @@ const accountValues2 = [new Date(), 1, 'current'];
 
 const seedUsers = async (query, values) => {
   try {
-    await database.query(query, values);
+    return await database.query(query, values);
   } catch (error) {
     console.error(error);
   }
