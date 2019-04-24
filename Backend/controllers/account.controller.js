@@ -1,7 +1,5 @@
-import { transactions } from '../models/storage.model';
 import Util from '../helper/util.helper';
 import database from '../db/index';
-import Transaction from '../models/transaction.model';
 
 export default class AccountMiddleware {
   static async createAccount(req, res) {
@@ -43,23 +41,41 @@ export default class AccountMiddleware {
     }
   }
 
-  static createTransaction(req, res) {
+  static async createTransaction(req, res) {
     const userInfo = Util.getInfoFromToken(req);
-    Util.generateId(req, transactions);
-    const acct = Util.getAccount(req.params.accountNumber);
+    const acct = await Util.getAccount(res, req.params.accountNumber);
     const newBalance = acct.balance;
-    transactions.push(new Transaction(req.body.id, req.params.accountNumber, Date.now(), 'credit', userInfo.id, req.body.amount, acct.balance, newBalance));
-    res.status(200).json({
-      status: 200,
-      data: {
-        id: req.body.id,
-        accountNumber: req.params.accountNumber,
-        amount: parseFloat(req.body.amount),
-        cashier: userInfo.id,
-        transactionType: req.body.type,
-        accountBalance: newBalance,
-      },
-    });
+    const text = 'INSERT INTO transactions(createdon, type, accountnumber, cashier, amount, oldbalance, newbalance) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
+    const values = [
+      new Date(),
+      req.body.type,
+      req.params.accountNumber,
+      userInfo.id,
+      req.body.amount,
+      req.body.oldBal,
+      newBalance,
+    ];
+
+    try {
+      const { rows } = await database.query(text, values);
+      const transaction = rows[0];
+      return res.status(200).json({
+        status: 200,
+        data: {
+          id: transaction.id,
+          accountNumber: acct.accountnumber,
+          amount: parseFloat(req.body.amount),
+          cashier: userInfo.id,
+          transactionType: req.body.type,
+          accountBalance: acct.balance,
+        },
+      });
+    } catch (err) {
+      return res.status(400).json({
+        status: 400,
+        error: err.message,
+      });
+    }
   }
 
   static async changeAccountStatus(req, res) {
