@@ -4,5 +4,5 @@ import AccountMiddleware from '../middleware/account.middleware';
 
 const router = express.Router();
 
-router.patch('/:accountNumber', AccountMiddleware.checkAuthorization, AccountMiddleware.checkStaffAccess, Account.changeAccountStatus);
+router.patch('/:accountNumber', AccountMiddleware.checkAuthorization, AccountMiddleware.checkTokenOwner, AccountMiddleware.checkStaffAccess, Account.changeAccountStatus);
 export default router;

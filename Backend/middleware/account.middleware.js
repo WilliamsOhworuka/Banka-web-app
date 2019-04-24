@@ -50,8 +50,16 @@ export default class AccountService {
     return next();
   }
 
-  static checkStaffAccess(req, res, next) {
+  static async checkStaffAccess(req, res, next) {
     const userInfo = Util.getInfoFromToken(req);
+    const exist = await Util.getUserById(res, userInfo.id);
+    if (!exist) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Not found',
+      });
+    }
+
     if (userInfo.type === 'staff') {
       return next();
     }

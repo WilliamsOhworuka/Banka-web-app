@@ -62,22 +62,28 @@ export default class AccountMiddleware {
     });
   }
 
-  static changeAccountStatus(req, res) {
-    const acct = Util.getAccount(req.params.accountNumber);
+  static async changeAccountStatus(req, res) {
+    const acct = await Util.getAccount(res, req.params.accountNumber);
     if (acct) {
-      const Oldstatus = acct.status;
-      if (Oldstatus === 'active') {
-        acct.status = 'dormant';
-      } else {
-        acct.status = 'active';
+      const text = 'UPDATE accounts SET status = $1 WHERE accountnumber = $2 RETURNING *';
+      const values = [req.body.status, req.params.accountNumber];
+
+      try {
+        const { rows } = await database.query(text, values);
+        const account = rows[0];
+        return res.status(200).json({
+          status: 200,
+          data: {
+            accountNumber: account.accountnumber,
+            status: account.status,
+          },
+        });
+      } catch (err) {
+        return res.status(400).json({
+          status: 400,
+          error: err.message,
+        });
       }
-      return res.status(200).json({
-        status: 200,
-        data: {
-          accountNumber: acct.accountNumber,
-          status: acct.status,
-        },
-      });
     }
     return res.status(404).json({
       status: 404,
