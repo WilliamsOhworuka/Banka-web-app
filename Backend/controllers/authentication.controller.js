@@ -1,18 +1,30 @@
 import bcrypt from 'bcrypt';
-import { Client } from '../models/user.model';
-import users from '../models/storage.model';
+import database from '../db/index';
 import Util from '../helper/util.helper';
 
-export default class User {
-  static createUser(req, res) {
-    Util.generateId(req, users);
+export default {
+  async createUser(req, res) {
     const hashPassword = bcrypt.hashSync(req.body.password, 8);
+    const text = 'INSERT INTO users(firstName, lastName, email, password) VALUES($1, $2, $3, $4) RETURNING *';
+    const values = [
+      req.body.firstName,
+      req.body.lastName,
+      req.body.email,
+      hashPassword,
+    ];
 
-    users.push(new Client(req.body.id, req.body.email, req.body.firstName, req.body.lastName, hashPassword, 'client'));
-    Util.sendToken(req, res);
-  }
+    try {
+      const dbRes = await database.query(text, values);
+      Util.SendToken(req, res, 'signup', dbRes.rows[0]);
+    } catch (err) {
+      res.status(400).json({
+        status: 400,
+        error: err.message,
+      });
+    }
+  },
 
-  static sendResponce(req, res) {
-    Util.sendToken(req, res, 'signin');
-  }
-}
+  sendResponse(req, res) {
+    Util.SendToken(req, res, 'signin', req.body.dbResponse);
+  },
+};

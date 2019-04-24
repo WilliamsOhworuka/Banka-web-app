@@ -9,10 +9,12 @@
   "scripts": {
     "start": "npm run build && node ./build/src/app.js",
     "start-dev": "babel-node ./Backend/src/app.js",
-    "test": " nyc mocha Backend/test --require @babel/register --exit || true",
+    "test": " npm run drop-table & npm run create-table & nyc mocha Backend/test --require @babel/register --exit || true",
     "lint": "./node_modules/.bin/eslint ./Backend",
     "build-babel": "babel -d ./build ./Backend -s",
     "build": "npm run build-babel",
+    "create-table": "babel-node ./Backend/db/createtables.queries & babel-node ./Backend/db/seed.queries.js",
+    "drop-table":"babel-node ./Backend/db/droptables.queries",
     "clean": "rm -rf ./build && mkdir ./build",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -20,17 +22,22 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/preset-env": "^7.4.3",
     "@babel/cli": "^7.4.3",
     "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/runtime": "^7.4.3",
     "bcrypt": "^3.0.5",
     "body-parser": "^1.18.3",
+    "custom-env": "^1.0.0",
+    "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.1",
-    "jwt-decode": "^2.2.0"
+    "jwt-decode": "^2.2.0",
+    "pg": "^7.10.0"
   },
   "devDependencies": {
     "@babel/node": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/register": "^7.4.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",

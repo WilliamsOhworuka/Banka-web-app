@@ -5,6 +5,6 @@ import SignupMiddleware from '../middleware/signup.middleware';
 
 const router = express.Router();
 
-router.post('/signup', SignupMiddleware.checkEmptyFields, SignupMiddleware.checkValidInput, Auth.createUser);
-router.post('/signin', SigninMiddleware.checkEmptyFields, SigninMiddleware.checkExistence, SigninMiddleware.getId, Auth.sendResponce);
+router.post('/signup', SignupMiddleware.checkEmptyFields, SignupMiddleware.checkValidInput, SignupMiddleware.exists, Auth.createUser);
+router.post('/signin', SigninMiddleware.checkEmptyFields, SigninMiddleware.checkExistence, Auth.sendResponse);
 export default router;

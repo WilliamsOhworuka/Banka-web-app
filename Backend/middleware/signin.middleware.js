@@ -1,17 +1,8 @@
 /* eslint-disable no-trailing-spaces */
 import bcrypt from 'bcrypt';
-import users from '../models/storage.model';
+import database from '../db/index';
 
 export default class {
-  static getId(req, res, next) { 
-    const user = users.find(item => item.email === req.body.email);
-    const { id } = { ...user };
-    req.body.id = id;
-    req.body.type = user.type;
-    req.body.isAdmin = user.isAdmin;
-    next();
-  }
-
   static checkEmptyFields(req, res, next) {
     if (!req.body.email) {
       res.status(400);
@@ -30,27 +21,33 @@ export default class {
     return next();
   }
 
-  static checkExistence(req, res, next) {
-    const check = users.find(item => req.body.email === item.email);
-    
-    if (check) {
-      const resp = bcrypt.compareSync(req.body.password, check.password);
-      if (!resp) {
-        res.status(401);
-        return res.json({
-          status: 401,
-          error: 'Invalid email or password',
-        });
-      }
-      req.body.firstName = check.firstName;
-      req.body.lastName = check.lastName;
-      return next();
+  static async checkExistence(req, res, next) {
+    const text = 'SELECT * FROM users WHERE email = $1';
+    const value = [req.body.email];
+
+    try {
+      const { rows } = await database.query(text, value);
+      const user = rows[0];
+      if (user) {
+        const passwordMatch = bcrypt.compareSync(req.body.password, user.password);
+        if (!passwordMatch) {
+          return res.status(403).json({
+            status: 403,
+            error: 'Invalid email or password',
+          });
+        }
+        [req.body.dbResponse] = rows;
+        return next();
+      } 
+      return res.status(403).json({
+        status: 403,
+        error: 'Invalid email or password',
+      });
+    } catch (err) {
+      return res.status(400).json({
+        status: 400,
+        error: err.message,
+      });
     }
-    
-    res.status(401);
-    return res.json({
-      status: 401,
-      error: 'Invalid email or password',
-    });
   }
 }
