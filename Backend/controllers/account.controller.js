@@ -1,4 +1,4 @@
-import { accounts, transactions } from '../models/storage.model';
+import { transactions } from '../models/storage.model';
 import Util from '../helper/util.helper';
 import database from '../db/index';
 import Transaction from '../models/transaction.model';
@@ -91,16 +91,24 @@ export default class AccountMiddleware {
     });
   }
 
-  static deleteAccount(req, res) {
-    const acct = Util.getAccount(req.params.accountNumber);
+  static async deleteAccount(req, res) {
+    const acct = await Util.getAccount(res, req.params.accountNumber);
     if (acct) {
-      const index = accounts.indexOf(acct);
-      accounts.splice(index, 1);
+      const text = 'DELETE FROM accounts WHERE accountnumber = $1';
+      const values = [req.params.accountNumber];
 
-      return res.status(200).json({
-        status: 200,
-        message: 'Account successfully deleted',
-      });
+      try {
+        await database.query(text, values);
+        return res.status(200).json({
+          status: 200,
+          message: 'Account successfully deleted',
+        });
+      } catch (err) {
+        return res.status(400).json({
+          status: 400,
+          error: err.message,
+        });
+      }
     }
     return res.status(404).json({
       status: 404,
