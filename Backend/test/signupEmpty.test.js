@@ -63,27 +63,4 @@ describe('Testing user signup for empty required fields', () => {
         done();
       });
   });
-
-  it('should return an object with user data and token on successful signup', (done) => {
-    chai.request(app)
-      .post('/api/v1/auth/signup')
-      .send({
-        firstName: 'halla',
-        lastName: 'kid',
-        email: 'test@test.com',
-        password: 'password',
-        confirmPassword: 'password',
-      })
-      .end((error, response) => {
-        expect(response).to.have.status(201);
-        expect(response.body).to.have.property('status');
-        expect(response.body).to.have.property('data');
-        expect(response.body.data).to.be.a('object');
-        expect(response.body.data.firstName).to.be.a('string');
-        expect(response.body.data.lastName).to.be.a('string');
-        expect(response.body.data.id).to.be.a('number');
-        expect(response.body.data.email).to.be.a('string');
-        done();
-      });
-  });
 });

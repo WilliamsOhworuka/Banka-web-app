@@ -1,28 +1,9 @@
-/* eslint-disable max-len */
-import users from '../models/storage.model';
+import database from '../db/index';
 
 export default class Validate {
   static checkValidInput(req, res, next) {
-    const checkName = users.find(user => user.firstName + user.lastName === req.body.firstName + req.body.lastName);
-    const checkMail = users.find(user => user.email === req.body.email);
     const valid = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const validMail = valid.test(req.body.email.toLowerCase());
-
-    if (checkName) {
-      res.status(400);
-      return res.json({
-        status: 400,
-        error: 'Name already exists',
-      });
-    }
-
-    if (checkMail) {
-      res.status(400);
-      return res.json({
-        status: 400,
-        error: 'email already exists',
-      });
-    }
 
     if (!validMail) {
       res.status(400);
@@ -75,5 +56,26 @@ export default class Validate {
       });
     }
     return next();
+  }
+
+  static async exists(req, res, next) {
+    const text = 'SELECT * FROM users WHERE email = $1';
+    const value = [req.body.email];
+
+    try {
+      const { rows } = await database.query(text, value);
+      if (rows[0]) {
+        return res.status(409).json({
+          status: 409,
+          error: 'Email already exists',
+        });
+      }
+      return next();
+    } catch (err) {
+      return res.status(400).json({
+        status: 400,
+        error: err.message,
+      });
+    }
   }
 }
