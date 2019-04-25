@@ -27,7 +27,7 @@ describe('Testing user signup', () => {
       });
   });
 
-  it('should return an error if email exists', (done) => {
+  it('should return an error if email exists for sign up', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send({
@@ -47,7 +47,7 @@ describe('Testing user signup', () => {
       });
   });
 
-  it('should return an error if email is not valid', (done) => {
+  it('should return an error if email is not valid for sign up', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send({
