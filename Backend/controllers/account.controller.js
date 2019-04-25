@@ -131,4 +131,29 @@ export default class AccountMiddleware {
       error: 'Account does not exist',
     });
   }
+
+  static async getAllAccounts(req, res) {
+    const owner = await Util.getownerId(req, res);
+    if (!owner) {
+      return res.status(400).json({
+        status: 400,
+        error: 'Invalid email',
+      });
+    }
+    const text = 'SELECT createdon,accountnumber,type,status,balance FROM accounts WHERE owner = $1';
+    const values = [owner.id];
+
+    try {
+      const { rows } = await database.query(text, values);
+      return res.status(200).json({
+        status: 200,
+        accounts: rows,
+      });
+    } catch (err) {
+      return res.status(400).json({
+        status: 400,
+        error: err.message,
+      });
+    }
+  }
 }

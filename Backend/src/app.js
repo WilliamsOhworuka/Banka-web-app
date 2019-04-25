@@ -5,6 +5,7 @@ import authRoute from '../routes/auth.route';
 import accountsRoute from '../routes/accounts.route';
 import accountRoute from '../routes/account.route';
 import transactionRoute from '../routes/transaction.route';
+import userRoute from '../routes/users.routes';
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use('/api/v1/accounts', accountsRoute);
 app.use('/api/v1/account', accountRoute);
 app.use('/api/v1/transactions', transactionRoute);
 app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/user', userRoute);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('Server is listening at 3000'));

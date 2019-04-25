@@ -267,3 +267,19 @@ describe('Testing bank account delete operation', () => {
       });
   });
 });
+
+describe('test get user route', () => {
+  it('should return error for invalid email', (done) => {
+    chai.request(app)
+      .get('/api/v1/user/dan@yahuoo.com/accounts')
+      // sending token of a staff(authorized user)
+      .set('authorization', `bearer ${staffToken}`)
+      .end((error, response) => {
+        expect(response).to.have.status(400);
+        expect(response.body.error).to.be.a('string');
+        expect(response.body).to.have.property('status');
+        expect(response.body.error).to.equal('Invalid email');
+        done();
+      });
+  });
+});
