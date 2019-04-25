@@ -113,4 +113,10 @@ export default class Util {
       });
     }
   }
+
+  static async getownerId(req, res) {
+    const text = 'SELECT id FROM users WHERE email = $1';
+    const { rows } = await database.query(text, [req.params.user_email]);
+    return rows[0];
+  }
 }
