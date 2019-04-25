@@ -1,17 +1,15 @@
 import chai, { expect } from 'chai';
 import chaihttp from 'chai-http';
-import deepEqualInAnyOrder from 'deep-equal-in-any-order';
 import app from '../src/app';
 
 chai.use(chaihttp);
-chai.use(deepEqualInAnyOrder);
 
 let clientToken;
 let staffToken;
 const wrongToken = 'djjffjo20459596.e44njnjsnjfs.oewei04i0';
 
 describe('Testing user bank account creation', () => {
-  before(() => {
+  before((done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
       .send({
@@ -20,10 +18,11 @@ describe('Testing user bank account creation', () => {
       })
       .end((error, res) => {
         clientToken = res.body.data.token;
+        done();
       });
   });
 
-  it('should return an error if account type is not set', (done) => {
+  it('should return an error if account type is not set for creation', (done) => {
     chai.request(app)
       .post('/api/v1/accounts/')
       .send({})
@@ -37,7 +36,7 @@ describe('Testing user bank account creation', () => {
       });
   });
 
-  it('should return an error if user has not signed up', (done) => {
+  it('should return an error if user has not signed up for creation', (done) => {
     chai.request(app)
       .post('/api/v1/accounts')
       .send({
@@ -77,7 +76,7 @@ describe('Testing user bank account creation', () => {
 });
 
 describe('Testing bank account status change operation', () => {
-  before(() => {
+  before((done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
       .send({
@@ -86,6 +85,7 @@ describe('Testing bank account status change operation', () => {
       })
       .end((error, res) => {
         clientToken = res.body.data.token;
+        done();
       });
 
     chai.request(app)
@@ -99,7 +99,7 @@ describe('Testing bank account status change operation', () => {
       });
   });
 
-  it('should return error if user is not signed in', (done) => {
+  it('should return error if user is not signed in for status change', (done) => {
     chai.request(app)
       .patch('/api/v1/account/30772001')
       .send({
@@ -115,7 +115,7 @@ describe('Testing bank account status change operation', () => {
       });
   });
 
-  it('should return error if token is wrong or temperred with', (done) => {
+  it('should return error if token is wrong or temperred with for status change', (done) => {
     chai.request(app)
       .patch('/api/v1/account/30772001')
       .set('authorization', `bearer ${wrongToken}`)
@@ -132,7 +132,7 @@ describe('Testing bank account status change operation', () => {
       });
   });
 
-  it('should return an error if user is not a staff', (done) => {
+  it('should return error message if user is not a staff for status change', (done) => {
     chai.request(app)
     // sending token of a client
       .patch('/api/v1/account/30772001')
@@ -150,7 +150,7 @@ describe('Testing bank account status change operation', () => {
       });
   });
 
-  it('should return an error if account does not exist', (done) => {
+  it('should return an error if account does not exist for status change', (done) => {
     chai.request(app)
     // sending accoount that does not exist
       .patch('/api/v1/account/307720046')
@@ -189,7 +189,7 @@ describe('Testing bank account status change operation', () => {
 });
 
 describe('Testing bank account delete operation', () => {
-  before(() => {
+  before((done) => {
     chai.request(app)
       .post('/api/v1/auth/signin')
       .send({
@@ -198,6 +198,7 @@ describe('Testing bank account delete operation', () => {
       })
       .end((error, res) => {
         clientToken = res.body.data.token;
+        done();
       });
 
     chai.request(app)
@@ -211,7 +212,7 @@ describe('Testing bank account delete operation', () => {
       });
   });
 
-  it('should return a error message user is not signed in', (done) => {
+  it('should return a error message user is not signed in for delete op', (done) => {
     chai.request(app)
       .delete('/api/v1/accounts/30772002')
       .end((error, response) => {
@@ -224,7 +225,7 @@ describe('Testing bank account delete operation', () => {
       });
   });
 
-  it('should return error when token is not valid or has been tempered with', (done) => {
+  it('should return error when token is not valid or has been tempered with for delete op', (done) => {
     chai.request(app)
       .delete('/api/v1/accounts/30772002')
       // sending invalid token
@@ -238,7 +239,7 @@ describe('Testing bank account delete operation', () => {
       });
   });
 
-  it('should return error if user is not a staff', (done) => {
+  it('should return error if user is not a staff for delete op', (done) => {
     chai.request(app)
       .delete('/api/v1/accounts/30772002')
       // sending client token
@@ -252,7 +253,7 @@ describe('Testing bank account delete operation', () => {
       });
   });
 
-  it('should return a success message if user is a staff', (done) => {
+  it('should return a success message if user is a staff delete op', (done) => {
     chai.request(app)
       .delete('/api/v1/accounts/30772002')
       // sending token of a staff(authorized user)
