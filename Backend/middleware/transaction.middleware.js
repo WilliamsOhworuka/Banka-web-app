@@ -83,6 +83,41 @@ export default class TransactionService {
       });
     }
 
+    if (!user) {
+      return res.status(401).json({
+        status: 401,
+        error: 'Unauthorized',
+      });
+    }
+
+    if (user.id !== account.owner) {
+      return res.status(401).json({
+        status: 401,
+        error: 'unauthorized',
+      });
+    }
+    return next();
+  }
+
+  static async checkTransactionOwner(req, res, next) {
+    const userinfo = Util.getInfoFromToken(req);
+    const user = await Util.getUserById(res, userinfo.id);
+    const account = await Util.getOwner(res, req.params.transaction_id);
+
+    if (account === 'false') {
+      return res.status(404).json({
+        status: 404,
+        error: 'No such transaction',
+      });
+    }
+
+    if (!user) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Unauthorized',
+      });
+    }
+
     if (user.id !== account.owner) {
       return res.status(401).json({
         status: 401,

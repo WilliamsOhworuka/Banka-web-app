@@ -51,6 +51,16 @@ export default class Util {
     }
   }
 
+  static async getOwner(res, TransactionId) {
+    const text = 'SELECT accounts.owner FROM accounts INNER JOIN transactions ON transactions.accountnumber=accounts.accountnumber WHERE transactions.id=$1';
+    const values = [TransactionId];
+    const { rows } = await database.query(text, values);
+    if (!rows[0]) {
+      return 'false';
+    }
+    return rows[0];
+  }
+
   static getToken(req) {
     const bearer = req.headers.authorization.split(' ');
     return bearer[1];
