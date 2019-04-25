@@ -7,7 +7,7 @@ import app from '../src/app';
 chai.use(chaihttp);
 
 describe('Testing user signup for empty required fields', () => {
-  it('should return an error if last name is not set', (done) => {
+  it('should return an error if last name is not set for sign up', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send({
@@ -26,7 +26,7 @@ describe('Testing user signup for empty required fields', () => {
       });
   });
 
-  it('should return an error if first name is not set', (done) => {
+  it('should return an error if first name is not set for sign up', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send({
@@ -45,7 +45,7 @@ describe('Testing user signup for empty required fields', () => {
       });
   });
 
-  it('should return an error if email is not set', (done) => {
+  it('should return an error if email is not set for sign up', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send({

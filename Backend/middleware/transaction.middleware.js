@@ -70,4 +70,25 @@ export default class TransactionService {
       error: 'Unauthorized',
     });
   }
+
+  static async checkOwner(req, res, next) {
+    const userinfo = Util.getInfoFromToken(req);
+    const user = await Util.getUserById(res, userinfo.id);
+    const account = await Util.getAccount(res, req.params.accountNumber);
+
+    if (!account) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Account does not exist',
+      });
+    }
+
+    if (user.id !== account.owner) {
+      return res.status(401).json({
+        status: 401,
+        error: 'unauthorized',
+      });
+    }
+    return next();
+  }
 }
