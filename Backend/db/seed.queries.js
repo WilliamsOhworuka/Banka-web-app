@@ -11,13 +11,14 @@ const accountValues2 = [new Date(), 1, 'current'];
 
 const seedUsers = async (query, values) => {
   try {
-    await database.query(query, values);
+    return await database.query(query, values);
   } catch (error) {
-    console.error(error);
+    return error;
   }
 };
 
-seedUsers(userText, userValues1);
+seedUsers(userText, userValues1).then((res) => {
+  seedUsers(accountText, accountValues1);
+  seedUsers(accountText, accountValues2);
+});
 seedUsers(userText, userValues2);
-seedUsers(accountText, accountValues1);
-seedUsers(accountText, accountValues2);
