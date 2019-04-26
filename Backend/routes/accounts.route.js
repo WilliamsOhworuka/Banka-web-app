@@ -9,4 +9,5 @@ const router = express.Router();
 router.post('/', AccountMiddleware.checkEmptyFields, AccountMiddleware.checkAuthorization, AccountMiddleware.checkTokenOwner, AccountController.createAccount);
 router.delete('/:accountNumber', AccountMiddleware.checkAuthorization, AccountMiddleware.checkStaffAccess, AccountController.deleteAccount);
 router.get('/:accountNumber/transactions', AccountMiddleware.checkAuthorization, TransactionMiddleware.checkOwner, TransactionController.getTransactions);
+router.get('/:accountNumber', AccountMiddleware.checkAuthorization,TransactionMiddleware.checkOwner, AccountController.getAccount);
 export default router;
