@@ -17,7 +17,7 @@
     "lint": "./node_modules/.bin/eslint ./Backend",
     "build-babel": "babel -d ./build ./Backend -s",
     "build": "npm run build-babel",
-    "create-table": "babel-node ./Backend/db/createtables.queries & babel-node ./Backend/db/seed.queries.js",
+    "create-table": "node ./build/db/createtables.queries & node ./build/db/seed.queries.js",
     "drop-table": "babel-node ./Backend/db/droptables.queries",
     "clean": "rm -rf ./build && mkdir ./build",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
