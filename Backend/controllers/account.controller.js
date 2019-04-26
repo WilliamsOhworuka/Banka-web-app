@@ -172,4 +172,13 @@ export default class AccountMiddleware {
       data: rows[0],
     });
   }
+
+  static async getAllBankaccount(req, res) {
+    const text = 'SELECT accounts.createdon,accounts.accountnumber,users.email, accounts.type, accounts.status, accounts.balance FROM accounts INNER JOIN users ON users.id = accounts.owner';
+    const { rows } = await database.query(text);
+    return res.status(200).json({
+      status: 200,
+      data: rows,
+    });
+  }
 }
