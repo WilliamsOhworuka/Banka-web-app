@@ -133,7 +133,7 @@ export default class AccountMiddleware {
   }
 
   static async getAllAccounts(req, res) {
-    const owner = await Util.getownerId(req, res);
+    const owner = await Util.getownerId(req);
     if (!owner) {
       return res.status(400).json({
         status: 400,
@@ -174,8 +174,25 @@ export default class AccountMiddleware {
   }
 
   static async getAllBankaccount(req, res) {
-    const text = 'SELECT accounts.createdon,accounts.accountnumber,users.email, accounts.type, accounts.status, accounts.balance FROM accounts INNER JOIN users ON users.id = accounts.owner';
-    const { rows } = await database.query(text);
+    if (!req.query.status) {
+      const text = 'SELECT accounts.createdon,accounts.accountnumber,users.email, accounts.type, accounts.status, accounts.balance FROM accounts INNER JOIN users ON users.id = accounts.owner';
+      const { rows } = await database.query(text);
+      return res.status(200).json({
+        status: 200,
+        data: rows,
+      });
+    }
+    const text = 'SELECT accounts.createdon,accounts.accountnumber,users.email, accounts.type, accounts.status, accounts.balance FROM accounts INNER JOIN users ON users.id = accounts.owner WHERE accounts.status = $1';
+    const { rows } = await database.query(text, [req.query.status]);
+    return res.status(200).json({
+      status: 200,
+      data: rows,
+    });
+  }
+
+  static async getActiveBankAccount(req, res) {
+    const text = 'SELECT createdon from accounts';
+    const { rows } = await database.query(text, [req.query.status]);
     return res.status(200).json({
       status: 200,
       data: rows,
