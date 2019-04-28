@@ -43,7 +43,7 @@ describe('testing get all transactions route', () => {
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
-        expect(response.body.error).to.equal('unauthorized');
+        expect(response.body.error).to.equal('unauthorized user');
         done();
       });
   });
@@ -71,7 +71,7 @@ describe('testing get all transactions route', () => {
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
-        expect(response.body.error).to.equal('Unauthorized');
+        expect(response.body.error).to.equal('Unauthorized user');
         done();
       });
   });

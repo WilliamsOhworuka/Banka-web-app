@@ -17,9 +17,9 @@ export default {
       const dbRes = await database.query(text, values);
       Util.SendToken(req, res, 'signup', dbRes.rows[0]);
     } catch (err) {
-      res.status(400).json({
-        status: 400,
-        error: err.message,
+      res.status(500).json({
+        status: 500,
+        error: 'Something went wrong',
       });
     }
   },
@@ -57,7 +57,7 @@ export default {
     if (!user.isAdmin) {
       return res.status(401).json({
         status: 401,
-        error: 'Unauthorized',
+        error: 'Unauthorized user',
       });
     }
 
@@ -73,11 +73,12 @@ export default {
           type: rows[0].type,
           isadmin: rows[0].isAdmin,
         },
+        message: `${req.body.type} created`,
       });
     } catch (err) {
-      return res.status(400).json({
-        status: 400,
-        error: err.message,
+      return res.status(500).json({
+        status: 500,
+        error: 'Something went wrong',
       });
     }
   },

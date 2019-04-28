@@ -1,10 +1,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import '@babel/polyfill';
 import authRoute from '../routes/auth.route';
 import accountsRoute from '../routes/accounts.route';
 import accountRoute from '../routes/account.route';
 import transactionRoute from '../routes/transaction.route';
 import UserRoute from '../routes/users.routes';
+import postMiddleware from '../middleware/posts.middleware';
 
 const app = express();
 
@@ -15,6 +17,7 @@ app.get('/', (req, res) => {
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(postMiddleware);
 app.use('/api/v1/accounts', accountsRoute);
 app.use('/api/v1/account', accountRoute);
 app.use('/api/v1/transactions', transactionRoute);

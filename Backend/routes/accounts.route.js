@@ -6,9 +6,19 @@ import TransactionController from '../controllers/transaction.controller';
 
 const router = express.Router();
 
-router.post('/', AccountMiddleware.checkEmptyFields, AccountMiddleware.checkAuthorization, AccountMiddleware.checkTokenOwner, AccountController.createAccount);
-router.delete('/:accountNumber', AccountMiddleware.checkAuthorization, AccountMiddleware.checkStaffAccess, AccountController.deleteAccount);
-router.get('/:accountNumber/transactions', AccountMiddleware.checkAuthorization, TransactionMiddleware.checkOwner, TransactionController.getTransactions);
-router.get('/:accountNumber', AccountMiddleware.checkAuthorization, TransactionMiddleware.checkOwner, AccountController.getAccount);
-router.get('/', AccountMiddleware.checkAuthorization, AccountMiddleware.checkStaffAccess, AccountController.getAllBankaccount);
+router.post('/', AccountMiddleware.checkEmptyFields, AccountMiddleware.checkAuthorization,
+  AccountMiddleware.checkTokenOwner, AccountController.createAccount);
+
+router.delete('/:accountNumber', AccountMiddleware.checkAuthorization,
+  AccountMiddleware.checkStaffAccess, AccountController.deleteAccount);
+
+router.get('/:accountNumber/transactions', AccountMiddleware.checkAuthorization,
+  TransactionMiddleware.checkOwner, TransactionController.getTransactions);
+
+router.get('/:accountNumber', AccountMiddleware.checkAuthorization,
+  TransactionMiddleware.checkOwner, AccountController.getAccount);
+
+router.get('/', AccountMiddleware.checkAuthorization, AccountMiddleware.checkStaffAccess, 
+  AccountController.getAllBankaccount);
+
 export default router;

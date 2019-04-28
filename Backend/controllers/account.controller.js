@@ -8,8 +8,9 @@ export default class AccountMiddleware {
     try {
       owner = await Util.ownerInfo(req, res);
     } catch (err) {
-      res.json({
-        error: err.message,
+      res.status(500).json({
+        status: 500,
+        error: 'Something went wrong',
       });
     }
     const text = 'INSERT INTO accounts(createdon,owner,type) VALUES($1, $2, $3) RETURNING *';
@@ -32,11 +33,12 @@ export default class AccountMiddleware {
           type: account.type,
           openingBalance: parseFloat(account.balance),
         },
+        message: 'Account created',
       });
     } catch (err) {
-      res.status(400).json({
-        status: 400,
-        error: err.message,
+      res.status(500).json({
+        status: 500,
+        error: 'Something went wrong',
       });
     }
   }
@@ -69,11 +71,12 @@ export default class AccountMiddleware {
           transactionType: req.body.type,
           accountBalance: acct.balance,
         },
+        message: `Account ${req.body.type}ed`,
       });
     } catch (err) {
-      return res.status(400).json({
-        status: 400,
-        error: err.message,
+      return res.status(500).json({
+        status: 500,
+        error: 'Something went wrong',
       });
     }
   }
@@ -83,7 +86,7 @@ export default class AccountMiddleware {
     if (acct) {
       const text = 'UPDATE accounts SET status = $1 WHERE accountnumber = $2 RETURNING *';
       const values = [req.body.status, req.params.accountNumber];
-
+      const state = req.body.status === 'active' ? 'Activated' : 'Deactived';
       try {
         const { rows } = await database.query(text, values);
         const account = rows[0];
@@ -93,11 +96,12 @@ export default class AccountMiddleware {
             accountNumber: account.accountnumber,
             status: account.status,
           },
+          message: `Account ${state}`,
         });
       } catch (err) {
-        return res.status(400).json({
-          status: 400,
-          error: err.message,
+        return res.status(500).json({
+          status: 500,
+          error: 'Something went wrong',
         });
       }
     }
@@ -120,9 +124,9 @@ export default class AccountMiddleware {
           message: 'Account successfully deleted',
         });
       } catch (err) {
-        return res.status(400).json({
-          status: 400,
-          error: err.message,
+        return res.status(500).json({
+          status: 500,
+          error: 'Something went wrong',
         });
       }
     }
@@ -135,9 +139,9 @@ export default class AccountMiddleware {
   static async getAllAccounts(req, res) {
     const owner = await Util.getownerId(req);
     if (!owner) {
-      return res.status(400).json({
-        status: 400,
-        error: 'Invalid email',
+      return res.status(404).json({
+        status: 404,
+        error: 'User does not exist',
       });
     }
     const text = 'SELECT createdon,accountnumber,type,status,balance FROM accounts WHERE owner = $1';
@@ -145,14 +149,19 @@ export default class AccountMiddleware {
 
     try {
       const { rows } = await database.query(text, values);
+      if (rows.length === 0) {
+        rows[0] = {
+          message: 'No accounts yet',
+        };
+      }
       return res.status(200).json({
         status: 200,
         accounts: rows,
       });
     } catch (err) {
-      return res.status(400).json({
-        status: 400,
-        error: err.message,
+      return res.status(500).json({
+        status: 500,
+        error: 'Something went wrong',
       });
     }
   }
@@ -177,6 +186,11 @@ export default class AccountMiddleware {
     if (!req.query.status) {
       const text = 'SELECT accounts.createdon,accounts.accountnumber,users.email, accounts.type, accounts.status, accounts.balance FROM accounts INNER JOIN users ON users.id = accounts.owner';
       const { rows } = await database.query(text);
+      if (rows.length === 0) {
+        rows[0] = {
+          message: 'No accounts yet',
+        };
+      }
       return res.status(200).json({
         status: 200,
         data: rows,
@@ -184,15 +198,11 @@ export default class AccountMiddleware {
     }
     const text = 'SELECT accounts.createdon,accounts.accountnumber,users.email, accounts.type, accounts.status, accounts.balance FROM accounts INNER JOIN users ON users.id = accounts.owner WHERE accounts.status = $1';
     const { rows } = await database.query(text, [req.query.status]);
-    return res.status(200).json({
-      status: 200,
-      data: rows,
-    });
-  }
-
-  static async getActiveBankAccount(req, res) {
-    const text = 'SELECT createdon from accounts';
-    const { rows } = await database.query(text, [req.query.status]);
+    if (rows.length === 0) {
+      rows[0] = {
+        message: `No ${req.query.status} accounts`,
+      };
+    }
     return res.status(200).json({
       status: 200,
       data: rows,

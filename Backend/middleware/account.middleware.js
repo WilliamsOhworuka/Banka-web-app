@@ -22,7 +22,7 @@ export default class AccountService {
     if (!auth) {
       return res.status(401).json({
         status: 401,
-        error: 'Unauthorized',
+        error: 'Unauthorized user',
       });
     }
 
@@ -31,7 +31,7 @@ export default class AccountService {
       if (err) {
         return res.status(401).json({
           status: 401,
-          error: 'Unauthorized',
+          error: 'Unauthorized user',
         });
       }
       return next();
@@ -44,7 +44,7 @@ export default class AccountService {
     if (!exist) {
       return res.status(404).json({
         status: 404,
-        error: 'Not found',
+        error: 'User does not exist',
       });
     }
     return next();
@@ -56,7 +56,7 @@ export default class AccountService {
     if (!exist) {
       return res.status(404).json({
         status: 404,
-        error: 'Not found',
+        error: 'User does not exist',
       });
     }
 
@@ -65,7 +65,7 @@ export default class AccountService {
     }
     return res.status(401).json({
       status: 401,
-      error: 'Unauthorized',
+      error: 'Unauthorized user',
     });
   }
 }

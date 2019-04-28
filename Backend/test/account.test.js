@@ -47,7 +47,7 @@ describe('Testing user bank account creation', () => {
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
-        expect(response.body.error).to.equal('Unauthorized');
+        expect(response.body.error).to.equal('Unauthorized user');
         done();
       });
   });
@@ -110,7 +110,7 @@ describe('Testing bank account status change operation', () => {
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
-        expect(response.body.error).to.equal('Unauthorized');
+        expect(response.body.error).to.equal('Unauthorized user');
         done();
       });
   });
@@ -127,7 +127,7 @@ describe('Testing bank account status change operation', () => {
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
-        expect(response.body.error).to.equal('Unauthorized');
+        expect(response.body.error).to.equal('Unauthorized user');
         done();
       });
   });
@@ -145,7 +145,7 @@ describe('Testing bank account status change operation', () => {
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
-        expect(response.body.error).to.equal('Unauthorized');
+        expect(response.body.error).to.equal('Unauthorized user');
         done();
       });
   });
@@ -220,7 +220,7 @@ describe('Testing bank account delete operation', () => {
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
-        expect(response.body.error).to.equal('Unauthorized');
+        expect(response.body.error).to.equal('Unauthorized user');
         done();
       });
   });
@@ -234,7 +234,7 @@ describe('Testing bank account delete operation', () => {
         expect(response).to.have.status(401);
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
-        expect(response.body.error).to.equal('Unauthorized');
+        expect(response.body.error).to.equal('Unauthorized user');
         done();
       });
   });
@@ -248,7 +248,7 @@ describe('Testing bank account delete operation', () => {
         expect(response).to.have.status(401);
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
-        expect(response.body.error).to.equal('Unauthorized');
+        expect(response.body.error).to.equal('Unauthorized user');
         done();
       });
   });
@@ -268,17 +268,17 @@ describe('Testing bank account delete operation', () => {
   });
 });
 
-describe('test get user route', () => {
+describe('test get all accounts for a specific user route', () => {
   it('should return error for invalid email', (done) => {
     chai.request(app)
       .get('/api/v1/user/dan@yahuoo.com/accounts')
       // sending token of a staff(authorized user)
       .set('authorization', `bearer ${staffToken}`)
       .end((error, response) => {
-        expect(response).to.have.status(400);
+        expect(response).to.have.status(404);
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
-        expect(response.body.error).to.equal('Invalid email');
+        expect(response.body.error).to.equal('User does not exist');
         done();
       });
   });

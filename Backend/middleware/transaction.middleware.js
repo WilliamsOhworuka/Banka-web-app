@@ -28,7 +28,7 @@ export default class TransactionService {
     }
     return res.status(401).json({
       status: 401,
-      error: 'Unauthorized',
+      error: 'Unauthorized user',
     });
   }
 
@@ -67,7 +67,7 @@ export default class TransactionService {
     }
     return res.status(401).json({
       status: 401,
-      error: 'Unauthorized',
+      error: 'Unauthorized user',
     });
   }
 
@@ -86,14 +86,14 @@ export default class TransactionService {
     if (!user) {
       return res.status(401).json({
         status: 401,
-        error: 'Unauthorized',
+        error: 'Unauthorized user',
       });
     }
 
     if (user.id !== account.owner) {
       return res.status(401).json({
         status: 401,
-        error: 'unauthorized',
+        error: 'unauthorized user',
       });
     }
     return next();
@@ -114,14 +114,14 @@ export default class TransactionService {
     if (!user) {
       return res.status(404).json({
         status: 404,
-        error: 'Unauthorized',
+        error: 'User does not exist',
       });
     }
 
     if (user.id !== account.owner) {
       return res.status(401).json({
         status: 401,
-        error: 'unauthorized',
+        error: 'unauthorized user',
       });
     }
     return next();
