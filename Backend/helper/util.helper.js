@@ -8,6 +8,7 @@ dotenv.config();
 export default class Util {
   static SendToken(req, res, action, dbResponse) {
     let stat;
+    let message;
     jwt.sign(
       {
         id: dbResponse.id,
@@ -18,8 +19,10 @@ export default class Util {
       (err, token) => {
         if (action === 'signin') {
           stat = 200;
+          message = 'Sucessfully signed in';
         } else {
           stat = 201;
+          message = 'Sucessfully signed up';
         }
         res.status(stat);
         res.json({
@@ -31,6 +34,7 @@ export default class Util {
             lastName: dbResponse.lastname,
             email: dbResponse.email,
           },
+          message: `${message}`,
         });
       },
     );
@@ -44,9 +48,9 @@ export default class Util {
       const { rows } = await database.query(text, values);
       return rows[0];
     } catch (err) {
-      return res.status(400).json({
-        status: 400,
-        error: err.message,
+      return res.status(500).json({
+        status: 500,
+        error: 'Something went wrong',
       });
     }
   }
@@ -54,11 +58,18 @@ export default class Util {
   static async getOwner(res, TransactionId) {
     const text = 'SELECT accounts.owner FROM accounts INNER JOIN transactions ON transactions.accountnumber=accounts.accountnumber WHERE transactions.id=$1';
     const values = [TransactionId];
-    const { rows } = await database.query(text, values);
-    if (!rows[0]) {
-      return 'false';
+    try {
+      const { rows } = await database.query(text, values);
+      if (!rows[0]) {
+        return 'false';
+      }
+      return rows[0];
+    } catch (err) {
+      return res.status(500).json({
+        status: 500,
+        error: 'Something went wrong',
+      });
     }
-    return rows[0];
   }
 
   static getToken(req) {
@@ -82,8 +93,9 @@ export default class Util {
       }
       return rows[0];
     } catch (err) {
-      return res.json({
-        error: err.message,
+      return res.status(500).json({
+        status: 500,
+        error: 'Something went wrong',
       });
     }
   }
@@ -107,16 +119,27 @@ export default class Util {
       const { rows } = await database.query(text, values);
       return rows[0];
     } catch (err) {
-      return res.status(400).json({
-        status: 400,
-        error: err.message,
+      return res.status(500).json({
+        status: 500,
+        error: 'Something went wrong',
       });
     }
   }
 
-  static async getownerId(req, res) {
+  static async getownerId(req) {
     const text = 'SELECT id FROM users WHERE email = $1';
     const { rows } = await database.query(text, [req.params.user_email]);
     return rows[0];
+  }
+
+  static trim(string) {
+    return string.replace(/^\s+|\s+$/g, '');
+  }
+
+  static trimValues(req, object) {
+    const keys = Object.keys(object);
+    keys.forEach((item) => {
+      req.body[item] = Util.trim(req.body[item]);
+    });
   }
 }

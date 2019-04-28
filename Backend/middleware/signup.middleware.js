@@ -72,9 +72,9 @@ export default class Validate {
       }
       return next();
     } catch (err) {
-      return res.status(400).json({
-        status: 400,
-        error: err.message,
+      return res.status(500).json({
+        status: 500,
+        error: 'Something went wrong',
       });
     }
   }
