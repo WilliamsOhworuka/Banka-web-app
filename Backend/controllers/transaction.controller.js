@@ -5,14 +5,19 @@ export default class {
     const text = 'SELECT id AS transactionId, createdon, type, accountnumber, amount, oldbalance, newbalance FROM transactions WHERE accountnumber = $1';
     try {
       const { rows } = await database.query(text, [req.params.accountNumber]);
+      if (rows.length === 0) {
+        rows[0] = {
+          message: 'You dont have any transactions yet',
+        };
+      }
       return res.status(200).json({
         status: 200,
         data: rows,
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        error: error.message,
+      return res.status(500).json({
+        status: 500,
+        error: 'Something went wrong',
       });
     }
   }
@@ -32,9 +37,9 @@ export default class {
         data: rows[0],
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        error: error.message,
+      return res.status(500).json({
+        status: 500,
+        error: 'Something went wrong',
       });
     }
   }
