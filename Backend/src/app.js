@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import '@babel/polyfill';
+import cors from 'cors';
 import authRoute from '../routes/auth.route';
 import accountsRoute from '../routes/accounts.route';
 import accountRoute from '../routes/account.route';
@@ -9,6 +9,7 @@ import UserRoute from '../routes/users.routes';
 import postMiddleware from '../middleware/posts.middleware';
 
 const app = express();
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.json({
