@@ -2,7 +2,26 @@
 /* eslint-disable no-undef */
 const nav = document.getElementById('sidebar');
 const pageContent = document.getElementById('page-content');
+const body = document.getElementById('page');
+let history;
 
+const storage = () => {
+  const location = window.location.href;
+  const url = 'https://williamsohworuka.github.io/Banka-web-app/UI/staff-accountDashboard.html';
+  const url2 = 'https://williamsohworuka.github.io/Banka-web-app/UI/admin-dashboard.html';
+  if (location === url || url2) {
+    history = [];
+  }
+};
+storage();
+
+body.addEventListener('click', (event) => {
+  const ul = document.getElementById('down-menu');
+  ul.style.display = 'none';
+  const last = history[history.length - 1];
+  last.nextElementSibling.style.display = 'none';
+  last.style.display = 'inline-block';
+});
 
 const closeMenu = () => {
   nav.style.width = '0';
@@ -73,4 +92,49 @@ const resetPassword = (obj) => {
     document.getElementById('old-pswd').style.display = 'none';
     document.getElementById('new-pswd').style.display = 'none';
   }
+};
+
+const offset = (el) => {
+  const rect = el.getBoundingClientRect();
+  const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  return { top: rect.top + scrollTop, left: rect.left + scrollLeft };
+};
+
+const updateHistory = (elem) => {
+  history.push(elem);
+  if (history.length === 2) {
+    history.splice(0, 1);
+    return true;
+  }
+};
+
+const dropMenu = (event) => {
+  event.stopPropagation();
+  const ul = document.getElementById('down-menu');
+  const { target } = event;
+  const elem = event.currentTarget;
+  if (history.length) {
+    const last = history[history.length - 1];
+    if (last !== elem.nextElementSibling) {
+      last.nextElementSibling.style.display = 'none';
+      last.style.display = 'inline-block';
+    }
+  }
+  updateHistory(elem);
+  const coords = offset(target);
+  ul.style.left = `${coords.left}px`;
+  ul.style.top = `${coords.top + 12}px`;
+  ul.style.display = 'block';
+  elem.style.display = 'none';
+  elem.nextElementSibling.style.display = 'inline-block';
+};
+
+const collapseMenu = (event) => {
+  event.stopPropagation();
+  const ul = document.getElementById('down-menu');
+  ul.style.display = 'none';
+  const elem = event.currentTarget;
+  elem.style.display = 'none';
+  elem.previousElementSibling.style.display = 'inline-block';
 };
