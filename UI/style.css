@@ -451,14 +451,16 @@ header #logo{
   background-color:#f7f6f9;
   width:250px;
   height:100%;
-  transition: display .3s;
+  transition: margin .5s;
   font-family:'Amiri';
+  box-shadow: inset -8px 0 3px -6px rgba(0, 0, 0, 0.3);
 }
 
 .side-nav .brand{
   color:#660066;
   font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 2px solid #f2f2f2;
+  height: 37px;
 }
 
 .side-nav p, .side-nav .brand,.side-nav a{
@@ -551,8 +553,9 @@ header #logo{
 .icon-side-nav{
   width:45px;
   margin-left: -45px;
-  transition: margin .3s;
+  transition: margin .2s;
   top:0;
+  box-shadow: inset -8px 0 4px -6px rgba(0, 0, 0, 0.5);
 }
 
 .icon-side-nav a{
@@ -605,6 +608,7 @@ header #logo{
   margin-left: 241px;
   padding-left:7px;
   overflow:auto;
+  transition: margin .5s;
 }
 
 .profile-info h3{
@@ -621,6 +625,7 @@ header #logo{
   padding-bottom: 3px;
   border-bottom: 2px solid #f2f2f2;
   background-color: white;
+  margin-left:2px;
   z-index: 2;
 }
 
@@ -632,8 +637,7 @@ header #logo{
 
 .profile-info header h1{
   position: absolute;
-  right:300px;
-  display: none;
+  right:90px;
 }
 
 /*main content*/
@@ -663,15 +667,15 @@ header #logo{
 
 .dashboard .user-acct-dtls, .dashboard .user-trans-hist{
   border: 1px solid #e0e0e0;
-  border-radius: 7px;
+  border-radius: 4px;
   padding: 30px;
 }
 
 .dashboard .user-acct-dtls{
   width:250px;
-  float: left;
   height:130px;
-  margin-bottom: 10px;
+  margin:0;
+  display: inline-block;
 }
 
 .dashboard .user-acct-dtls ul{
@@ -695,19 +699,19 @@ header #logo{
 
 .dashboard .user-trans-hist{
   width: 500px;
-  float:right;
-  height: 230px;
-  margin-right: 20px;
-  position: relative;
+  display: inline-block;
+  height: 180px;
   padding: 15px;
-  color: purple;
-  margin-right:200px;
+  color: purple; 
+  position: relative;
+  margin-left: 30px;
 }
 
 .dashboard .user-trans-hist p{
-  font-size: 20px;
+  font-size: 15px;
+  font-weight: bold;
   margin-top:0;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   margin-left: 0;
   font-family: Verdana, Geneva, sans-serif;
   color:#660066;
@@ -716,7 +720,8 @@ header #logo{
 .dashboard .user-trans-hist .view{
   display: block;
   text-align: center;
-  margin-top:40px;
+  margin-top:20px;
+  color: blue;
 }
 
 .dashboard .user-trans-hist .go{
@@ -850,7 +855,7 @@ header #logo{
   }
 
   .side-nav{
-    display: none;
+    margin-left:-245px;
   }
 
   .icon-side-nav{
@@ -869,11 +874,11 @@ header #logo{
   .modal .modal-content{
     display: block;
     width:70%;
-    height:60%;
+    height:70%;
   }
 
   .modal{
-    padding-top: 20%;
+    padding-top: 10%;
   }
   
   .open{
@@ -905,7 +910,19 @@ header #logo{
   }
 
   .dashboard .user-acct-dtls, .dashboard .user-trans-hist{
-    float: none;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    display: block;
+  }
+
+  .dashboard .user-acct-dtls{
+    margin-bottom: 20px;
+    height: 160px;
+  }
+
+  .dashboard .user-trans-hist{
+    margin-left: 0;
+    height: 160px;
+    margin-bottom: 10px;
   }
 }
 
@@ -973,11 +990,6 @@ header #logo{
     border:none;
   }
 
-  .dashboard .user-acct-dtls, .dashboard .user-trans-hist{
-    float: none;
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  }
-
   .dashboard .user-acct-dtls{
     max-width:350px;
     padding:3px;
@@ -987,10 +999,16 @@ header #logo{
  
   .dashboard .user-trans-hist{
     max-width:330px;
+    height: 230px;
     padding:5px;
   }
 
-  .dashboard .user-acct-dtls{
-    margin-bottom: 20px;
+  .modal .modal-content{
+    display: block;
+    height:60%;
+  }
+
+  .modal{
+    padding-top: 35%;
   }
 }
