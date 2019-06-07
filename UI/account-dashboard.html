@@ -11,6 +11,29 @@
     <title>Account dashboard</title>
   </head>
   <body id="page">
+    <nav class='side-nav' id="profile-side-nav">
+      <a href="javascript:void(0);" class="close-side-nav" id="cancel-side-nav" onclick="closeSideNav()"><i class="far fa-minus-square"></i></a>
+      <h1 class="brand">Ban<span>ka</span></h1>
+      <p><i class="far fa-user"></i>Williams Smith</p>
+      <a href="./account-dashboard.html" class="account active"><i class="fas fa-university"></i>Account</a>
+      <a href="./transaction-history.html" class="history"><i class="fas fa-history"></i>Transaction history</a>
+      <a href="./edit-detail.html" class="details"><i class="far fa-edit"></i>Edit details</a>
+      <a href="./signin.html" class="Signout"><i class="fas fa-sign-out-alt"></i>Sign out</a>
+    </nav>
+    <nav class='icon-side-nav' id="icon-nav">
+      <a href="javascript:void(0);" class="open-side-nav" onclick="openSideNav()"><i class="fas fa-bars"></i></a>
+      <a href="javascript:void(0);" class="user"><i class="far fa-user"></i><span class="tooltip">Williams Smith</span></a>
+      <a href="./account-dashboard.html" class="account active"><i class="fas fa-university"></i><span class="tooltip">Account</span></a>
+      <a href="./transaction-history.html" class="history"><i class="fas fa-history"></i><span class="tooltip">Transaction history</span></a>
+      <a href="./edit-detail.html" class="details"><i class="far fa-edit"></i><span class="tooltip">Edit details</span></a>
+      <a href="./signin.html" class="Signout"><i class="fas fa-sign-out-alt"></i><span class="tooltip">Sign out</span></a>
+    </nav>
+    <nav class='icon-top-nav' id='icon-top-bar'>
+      <a href="./account-dashboard.html" class="account active"><i class="fas fa-university"></i><span>Accounts</span></a>
+      <a href="./edit-detail.html" class="details"><i class="far fa-edit"></i><span>Edit details</span></a>
+      <a href="./transaction-history.html" class="history"><i class="fas fa-history"></i><span>history</span></a>
+      <a href="./signin.html" class="Signout"><i class="fas fa-sign-out-alt"></i><span>Sign out</span></a>
+    </nav>
     <section class="profile-info" id="profile">
       <header>
         <a href="javascript:void(0);" class="open-side-nav" onclick="OpenSideNav()"><i class="fas fa-bars"></i></a>
@@ -18,29 +41,6 @@
         <h3>Account</h3>
         <h4>Welcome Williams Smith</h4>
       </header>
-      <nav class='icon-top-nav' id='icon-top-bar'>
-        <a href="./account-dashboard.html" class="account active"><i class="fas fa-university"></i><span>Accounts</span></a>
-        <a href="./edit-detail.html" class="details"><i class="far fa-edit"></i><span>Edit details</span></a>
-        <a href="./transaction-history.html" class="history"><i class="fas fa-history"></i><span>Transaction history</span></a>
-        <a href="./signin.html" class="Signout"><i class="fas fa-sign-out-alt"></i><span>Sign out</span></a>
-      </nav>
-      <nav class='side-nav' id="profile-side-nav">
-        <a href="javascript:void(0);" class="close-side-nav" id="cancel-side-nav" onclick="closeSideNav()"><i class="far fa-minus-square"></i></a>
-        <h1 class="brand">Ban<span>ka</span></h1>
-        <p><i class="far fa-user"></i>Williams Smith</p>
-        <a href="./account-dashboard.html" class="account active"><i class="fas fa-university"></i>Account</a>
-        <a href="./transaction-history.html" class="history"><i class="fas fa-history"></i>Transaction history</a>
-        <a href="./edit-detail.html" class="details"><i class="far fa-edit"></i>Edit details</a>
-        <a href="./signin.html" class="Signout"><i class="fas fa-sign-out-alt"></i>Sign out</a>
-      </nav>
-      <nav class='icon-side-nav' id="icon-nav">
-        <a href="javascript:void(0);" class="open-side-nav" onclick="openSideNav()"><i class="fas fa-bars"></i></a>
-        <a href="javascript:void(0);" class="user"><i class="far fa-user"></i><span class="tooltip">Williams Smith</span></a>
-        <a href="./account-dashboard.html" class="account active"><i class="fas fa-university"></i><span class="tooltip">Account</span></a>
-        <a href="./transaction-history.html" class="history"><i class="fas fa-history"></i><span class="tooltip">Transaction history</span></a>
-        <a href="./edit-detail.html" class="details"><i class="far fa-edit"></i><span class="tooltip">Edit details</span></a>
-        <a href="./signin.html" class="Signout"><i class="fas fa-sign-out-alt"></i><span class="tooltip">Sign out</span></a>
-      </nav>
       <div class="dashboard">
         <section class='user-acct-dtls' id="user-dt">
           <ul>
