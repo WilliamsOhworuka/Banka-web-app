@@ -3,6 +3,7 @@
 const nav = document.getElementById('sidebar');
 const pageContent = document.getElementById('page-content');
 const body = document.getElementById('page');
+const potraitWidth = matchMedia('(max-width: 480px)');
 let history;
 
 const storage = () => {
@@ -57,6 +58,27 @@ const closeSideNav = () => {
   document.getElementById('profile').style.marginLeft = '45px';
   document.getElementById('icon-top-bar').style.left = '0';
 };
+
+const hideSidebarForMobilePotrait = () => {
+  const sideNav = document.getElementById('profile-side-nav');
+  const profileInfo = document.getElementById('profile');
+
+  if (potraitWidth.matches) {
+    document.getElementById('icon-nav').style.marginLeft = '-45px';
+    sideNav.style.marginLeft = '-300px';
+    sideNav.style.transition = '0s';
+    document.getElementById('icon-top-bar').style.left = '0';
+    profileInfo.style.marginLeft = '0';
+    profileInfo.style.transition = '0s';
+  } else {
+    openSideNav();
+    sideNav.style.transition = 'margin 0.5s';
+    profileInfo.style.transition = 'margin 0.5s';
+  }
+};
+
+hideSidebarForMobilePotrait();
+potraitWidth.addListener(hideSidebarForMobilePotrait);
 
 const menu = () => {
   const ul = document.getElementById('drop-down-menu');

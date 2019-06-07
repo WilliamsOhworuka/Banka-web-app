@@ -57,9 +57,6 @@ ul{
   border-radius:3px;
 }
 
-.side-nav > a:not(.close-side-nav):hover{
-  background-color:orange;
-}
 
 label{
   font-size: 18px;
@@ -484,19 +481,25 @@ header #logo{
   font-size: 20px;
 }
 
-.side-nav .close-side-nav,.side-nav .small-close-side-nav{
+.side-nav .close-side-nav{
   position: absolute;
   top:0;
   right:0;
-}
-
-.side-nav .small-close-side-nav{
   display: none;
 }
 
 .side-nav p i{
   color: #660066;
   margin-right:5px;
+}
+
+.side-nav a:not(.close-side-nav):hover {
+  background-color:orange;
+  color: white;
+}
+
+.side-nav a:not(.close-side-nav):hover i{
+  color: white;
 }
 
 .side-nav > a i{
@@ -529,25 +532,8 @@ header #logo{
   height:70px;
   width: 100%;
   top:95px;
+  padding: 0;
   display:none;
-}
-
-.icon-top-nav a{
-  padding: 3% 3% 2% 3% ;
-  display: inline-block;
-  color: white;
-  border-bottom: 3px solid #660066;
-  text-align: center;
-}
-
-.icon-top-nav .active{
-  background-color: orange;
-}
-
-.icon-top-nav span{
-  display: block;
-  font-size: 13px;
-  margin-top:2px;
 }
 
 .icon-side-nav{
@@ -555,7 +541,7 @@ header #logo{
   margin-left: -45px;
   transition: margin .2s;
   top:0;
-  box-shadow: inset -8px 0 4px -6px rgba(0, 0, 0, 0.5);
+  box-shadow: inset -8px 0 4px -6px rgba(0, 0, 0, 0.8);
 }
 
 .icon-side-nav a{
@@ -835,6 +821,12 @@ header #logo{
 }
 
 /* small screen devices */
+@media (max-width:940px){
+  .side-nav .close-side-nav{
+    display: inline;
+  }
+}
+
 @media (max-width:900px){
   header nav li{
     display: none;
@@ -931,9 +923,10 @@ header #logo{
   .dashboard{
     margin-top:170px; 
     margin-left: 0;
-    padding: 5px;
+    padding-left: 4%;
+    padding-top: 4%;
   }
-
+  
   .p-3{
     display: none;
   }
@@ -950,7 +943,6 @@ header #logo{
   .profile-info{
     margin-left:0;
     padding-left:0; 
-    padding: 5px;
   }
 
   .profile-info h4{
@@ -962,26 +954,53 @@ header #logo{
   }
   
   .profile-info header h1{
-    position:static;
+    position: static;
     text-align: center;
     display: block;
   }
+  
   .icon-top-nav{
     display: block;
   }
-  .icon-side-nav,.side-nav .close-side-nav{
+  .icon-side-nav{
     display: none;
   }
 
-  .profile-info header .open-side-nav,.side-nav .small-close-side-nav{
-    display: inline;
+  .icon-top-nav{
+    margin-top: -15px;
   }
+
+  .icon-top-nav a{
+    padding: 4.5%;
+    display: inline-block;
+    color: white;
+    text-align: center;
+  }
+  
+  .icon-top-nav .active{
+    background-color: orange;
+    border-bottom: 1px solid orange;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  }
+  
+  .icon-top-nav span{
+    display: block;
+    font-size: 13px;
+    margin-top:2px;
+  }
+  
+  .profile-info header{
+    display: inline;
+    text-align: center;
+    padding: 0;
+  }
+
   .profile-info h4{
     color: purple;
-    text-align: center;
-    margin:-15px;
-    padding: 3px;
+    margin-top:-23px;
+    margin-left:0;
   }
+
   .icon-top-nav a:hover{
     border-bottom-color: white;
   } 
@@ -1011,4 +1030,10 @@ header #logo{
   .modal{
     padding-top: 35%;
   }
+}
+@media screen and (max-width: 355px){
+  .icon-top-nav a{
+    padding-left:3%;
+    padding-right:3%; 
+  } 
 }
