@@ -57,6 +57,9 @@ ul{
   border-radius:3px;
 }
 
+.small-form h2{
+  color: #660066;
+}
 
 label{
   font-size: 18px;
@@ -252,7 +255,7 @@ header nav .icon{
 }
 
 /* body */
-.signin-pageContent{
+.entry-formPage{
   background-color:white;
 }
 
@@ -446,7 +449,7 @@ header #logo{
   top:0;
   left:0;
   background-color:#f7f6f9;
-  width:250px;
+  width:247px;
   height:100%;
   transition: margin .5s;
   font-family:'Amiri';
@@ -592,7 +595,6 @@ header #logo{
 /* main content header */
 .profile-info{
   margin-left: 241px;
-  padding-left:7px;
   overflow:auto;
   transition: margin .5s;
 }
@@ -889,8 +891,21 @@ header #logo{
     width: 267px;
   }
 
+  .entry-formPage .small-form{
+    padding: 0;
+  }
+
+  input[type='submit']{
+    margin-top: 0;
+  }
+
+  .entry-formPage .small-form .bottom-input{
+    margin-bottom: 20px;
+  }
+
   .dashboard{
     margin-left:0;
+    padding-left:7px; 
   }
 
   .dashboard .small-form{
@@ -900,6 +915,15 @@ header #logo{
   .dashboard .small-form input{
     width:200px;
   }
+
+  .signupForm{
+    margin-top:10px;
+  }
+
+  .signupForm h2 {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
 
   .dashboard .user-acct-dtls, .dashboard .user-trans-hist{
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
@@ -931,6 +955,11 @@ header #logo{
     display: none;
   }
 
+  .signupForm h2{
+    margin-bottom: 40px;
+    font-size: 22px;
+  }
+
   .small-table td,.small-table th{
     padding:10px;
   }
@@ -938,6 +967,14 @@ header #logo{
   .small-table{
     margin: auto;
     display: table;
+  }
+
+  .small-form input:not([type='submit']){
+    width: 85%;
+  }
+
+  .entry-formPage .small-form{
+    padding:20px;
   }
 
   .profile-info{
@@ -1033,7 +1070,7 @@ header #logo{
 }
 @media screen and (max-width: 355px){
   .icon-top-nav a{
-    padding-left:3%;
-    padding-right:3%; 
+    padding-left:2%;
+    padding-right:2%; 
   } 
 }
