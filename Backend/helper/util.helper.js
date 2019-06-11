@@ -1,9 +1,25 @@
 import jwt from 'jsonwebtoken';
 import jwtDecode from 'jwt-decode';
+import joi from '@hapi/joi';
 import dotenv from 'dotenv';
 import database from '../db/index';
 
+
 dotenv.config();
+
+export const schema = joi.object().keys({
+  firstName: joi.string().regex(/^\S*$/).required(),
+  lastName: joi.string().regex(/^\S*$/).required(),
+  email: joi.string().email().required(),
+  password: joi.string().alphanum().min(6).required(),
+  accountType: joi.string().valid(['savings', 'current']).required(),
+  userType: joi.string().valid(['staff', 'admin']).required(),
+  accountNumber: joi.number().integer().min(30772001).required(),
+  status: joi.string().valid(['active', 'deactivated', 'draft']).required(),
+  amount: joi.number().min(0.1).required(),
+  TransactionId: joi.number().required(),
+  authToken: joi.string().required(),
+});
 
 export default class Util {
   static SendToken(req, res, action, dbResponse) {
