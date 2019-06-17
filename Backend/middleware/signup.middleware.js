@@ -1,61 +1,19 @@
+import Util from '../helper/util.helper';
 import database from '../db/index';
 
 export default class Validate {
   static checkValidInput(req, res, next) {
-    const valid = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const validMail = valid.test(req.body.email.toLowerCase());
-
-    if (!validMail) {
-      res.status(400);
-      return res.json({
-        status: 400,
-        error: 'email is not valid',
-      });
+    const valid = Util.check(res, {
+      'first name': req.body.firstName,
+      'last name': req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      'confirm password': req.body.confirmPassword,
+    }, 'signupSchema');
+    if (valid) {
+      return next();
     }
-
-    if (req.body.password !== req.body.confirmPassword) {
-      res.status(400);
-      return res.json({
-        status: 400,
-        error: 'password does not match',
-      });
-    }
-
-    if (req.body.password.length < 6) {
-      res.status(400);
-      return res.json({
-        status: 400,
-        error: 'password should be at least 6 letters long',
-      });
-    }
-    return next();
-  }
-
-  static checkEmptyFields(req, res, next) {
-    if (!req.body.lastName) {
-      res.status(400);
-      return res.json({
-        status: 400,
-        error: 'Last name is required',
-      });
-    }
-
-    if (!req.body.firstName) {
-      res.status(400);
-      return res.json({
-        status: 400,
-        error: 'First name is required',
-      });
-    }
-
-    if (!req.body.email) {
-      res.status(400);
-      return res.json({
-        status: 400,
-        error: 'email is required',
-      });
-    }
-    return next();
+    return undefined;
   }
 
   static async exists(req, res, next) {
@@ -72,9 +30,9 @@ export default class Validate {
       }
       return next();
     } catch (err) {
-      return res.status(500).json({
-        status: 500,
-        error: 'Something went wrong',
+      return res.status(400).json({
+        status: 400,
+        error: err.message,
       });
     }
   }

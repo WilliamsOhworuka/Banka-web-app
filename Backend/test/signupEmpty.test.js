@@ -17,11 +17,11 @@ describe('Testing user signup for empty required fields', () => {
         confirmPassword: 'password',
       })
       .end((error, response) => {
-        expect(response).to.have.status(400);
+        expect(response).to.have.status(403);
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
-        expect(response.body.error).to.equal('Last name is required');
+        expect(response.body.error).to.equal('Enter last name');
         done();
       });
   });
@@ -36,11 +36,11 @@ describe('Testing user signup for empty required fields', () => {
         confirmPassword: 'password',
       })
       .end((error, response) => {
-        expect(response).to.have.status(400);
+        expect(response).to.have.status(403);
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
-        expect(response.body.error).to.equal('First name is required');
+        expect(response.body.error).to.equal('Enter first name');
         done();
       });
   });
@@ -55,11 +55,11 @@ describe('Testing user signup for empty required fields', () => {
         confirmPassword: 'password',
       })
       .end((error, response) => {
-        expect(response).to.have.status(400);
+        expect(response).to.have.status(403);
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
-        expect(response.body.error).to.equal('email is required');
+        expect(response.body.error).to.equal('Enter email');
         done();
       });
   });

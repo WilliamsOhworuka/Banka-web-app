@@ -6,7 +6,7 @@ const accountText = `create table if not exists accounts(
     createdOn date not null,
     owner int references users(id) not null,
     type varchar(10) not null,
-    status varchar(10) default 'active',
+    status varchar(20) default 'active',
     balance numeric(10,2) default 0.00,
     PRIMARY KEY(id, accountNumber)
 )`;

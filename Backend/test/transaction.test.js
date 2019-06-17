@@ -12,7 +12,7 @@ describe('testing get all transactions route', () => {
       .post('/api/v1/auth/signin')
       .send({
         email: 'john@yahoo.com',
-        password: 'brock',
+        password: 'brocky',
       })
       .end((error, res) => {
         clientToken = res.body.data.token;
@@ -25,7 +25,7 @@ describe('testing get all transactions route', () => {
       .post('/api/v1/auth/signin')
       .send({
         email: 'johnna@yahoo.com',
-        password: 'brock',
+        password: 'brocky',
       })
       .end((error, res) => {
         clientToken = res.body.data.token;
@@ -36,7 +36,7 @@ describe('testing get all transactions route', () => {
 
   it('should return an error if user is not owner for transactions', (done) => {
     chai.request(app)
-      .get('/api/v1/accounts/30772001/transactions')
+      .get('/api/v1/accounts/30772003/transactions')
       .set('authorization', `bearer ${clientToken}`)
       .end((error, response) => {
         expect(response).to.have.status(401);

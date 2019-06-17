@@ -62,7 +62,7 @@ export default class Util {
   static errorMessage(type, path) {
     const error = {
       'any.allowOnly': {
-        msg: `invalid ${path}`,
+        msg: path == 'confirm password' ? 'password does not match' : `invalid ${path}`,
       },
       'any.empty': {
         msg: `Enter ${path}`,

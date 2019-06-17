@@ -14,7 +14,7 @@ describe('Testing user bank account creation', () => {
       .post('/api/v1/auth/signin')
       .send({
         email: 'john@yahoo.com',
-        password: 'brock',
+        password: 'brocky',
       })
       .end((error, res) => {
         clientToken = res.body.data.token;
@@ -81,7 +81,7 @@ describe('Testing bank account status change operation', () => {
       .post('/api/v1/auth/signin')
       .send({
         email: 'john@yahoo.com',
-        password: 'brock',
+        password: 'brocky',
       })
       .end((error, res) => {
         clientToken = res.body.data.token;
@@ -92,7 +92,7 @@ describe('Testing bank account status change operation', () => {
       .post('/api/v1/auth/signin')
       .send({
         email: 'dan@yahoo.com',
-        password: 'brock',
+        password: 'brocky',
       })
       .end((error, res) => {
         staffToken = res.body.data.token;
@@ -153,7 +153,7 @@ describe('Testing bank account status change operation', () => {
   it('should return an error if account does not exist for status change', (done) => {
     chai.request(app)
     // sending accoount that does not exist
-      .patch('/api/v1/account/307720046')
+      .patch('/api/v1/account/30772084')
       .set('authorization', `bearer ${staffToken}`)
       .send({
         status: 'dormant',
@@ -194,7 +194,7 @@ describe('Testing bank account delete operation', () => {
       .post('/api/v1/auth/signin')
       .send({
         email: 'john@yahoo.com',
-        password: 'brock',
+        password: 'brocky',
       })
       .end((error, res) => {
         clientToken = res.body.data.token;
@@ -205,7 +205,7 @@ describe('Testing bank account delete operation', () => {
       .post('/api/v1/auth/signin')
       .send({
         email: 'dan@yahoo.com',
-        password: 'brock',
+        password: 'brocky',
       })
       .end((error, res) => {
         staffToken = res.body.data.token;
