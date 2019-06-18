@@ -1,25 +1,12 @@
 import jwt from 'jsonwebtoken';
-import jwtDecode from 'jwt-decode';
 import joi from '@hapi/joi';
+import jwtDecode from 'jwt-decode';
 import dotenv from 'dotenv';
 import database from '../db/index';
+import schema from './joi.schema';
 
 
 dotenv.config();
-
-export const schema = joi.object().keys({
-  firstName: joi.string().regex(/^\S*$/).required(),
-  lastName: joi.string().regex(/^\S*$/).required(),
-  email: joi.string().email().required(),
-  password: joi.string().alphanum().min(6).required(),
-  accountType: joi.string().valid(['savings', 'current']).required(),
-  userType: joi.string().valid(['staff', 'admin']).required(),
-  accountNumber: joi.number().integer().min(30772001).required(),
-  status: joi.string().valid(['active', 'deactivated', 'draft']).required(),
-  amount: joi.number().min(0.1).required(),
-  TransactionId: joi.number().required(),
-  authToken: joi.string().required(),
-});
 
 export default class Util {
   static SendToken(req, res, action, dbResponse) {
@@ -56,6 +43,58 @@ export default class Util {
     );
   }
 
+  static check(res, properties, scheme) {
+    let status = true;
+    joi.validate(properties, schema[scheme], (err) => {
+      if (err) {
+        const msg = Util.errorMessage(err.details[0].type, err.details[0].path);
+        res.status(403);
+        res.json({
+          status: 403,
+          error: msg,
+        });
+        status = false;
+      }
+    });
+    return status;
+  }
+
+  static errorMessage(type, path) {
+    const error = {
+      'any.allowOnly': {
+        msg: path == 'confirm password' ? 'password does not match' : `invalid ${path}`,
+      },
+      'any.empty': {
+        msg: `Enter ${path}`,
+      },
+      'any.required': {
+        msg: `Enter ${path}`,
+      },
+      'string.email': {
+        msg: 'Invalid email',
+      },
+      'string.min': {
+        msg: 'Invalid email or password',
+      },
+      'string.regex.base': {
+        msg: `invalid ${path}`,
+      },
+      'number.base': {
+        msg: `invalid ${path}`,
+      },
+      'number.min': {
+        msg: `invalid ${path}`,
+      },
+      'number.max': {
+        msg: `invalid ${path}`,
+      },
+      'string.alphanum': {
+        msg: `invalid ${path}`,
+      },
+    };
+    return error[type].msg;
+  }
+
   static async getAccount(res, acctNumber) {
     const text = 'SELECT * FROM accounts WHERE accountnumber = $1';
     const values = [acctNumber];
@@ -66,7 +105,7 @@ export default class Util {
     } catch (err) {
       return res.status(500).json({
         status: 500,
-        error: 'Something went wrong',
+        error: err.message,
       });
     }
   }
@@ -83,7 +122,7 @@ export default class Util {
     } catch (err) {
       return res.status(500).json({
         status: 500,
-        error: 'Something went wrong',
+        error: err.message,
       });
     }
   }
@@ -111,7 +150,7 @@ export default class Util {
     } catch (err) {
       return res.status(500).json({
         status: 500,
-        error: 'Something went wrong',
+        error: err.message,
       });
     }
   }

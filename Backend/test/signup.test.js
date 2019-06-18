@@ -18,7 +18,7 @@ describe('Testing user signup', () => {
         confirmPassword: 'password',
       })
       .end((error, response) => {
-        expect(response).to.have.status(400);
+        expect(response).to.have.status(403);
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
@@ -58,11 +58,11 @@ describe('Testing user signup', () => {
         confirmPassword: 'password',
       })
       .end((error, response) => {
-        expect(response).to.have.status(400);
+        expect(response).to.have.status(403);
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
-        expect(response.body.error).to.equal('email is not valid');
+        expect(response.body.error).to.equal('Invalid email');
         done();
       });
   });
@@ -78,11 +78,11 @@ describe('Testing user signup', () => {
         confirmPassword: 'pass',
       })
       .end((error, response) => {
-        expect(response).to.have.status(400);
+        expect(response).to.have.status(403);
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
-        expect(response.body.error).to.equal('password should be at least 6 letters long');
+        expect(response.body.error).to.equal('Invalid email or password');
         done();
       });
   });

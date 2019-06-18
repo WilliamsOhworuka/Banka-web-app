@@ -13,11 +13,11 @@ describe('Testing user signin', () => {
         password: 'password',
       })
       .end((error, response) => {
-        expect(response).to.have.status(400);
+        expect(response).to.have.status(403);
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
-        expect(response.body.error).to.equal('Enter your email');
+        expect(response.body.error).to.equal('Enter email');
         done();
       });
   });
@@ -29,11 +29,11 @@ describe('Testing user signin', () => {
         email: 'mikey@ya.com',
       })
       .end((error, response) => {
-        expect(response).to.have.status(400);
+        expect(response).to.have.status(403);
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
-        expect(response.body.error).to.equal('Enter your password');
+        expect(response.body.error).to.equal('Enter password');
         done();
       });
   });
@@ -60,7 +60,7 @@ describe('Testing user signin', () => {
       .post('/api/v1/auth/signin')
       .send({
         email: 'john@yahoo.com',
-        password: 'brock',
+        password: 'brocky',
       })
       .end((error, response) => {
         expect(response).to.have.status(200);

@@ -29,7 +29,7 @@ export default {
   },
 
   async AdmincreateUser(req, res) {
-    const hashPassword = bcrypt.hashSync('sing', 8);
+    const hashPassword = bcrypt.hashSync(`${req.body.firstName}${req.body.lastName}`, 8);
     const text = 'INSERT INTO users(firstName, lastName, email, password, type, isAdmin) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
     const values = [
       req.body.firstName,
@@ -39,19 +39,6 @@ export default {
       req.body.type,
       req.body.isAdmin,
     ];
-    if (!req.body.type) {
-      return res.status(400).json({
-        status: 400,
-        error: 'type field is required',
-      });
-    }
-
-    if (req.body.type === 'client') {
-      return res.status(400).json({
-        status: 400,
-        error: 'Cannot create clients',
-      });
-    }
 
     const user = Util.getInfoFromToken(req);
     if (!user.isAdmin) {
@@ -60,26 +47,36 @@ export default {
         error: 'Unauthorized user',
       });
     }
+    const valid = Util.check(res, {
+      'first name': req.body.firstName,
+      'last name': req.body.lastName,
+      email: req.body.email,
+      type: req.body.type,
+      isAdmin: req.body.isAdmin,
+    }, 'createUserSchema');
 
-    try {
-      const dbRes = await database.query(text, values);
-      const { rows } = dbRes;
-      return res.status(201).json({
-        status: 201,
-        data: {
-          firstname: rows[0].firstname,
-          lastname: rows[0].lastname,
-          email: rows[0].email,
-          type: rows[0].type,
-          isadmin: rows[0].isAdmin,
-        },
-        message: `${req.body.type} created`,
-      });
-    } catch (err) {
-      return res.status(500).json({
-        status: 500,
-        error: 'Something went wrong',
-      });
+    if (valid) {
+      try {
+        const dbRes = await database.query(text, values);
+        const { rows } = dbRes;
+        return res.status(201).json({
+          status: 201,
+          data: {
+            firstname: rows[0].firstname,
+            lastname: rows[0].lastname,
+            email: rows[0].email,
+            type: rows[0].type,
+            isadmin: rows[0].isAdmin,
+          },
+          message: `${req.body.type} created`,
+        });
+      } catch (err) {
+        return res.status(500).json({
+          status: 500,
+          error: err.message,
+        });
+      }
     }
+    return undefined;
   },
 };

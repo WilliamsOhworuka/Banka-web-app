@@ -1,24 +1,15 @@
 /* eslint-disable no-trailing-spaces */
 import bcrypt from 'bcrypt';
+import Util from '../helper/util.helper';
 import database from '../db/index';
 
 export default class {
   static checkEmptyFields(req, res, next) {
-    if (!req.body.email) {
-      res.status(400);
-      return res.json({
-        status: 400,
-        error: 'Enter your email',
-      });
+    const valid = Util.check(res, { email: req.body.email, password: req.body.password }, 'signinSchema');
+    if (valid) {
+      return next();
     }
-    if (!req.body.password) {
-      res.status(400);
-      return res.json({
-        status: 400,
-        error: 'Enter your password',
-      });
-    }
-    return next();
+    return undefined;
   }
 
   static async checkExistence(req, res, next) {
@@ -44,8 +35,8 @@ export default class {
         error: 'Invalid email or password',
       });
     } catch (err) {
-      return res.status(400).json({
-        status: 400,
+      return res.json({
+        status: res.status,
         error: err.message,
       });
     }
