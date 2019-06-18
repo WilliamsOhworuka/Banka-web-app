@@ -17,7 +17,7 @@ export default class {
     } catch (error) {
       return res.status(500).json({
         status: 500,
-        error: 'Something went wrong',
+        error: error.message,
       });
     }
   }
