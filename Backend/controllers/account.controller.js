@@ -10,14 +10,14 @@ export default class AccountMiddleware {
     } catch (err) {
       res.status(500).json({
         status: 500,
-        error: 'Something went wrong',
+        error: err.message,
       });
     }
     const text = 'INSERT INTO accounts(createdon,owner,type) VALUES($1, $2, $3) RETURNING *';
     const values = [
       new Date(),
       owner.id,
-      req.body.type,
+      req.body.type.toLowerCase(),
     ];
 
     try {
@@ -38,7 +38,7 @@ export default class AccountMiddleware {
     } catch (err) {
       res.status(500).json({
         status: 500,
-        error: 'Something went wrong',
+        error: err.message,
       });
     }
   }
@@ -76,40 +76,50 @@ export default class AccountMiddleware {
     } catch (err) {
       return res.status(500).json({
         status: 500,
-        error: 'Something went wrong',
+        error: err.message,
       });
     }
   }
 
   static async changeAccountStatus(req, res) {
-    const acct = await Util.getAccount(res, req.params.accountNumber);
-    if (acct) {
-      const text = 'UPDATE accounts SET status = $1 WHERE accountnumber = $2 RETURNING *';
-      const values = [req.body.status, req.params.accountNumber];
-      const state = req.body.status === 'active' ? 'Activated' : 'Deactived';
-      try {
-        const { rows } = await database.query(text, values);
-        const account = rows[0];
-        return res.status(200).json({
-          status: 200,
-          data: {
-            accountNumber: account.accountnumber,
-            status: account.status,
-          },
-          message: `Account ${state}`,
-        });
-      } catch (err) {
-        return res.status(500).json({
-          status: 500,
-          error: 'Something went wrong',
+    const valid = Util.check(res, {
+      'account number': `${req.params.accountNumber}`,
+      status: req.body.status,
+    }, 'statusChangeSchema');
+
+    if (valid) {
+      const acct = await Util.getAccount(res, req.params.accountNumber);
+      if (acct) {
+        const text = 'UPDATE accounts SET status = $1 WHERE accountnumber = $2 RETURNING *';
+        const state = req.body.status === 'activate' ? 'Active' : 'Deactivated';
+        const values = [state, req.params.accountNumber];
+        try {
+          const { rows } = await database.query(text, values);
+          const account = rows[0];
+          res.status(200).json({
+            status: 200,
+            data: {
+              accountNumber: account.accountnumber,
+              status: account.status,
+            },
+            message: `Account ${state}`,
+          });
+        } catch (error) {
+          res.status(500).json({
+            status: 500,
+            error: error.message,
+          });
+        }
+      } else {
+        res.status(404).json({
+          status: 404,
+          error: 'Account does not exist',
         });
       }
     }
-    return res.status(404).json({
-      status: 404,
-      error: 'Account does not exist',
-    });
+    return undefined;
   }
+
 
   static async deleteAccount(req, res) {
     const acct = await Util.getAccount(res, req.params.accountNumber);

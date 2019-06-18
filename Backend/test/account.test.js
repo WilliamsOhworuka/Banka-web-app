@@ -103,7 +103,7 @@ describe('Testing bank account status change operation', () => {
     chai.request(app)
       .patch('/api/v1/account/30772001')
       .send({
-        status: 'dormant',
+        status: 'activate',
       })
       .end((error, response) => {
         expect(response).to.have.status(401);
@@ -120,7 +120,7 @@ describe('Testing bank account status change operation', () => {
       .patch('/api/v1/account/30772001')
       .set('authorization', `bearer ${wrongToken}`)
       .send({
-        status: 'dormant',
+        status: 'deactivate',
       })
       .end((error, response) => {
         expect(response).to.have.status(401);
@@ -138,7 +138,7 @@ describe('Testing bank account status change operation', () => {
       .patch('/api/v1/account/30772001')
       .set('authorization', `bearer ${clientToken}`)
       .send({
-        status: 'dormant',
+        status: 'activate',
       })
       .end((error, response) => {
         expect(response).to.have.status(401);
@@ -156,7 +156,7 @@ describe('Testing bank account status change operation', () => {
       .patch('/api/v1/account/30772084')
       .set('authorization', `bearer ${staffToken}`)
       .send({
-        status: 'dormant',
+        status: 'activate',
       })
       .end((error, response) => {
         expect(response).to.have.status(404);
@@ -173,7 +173,7 @@ describe('Testing bank account status change operation', () => {
       .patch('/api/v1/account/30772001')
       .set('authorization', `bearer ${staffToken}`)
       .send({
-        status: 'dormant',
+        status: 'deactivate',
       })
       .end((error, response) => {
         expect(response).to.have.status(200);
@@ -182,7 +182,7 @@ describe('Testing bank account status change operation', () => {
         expect(response.body.data).to.be.a('object');
         expect(response.body.data.accountNumber).to.be.a('number');
         expect(response.body.data.status).to.be.a('string');
-        expect(response.body.data.status).to.equal('dormant');
+        expect(response.body.data.status).to.equal('Deactivated');
         done();
       });
   });
