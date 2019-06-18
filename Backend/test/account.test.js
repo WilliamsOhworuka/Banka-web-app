@@ -22,16 +22,33 @@ describe('Testing user bank account creation', () => {
       });
   });
 
-  it('should return an error if account type is not set for creation', (done) => {
+  it('should return an error if account type is not set ', (done) => {
     chai.request(app)
       .post('/api/v1/accounts/')
       .send({})
       .end((error, response) => {
-        expect(response).to.have.status(400);
+        expect(response).to.have.status(403);
         expect(response.body.error).to.be.a('string');
         expect(response.body).to.have.property('status');
         expect(response.body).to.have.property('error');
-        expect(response.body.error).to.equal('Set account type');
+        expect(response.body.error).to.equal('invalid account type');
+        done();
+      });
+  });
+
+  it('should return an error if account type is invalid', (done) => {
+    chai.request(app)
+      .post('/api/v1/accounts/')
+      // account type can only be current or savings
+      .send({
+        type: 'gunner',
+      })
+      .end((error, response) => {
+        expect(response).to.have.status(403);
+        expect(response.body.error).to.be.a('string');
+        expect(response.body).to.have.property('status');
+        expect(response.body).to.have.property('error');
+        expect(response.body.error).to.equal('invalid account type');
         done();
       });
   });

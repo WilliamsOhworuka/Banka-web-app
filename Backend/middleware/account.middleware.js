@@ -6,14 +6,11 @@ dotenv.config();
 
 export default class AccountService {
   static checkEmptyFields(req, res, next) {
-    if (!req.body.type) {
-      res.status(400);
-      return res.json({
-        status: 400,
-        error: 'Set account type',
-      });
+    const valid = Util.check(res, { 'account type': `${req.body.type}` }, 'generalSchema');
+    if (valid) {
+      return next();
     }
-    return next();
+    return undefined;
   }
 
   // eslint-disable-next-line consistent-return
