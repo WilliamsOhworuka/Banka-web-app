@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import database from './index';
 
 const text = 'drop table users,accounts,transactions';

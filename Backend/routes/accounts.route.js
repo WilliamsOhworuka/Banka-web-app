@@ -18,7 +18,7 @@ router.get('/:accountNumber/transactions', AccountMiddleware.checkAuthorization,
 router.get('/:accountNumber', AccountMiddleware.checkAuthorization,
   TransactionMiddleware.checkOwner, AccountController.getAccount);
 
-router.get('/', AccountMiddleware.checkAuthorization, AccountMiddleware.checkStaffAccess, 
+router.get('/', AccountMiddleware.checkAuthorization, AccountMiddleware.checkStaffAccess,
   AccountController.getAllBankaccount);
 
 export default router;
