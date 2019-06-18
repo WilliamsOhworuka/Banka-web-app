@@ -122,28 +122,32 @@ export default class AccountMiddleware {
 
 
   static async deleteAccount(req, res) {
-    const acct = await Util.getAccount(res, req.params.accountNumber);
-    if (acct) {
-      const text = 'DELETE FROM accounts WHERE accountnumber = $1';
-      const values = [req.params.accountNumber];
+    const valid = Util.check(res, { 'account number': req.params.accountNumber }, 'generalSchema');
+    if (valid) {
+      const acct = await Util.getAccount(res, req.params.accountNumber);
+      if (acct) {
+        const text = 'DELETE FROM accounts WHERE accountnumber = $1';
+        const values = [req.params.accountNumber];
 
-      try {
-        await database.query(text, values);
-        return res.status(200).json({
-          status: 200,
-          message: 'Account successfully deleted',
-        });
-      } catch (err) {
-        return res.status(500).json({
-          status: 500,
-          error: 'Something went wrong',
-        });
+        try {
+          await database.query(text, values);
+          return res.status(200).json({
+            status: 200,
+            message: 'Account successfully deleted',
+          });
+        } catch (err) {
+          return res.status(500).json({
+            status: 500,
+            error: err.message,
+          });
+        }
       }
+      return res.status(404).json({
+        status: 404,
+        error: 'Account does not exist',
+      });
     }
-    return res.status(404).json({
-      status: 404,
-      error: 'Account does not exist',
-    });
+    return undefined;
   }
 
   static async getAllAccounts(req, res) {
