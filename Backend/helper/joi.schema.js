@@ -31,7 +31,7 @@ export default {
 
   statusChangeSchema: joi.object().keys({
     status: joi.string().valid(['activate', 'deactivate']).insensitive().required(),
-    'account number': joi.number().integer().min(30772001).max(30999999),
+    'account number': joi.number().integer().min(30772001),
   }),
 
   generalSchema: joi.object().keys({
