@@ -151,41 +151,59 @@ export default class AccountMiddleware {
   }
 
   static async getAllAccounts(req, res) {
-    const owner = await Util.getownerId(req);
-    if (!owner) {
-      return res.status(404).json({
-        status: 404,
-        error: 'User does not exist',
-      });
-    }
-    const text = 'SELECT createdon,accountnumber,type,status,balance FROM accounts WHERE owner = $1';
-    const values = [owner.id];
+    const valid = Util.check(res, { email: req.params.user_email }, 'generalSchema');
+    const staff = Util.checkStaffAccess(req);
+    if (valid) {
+      const owner = await Util.getownerId(req);
+      const accountOwner = await Util.checkEmailOwner(req, res);
 
-    try {
-      const { rows } = await database.query(text, values);
-      if (rows.length === 0) {
-        rows[0] = {
-          message: 'No accounts yet',
-        };
+      if (!owner) {
+        return res.status(404).json({
+          status: 404,
+          error: 'User does not exist',
+        });
       }
-      return res.status(200).json({
-        status: 200,
-        accounts: rows,
-      });
-    } catch (err) {
-      return res.status(500).json({
-        status: 500,
-        error: 'Something went wrong',
-      });
+
+      if (!accountOwner) {
+        if (!staff) {
+          return res.status(401).json({
+            status: 401,
+            error: 'Unauthorized user',
+          });
+        }
+      }
+
+      const text = staff === 'true' ? 'SELECT createdon,accountnumber,type,status,balance FROM accounts WHERE owner = $1'
+        : 'SELECT accountnumber FROM accounts WHERE owner = $1';
+      const values = [owner.id];
+
+      try {
+        const { rows } = await database.query(text, values);
+        if (rows.length === 0) {
+          rows[0] = {
+            message: 'No accounts yet',
+          };
+        }
+        return res.status(200).json({
+          status: 200,
+          accounts: rows,
+        });
+      } catch (err) {
+        return res.status(500).json({
+          status: 500,
+          error: 'Something went wrong',
+        });
+      }
     }
+    return undefined;
   }
 
   static async getAccount(req, res) {
     const text = 'SELECT accounts.createdon,accounts.accountnumber,users.email, accounts.type, accounts.status, accounts.balance FROM accounts INNER JOIN users ON users.id = accounts.owner WHERE accountnumber = $1';
     const { rows } = await database.query(text, [req.params.accountNumber]);
     if (!rows[0]) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(403).json({
+        status: 403,
         data: 'invalid account number',
       });
     }

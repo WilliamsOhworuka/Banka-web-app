@@ -5,6 +5,6 @@ import AccountController from '../controllers/account.controller';
 const router = express.Router();
 
 router.get('/:user_email/accounts', AccountMiddleware.checkAuthorization,
-  AccountMiddleware.checkStaffAccess, AccountController.getAllAccounts);
+  AccountController.getAllAccounts);
 
 export default router;

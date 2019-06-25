@@ -59,6 +59,29 @@ export default class Util {
     return status;
   }
 
+  static async checkEmailOwner(req, res) {
+    const { id } = Util.getInfoFromToken(req);
+    const text = 'SELECT * from users WHERE email = $1 AND id = $2';
+    const values = [req.params.user_email, id];
+    try {
+      const { rows } = await database.query(text, values);
+      return rows[0];
+    } catch (err) {
+      return res.status(500).json({
+        status: 500,
+        error: err.message,
+      });
+    }
+  }
+
+  static checkStaffAccess(req) {
+    const userInfo = Util.getInfoFromToken(req);
+    if (userInfo.type === 'staff') {
+      return 'true';
+    }
+    return 'false';
+  }
+
   static errorMessage(type, path) {
     const error = {
       'any.allowOnly': {
