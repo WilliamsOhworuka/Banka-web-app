@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import database from './index';
 
 const accountText = `create table if not exists accounts(

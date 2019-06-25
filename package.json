@@ -13,12 +13,14 @@
   "scripts": {
     "start": "npm run build && node ./build/src/app.js",
     "start-dev": "babel-node ./Backend/src/app.js",
-    "test": " npm run create-table & nyc mocha Backend/test --require @babel/register --exit || true",
+    "test": " npm run dev-create-table & nyc mocha Backend/test --require @babel/register --exit || true",
     "lint": "./node_modules/.bin/eslint ./Backend",
-    "build-babel": "babel -d ./build ./Backend -s",
+    "build-babel": "npm run clean & babel -d ./build ./Backend -s",
     "build": "npm run build-babel",
-    "create-table": "babel-node ./Backend/db/createtables.queries & babel-node ./Backend/db/seed.queries.js",
-    "drop-table": "babel-node ./Backend/db/droptables.queries",
+    "create-table": "node ./build/db/createtables.queries & node ./build/db/seed.queries.js",
+    "drop-table": "node ./build/db/droptables.queries",
+    "dev-create-table": "babel-node ./Backend/db/createtables.queries & babel-node ./Backend/db/seed.queries.js",
+    "dev-drop-table": "babel-node ./Backend/db/createtables.queries & babel-node ./Backend/db/seed.queries.js",
     "clean": "rm -rf ./build && mkdir ./build",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
