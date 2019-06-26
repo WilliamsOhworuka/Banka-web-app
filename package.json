@@ -20,7 +20,7 @@
     "create-table": "node ./build/db/createtables.queries & node ./build/db/seed.queries.js",
     "drop-table": "node ./build/db/droptables.queries",
     "dev-create-table": "babel-node ./Backend/db/createtables.queries & babel-node ./Backend/db/seed.queries.js",
-    "dev-drop-table": "babel-node ./Backend/db/createtables.queries & babel-node ./Backend/db/seed.queries.js",
+    "dev-drop-table": "babel-node ./Backend/db/droptables.queries",
     "clean": "rm -rf ./build && mkdir ./build",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
