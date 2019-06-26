@@ -843,6 +843,69 @@ header #logo{
   margin: auto;
 }
 
+/*select accounts*/
+.accounts{
+background-color: #ebebeb;
+}
+
+.account-list{
+  margin:auto;
+  text-align: center;
+  box-sizing: border-box;
+  width:275px;
+  min-height: 150px;
+}
+
+.account-select{
+  background-color: #ffffff;
+  border: 1px solid rgb(230, 234, 237);
+  width: 300px;
+  min-height: 50px;
+  max-height: 500px;
+  overflow: auto;
+  padding: 10px;
+  margin: 100px auto auto auto;
+  border-radius: 5px;
+  border: 1px solid #d7d3d3;
+}
+
+.account-list h3{
+  margin-bottom:10px;
+  margin-top: 10px;
+  color: orange;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: lighter;
+}
+
+.account-list i{
+  margin-left: 100px;
+}
+
+.account-list li{
+ padding: 10px;
+ border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+.account-list .first{
+  border-top:1px solid rgb(221, 221, 221);
+ }
+
+.account-list li a{
+  display: block;
+  color:#272727;
+  padding: 5px;
+  font-size: 18px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+  border-left: 3px solid #9f9f9f;
+}
+
+.account-list li:hover a{
+  border-color: #660066;
+  color: #660066;
+  transition: .5s;
+}
+
 /*admin dashboard*/
 #admin{
   text-align: center;
