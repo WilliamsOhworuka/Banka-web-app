@@ -40,7 +40,7 @@ signinForm.addEventListener('submit', (e) => {
           location.href = isAdmin ? 'https://williamsohworuka.github.io/Banka-web-app/UI/admin-dashboard.html'
             : 'https://williamsohworuka.github.io/Banka-web-app/UI/staff-accountDashboard.html';
         } else {
-          location.href = 'https://williamsohworuka.github.io/Banka-web-app/UI/account-dashboard.html';
+          location.href = 'https://williamsohworuka.github.io/Banka-web-app/UI/select-account.html';
         }
       } else {
         submit.value = 'Sign in';

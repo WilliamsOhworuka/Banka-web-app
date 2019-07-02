@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Amiri' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Amiko' rel='stylesheet'>
+    <script defer type="text/javascript" src='account-dash.js'></script>
     <script defer type="text/javascript" src='script.js'></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,8 +14,7 @@
   <body id="page">
     <nav class='side-nav' id="profile-side-nav">
       <a href="javascript:void(0);" class="close-side-nav" id="cancel-side-nav" onclick="closeSideNav()"><i class="far fa-minus-square"></i></a>
-      <h1 class="brand">Ban<span>ka</span></h1>
-      <p><i class="far fa-user"></i>Williams Smith</p>
+      <h1 class="brand" id="brandName">Ban<span>ka</span></h1>
       <a href="./account-dashboard.html" class="account active"><i class="fas fa-university"></i>Account</a>
       <a href="./transaction-history.html" class="history"><i class="fas fa-history"></i>Transaction history</a>
       <a href="./edit-detail.html" class="details"><i class="far fa-edit"></i>Edit details</a>
@@ -35,33 +35,21 @@
       <a href="./signin.html" class="Signout"><i class="fas fa-sign-out-alt"></i><span>Sign out</span></a>
     </nav>
     <section class="profile-info" id="profile">
-      <header>
+      <header id = "head">
         <a href="javascript:void(0);" class="open-side-nav" onclick="OpenSideNav()"><i class="fas fa-bars"></i></a>
         <h1 class="brand" id="acct-brand">Ban<span>ka</span></h1>
         <h3>Account</h3>
-        <h4>Welcome Williams Smith</h4>
       </header>
       <div class="dashboard">
         <section class='user-acct-dtls' id="user-dt">
           <ul>
-            <li>Account number: <span>3077394848</span></li>
-            <li>Type: <span>Savings</span></li>
-            <li>Balance: <span>#30,405</span></li>
-            <li>Status: <span>Active</span></li>
+            <li>Account number:</li>
+            <li>Type:</li>
+            <li>Balance:</li>
+            <li>Status:</li>
           </ul>
           <a href="./create-account.html"><i class="fas fa-plus-circle"></i><span>Add an account</span></a>
         </section>
-         <section class='user-trans-hist' id="trans-hist">
-          <p>Recent Transactions</p>
-          <a href="./transaction-history.html" class="go"><i class="fas fa-arrow-right"></i></a>
-            <ul>
-             <li> Atm transfer: #30,000 TO 300858675 John smith ON 30/04/2039</li>
-             <li> Atm withdraw: #12,000 FROM 30048666 ON 31/04/2039</li>
-             <li> Atm transfer: #12,000 TO 300845374 ON 05/04/2039</li>
-             <li> Notification Charge: #10.00 ON 30/04/2039</li>
-            </ul>
-          <a class="view" href="./transaction-history.html">View all</a>
-         </section>
        </div>
       </section>
    </body>
