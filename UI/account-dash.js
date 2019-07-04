@@ -26,23 +26,8 @@ fetch(`https://infinite-sea-96838.herokuapp.com/api/v1/accounts/${accountNumber}
   },
 }).then(res => res.json())
   .then((res) => {
-    const { balance, status, type } = res.data;
-    const keys = [accountNumber, type, balance, status];
-    for (let i = 0; i < list.length; i += 1) {
-      list[i].innerHTML = `${list[i].textContent} <span>${keys[i]}</span>`;
-    }
-  });
-
-fetch(`https://infinite-sea-96838.herokuapp.com/api/v1/accounts/${accountNumber}/transactions`, {
-  method: 'get',
-  withCredentials: true,
-  credentials: 'include',
-  headers: {
-    Authorization: `bearer ${token}`,
-  },
-}).then(res => res.json())
-  .then((res) => {
-    const { balance, status, type } = res.data;
+    localStorage.setItem('dashData', JSON.stringify(res.data));
+    const { balance, status, type } = JSON.parse(localStorage.getItem('dashData'));
     const keys = [accountNumber, type, balance, status];
     for (let i = 0; i < list.length; i += 1) {
       list[i].innerHTML = `${list[i].textContent} <span>${keys[i]}</span>`;

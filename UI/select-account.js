@@ -23,7 +23,7 @@ fetch(`https://infinite-sea-96838.herokuapp.com/api/v1/user/${email}/accounts`, 
       ul.append(li);
       li.addEventListener('click', () => {
         localStorage.setItem('account-number', li.textContent);
-        window.location.href = 'http://localhost:5500/UI/account-dashboard.html'
+        window.location.href = 'https://williamsohworuka.github.io/Banka-web-app/UI/account-dashboard.html';
       });
     }
   });

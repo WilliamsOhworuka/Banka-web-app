@@ -29,7 +29,6 @@ signinForm.addEventListener('submit', (e) => {
     body: searchParams,
   }).then(res => res.json())
     .then((res) => {
-      console.log(res);
       if (!res.error) {
         const userData = decodeToken(res.data.token);
         const userType = userData.type;
