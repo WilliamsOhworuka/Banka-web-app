@@ -12,17 +12,8 @@ import UserRoute from '../routes/users.routes';
 import postMiddleware from '../middleware/posts.middleware';
 
 const app = express();
-const whitelist = ['http://localhost:5500', 'http://localhost:3000', 'https://infinite-sea-96838.herokuapp.com/'];
-const options = {
-  origin(origin, callback) {
-    if (whitelist.includes(origin) || (!origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-};
-app.use(cors(options));
+
+app.use(cors('*'));
 
 app.get('/', (req, res) => {
   res.json({
