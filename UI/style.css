@@ -691,6 +691,7 @@ header #logo{
   width:250px;
   height:130px;
   margin:0;
+  font-family: 'Work Sans', sans-serif;
   display: inline-block;
 }
 
@@ -711,45 +712,6 @@ header #logo{
 .dashboard .user-acct-dtls a{
   display: inline-block;
   padding-top:7px; 
-}
-
-.dashboard .user-trans-hist{
-  width: 500px;
-  display: inline-block;
-  height: 180px;
-  padding: 15px;
-  color: purple; 
-  position: relative;
-  margin-left: 30px;
-}
-
-.dashboard .user-trans-hist p{
-  font-size: 15px;
-  font-weight: bold;
-  margin-top:0;
-  margin-bottom: 10px;
-  margin-left: 0;
-  font-family: Verdana, Geneva, sans-serif;
-  color:#660066;
-}
-
-.dashboard .user-trans-hist .view{
-  display: block;
-  text-align: center;
-  margin-top:20px;
-  color: blue;
-}
-
-.dashboard .user-trans-hist .go{
-  position: absolute;
-  top:5px;
-  right:5px;
-  color:purple;
-}
-
-.dashboard .user-trans-hist li{
-  font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  font-size:14px;
 }
 
 .modal-dropdown{
