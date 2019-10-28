@@ -29,7 +29,6 @@ signinForm.addEventListener('submit', (e) => {
     body: searchParams,
   }).then(res => res.json())
     .then((res) => {
-      console.log(res);
       if (!res.error) {
         const userData = decodeToken(res.data.token);
         const userType = userData.type;
@@ -40,7 +39,7 @@ signinForm.addEventListener('submit', (e) => {
           location.href = isAdmin ? 'https://williamsohworuka.github.io/Banka-web-app/UI/admin-dashboard.html'
             : 'https://williamsohworuka.github.io/Banka-web-app/UI/staff-accountDashboard.html';
         } else {
-          location.href = 'https://williamsohworuka.github.io/Banka-web-app/UI/account-dashboard.html';
+          location.href = 'https://williamsohworuka.github.io/Banka-web-app/UI/select-account.html';
         }
       } else {
         submit.value = 'Sign in';

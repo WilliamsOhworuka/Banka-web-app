@@ -12,20 +12,8 @@ import UserRoute from '../routes/users.routes';
 import postMiddleware from '../middleware/posts.middleware';
 
 const app = express();
-const whitelist = ['http://localhost:5500', 'https://williamsohworuka.github.io/Banka-web-app/', 'https://infinite-sea-96838.herokuapp.com'];
-const options = {
-  origin(origin, callback) {
-    console.log(origin);
-    if (whitelist.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-};
 
-app.use(cors(options));
+app.use(cors('*'));
 
 app.get('/', (req, res) => {
   res.json({
