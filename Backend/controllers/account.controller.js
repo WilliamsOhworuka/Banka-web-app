@@ -158,6 +158,7 @@ export default class AccountMiddleware {
     if (valid) {
       const owner = await Util.getownerId(req);
       const accountOwner = await Util.checkEmailOwner(req, res);
+      const staff = Util.checkStaffAccess(req);
 
       if (!owner) {
         return res.status(404).json({
@@ -166,7 +167,7 @@ export default class AccountMiddleware {
         });
       }
 
-      if (!accountOwner) {
+      if (!accountOwner && staff) {
         return res.status(401).json({
           status: 401,
           error: 'Unauthorized user',
