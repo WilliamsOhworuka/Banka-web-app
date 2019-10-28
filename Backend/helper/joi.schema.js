@@ -40,4 +40,9 @@ export default {
     'transaction id': joi.number(),
     email: joi.string().email(),
   }),
+
+  createAccountSchema: joi.object().keys({
+    'account type': joi.string().valid(['savings', 'current']).insensitive().required(),
+    'account name': joi.string().regex(/^[a-zA-Z][-\sa-zA-Z]+$/).required(),
+  }),
 };

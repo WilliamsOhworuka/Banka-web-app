@@ -6,7 +6,10 @@ dotenv.config();
 
 export default class AccountService {
   static checkEmptyFields(req, res, next) {
-    const valid = Util.check(res, { 'account type': `${req.body.type}` }, 'generalSchema');
+    const valid = Util.check(res, {
+      'account type': req.body.type,
+      'account name': req.body.accountname,
+    }, 'createAccountSchema');
     if (valid) {
       return next();
     }
