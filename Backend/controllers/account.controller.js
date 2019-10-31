@@ -13,10 +13,11 @@ export default class AccountMiddleware {
         error: err.message,
       });
     }
-    const text = 'INSERT INTO accounts(createdon,owner,type) VALUES($1, $2, $3) RETURNING *';
+    const text = 'INSERT INTO accounts(createdon, owner, accountname, type) VALUES($1, $2, $3, $4) RETURNING *';
     const values = [
       new Date(),
       owner.id,
+      req.body.accountname.toLowerCase(),
       req.body.type.toLowerCase(),
     ];
 
@@ -27,6 +28,7 @@ export default class AccountMiddleware {
         status: 201,
         data: {
           accountNumber: account.accountnumber,
+          accountName: account.accountname,
           firstName: owner.firstname,
           lastName: owner.lastname,
           email: owner.email,
@@ -152,10 +154,11 @@ export default class AccountMiddleware {
 
   static async getAllAccounts(req, res) {
     const valid = Util.check(res, { email: req.params.user_email }, 'generalSchema');
-    const staff = Util.checkStaffAccess(req);
+
     if (valid) {
       const owner = await Util.getownerId(req);
       const accountOwner = await Util.checkEmailOwner(req, res);
+      const staff = Util.checkStaffAccess(req);
 
       if (!owner) {
         return res.status(404).json({
@@ -164,26 +167,19 @@ export default class AccountMiddleware {
         });
       }
 
-      if (!accountOwner) {
-        if (!staff) {
-          return res.status(401).json({
-            status: 401,
-            error: 'Unauthorized user',
-          });
-        }
+      if (!accountOwner && staff) {
+        return res.status(401).json({
+          status: 401,
+          error: 'Unauthorized user',
+        });
       }
 
-      const text = staff === 'true' ? 'SELECT createdon,accountnumber,type,status,balance FROM accounts WHERE owner = $1'
-        : 'SELECT accountnumber FROM accounts WHERE owner = $1';
+      const text = 'SELECT createdon,accountname,accountnumber,type,status,balance FROM accounts WHERE owner = $1';
       const values = [owner.id];
 
       try {
         const { rows } = await database.query(text, values);
-        if (rows.length === 0) {
-          rows[0] = {
-            message: 'No accounts yet',
-          };
-        }
+
         return res.status(200).json({
           status: 200,
           accounts: rows,
@@ -199,7 +195,7 @@ export default class AccountMiddleware {
   }
 
   static async getAccount(req, res) {
-    const text = 'SELECT accounts.createdon,accounts.accountnumber,users.email, accounts.type, accounts.status, accounts.balance FROM accounts INNER JOIN users ON users.id = accounts.owner WHERE accountnumber = $1';
+    const text = 'SELECT accounts.createdon,accounts.accountnumber,accounts.accountname,users.email, accounts.type, accounts.status, accounts.balance FROM accounts INNER JOIN users ON users.id = accounts.owner WHERE accountnumber = $1';
     const { rows } = await database.query(text, [req.params.accountNumber]);
     if (!rows[0]) {
       return res.status(403).json({
@@ -216,7 +212,7 @@ export default class AccountMiddleware {
 
   static async getAllBankaccount(req, res) {
     if (!req.query.status) {
-      const text = 'SELECT accounts.createdon,accounts.accountnumber,users.email, accounts.type, accounts.status, accounts.balance FROM accounts INNER JOIN users ON users.id = accounts.owner';
+      const text = 'SELECT accounts.createdon,accounts.accountname,accounts.accountnumber,users.email, accounts.type, accounts.status, accounts.balance FROM accounts INNER JOIN users ON users.id = accounts.owner';
       const { rows } = await database.query(text);
       if (rows.length === 0) {
         rows[0] = {
@@ -228,7 +224,7 @@ export default class AccountMiddleware {
         data: rows,
       });
     }
-    const text = 'SELECT accounts.createdon,accounts.accountnumber,users.email, accounts.type, accounts.status, accounts.balance FROM accounts INNER JOIN users ON users.id = accounts.owner WHERE accounts.status = $1';
+    const text = 'SELECT accounts.createdon,accounts.accountname,accounts.accountnumber,users.email, accounts.type, accounts.status, accounts.balance FROM accounts INNER JOIN users ON users.id = accounts.owner WHERE accounts.status = $1';
     const { rows } = await database.query(text, [req.query.status]);
     if (rows.length === 0) {
       rows[0] = {
