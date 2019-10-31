@@ -5,9 +5,9 @@ const userText = 'INSERT INTO users(firstname, lastname, email, type, password, 
 const userValues1 = ['Dan', 'Webstar', 'dan@yahoo.com', 'staff', bcrypt.hashSync('brocky', 8), true];
 const userValues2 = ['John', 'Lock', 'john@yahoo.com', 'client', bcrypt.hashSync('brocky', 8), false];
 const userValues3 = ['Johnna', 'Lockdown', 'johnna@yahoo.com', 'staff', bcrypt.hashSync('brocky', 8), false];
-const accountText = 'INSERT INTO accounts(createdon, owner, type) VALUES($1, $2, $3)';
-const accountValues1 = [new Date(), 1, 'current'];
-const accountValues2 = [new Date(), 2, 'current'];
+const accountText = 'INSERT INTO accounts(createdon, owner, type, accountname) VALUES($1, $2, $3, $4)';
+const accountValues1 = [new Date(), 1, 'current', 'John Wick'];
+const accountValues2 = [new Date(), 2, 'current', 'James Dean'];
 const transactionText = 'INSERT INTO transactions(createdon, type, accountnumber, cashier, amount, oldbalance, newbalance) VALUES($1, $2, $3, $4, $5, $6, $7)';
 const transactionValues = [new Date(), 'credit', 30772001, 1, 100.00, 0.00, 100.00];
 
@@ -15,7 +15,7 @@ const seedTables = async (query, values) => {
   try {
     return await database.query(query, values);
   } catch (error) {
-    return console.error(error);
+    return console.error('seeding tables', error);
   }
 };
 

@@ -8,7 +8,7 @@ export default class TransactionService {
       const valid = Util.check(res, {
         amount: req.body.amount,
         'account number': req.params.accountNumber,
-      }, 'creditSchema');
+      }, 'transactionSchema');
       if (valid) {
         const acct = await Util.getAccount(res, req.params.accountNumber);
         if (!acct) {

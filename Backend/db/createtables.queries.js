@@ -4,6 +4,7 @@ import database from './index';
 const accountText = `create table if not exists accounts(
     id serial not null,
     accountNumber serial unique not null,
+    accountname varchar(20) not null,
     createdOn date not null,
     owner int references users(id) not null,
     type varchar(10) not null,
