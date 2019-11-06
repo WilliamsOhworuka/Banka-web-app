@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import joi from '@hapi/joi';
+import bcrypt from 'bcrypt';
 import jwtDecode from 'jwt-decode';
 import dotenv from 'dotenv';
 import database from '../db/index';
@@ -41,6 +42,16 @@ export default class Util {
         });
       },
     );
+  }
+
+  static async checkPassword(password, id, res) {
+    const user = await Util.getUserById(res, id);
+    const passwordMatch = bcrypt.compareSync(password, user.password);
+
+    if (!passwordMatch) {
+      return false;
+    }
+    return true;
   }
 
   static check(res, properties, scheme) {
