@@ -12,6 +12,35 @@ export default class {
     return undefined;
   }
 
+  static async checkPassword(req, res, next) {
+    const { body: { oldPassword, newPassword }, params: { id } } = req;
+    const valid = Util.check(res, { oldPassword, newPassword }, 'changePasswordSchema');
+    let user;
+
+    if (!valid) {
+      return undefined;
+    }
+
+    try {
+      user = await Util.getUserById(res, id);
+    } catch (err) {
+      return res.status(500).json({
+        status: 500,
+        error: err.message,
+      });
+    }
+
+    const passwordMatch = bcrypt.compareSync(oldPassword, user.password);
+
+    if (!passwordMatch || newPassword === oldPassword) {
+      return res.status(403).json({
+        status: 403,
+        error: 'Invalid password',
+      });
+    }
+    return next();
+  }
+
   static async checkExistence(req, res, next) {
     const text = 'SELECT * FROM users WHERE email = $1';
     const value = [req.body.email];

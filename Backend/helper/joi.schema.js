@@ -46,6 +46,11 @@ export default {
     lastname: joi.string().regex(/^\S*$/).required(),
   }),
 
+  changePasswordSchema: joi.object().keys({
+    newPassword: joi.string().min(6).required(),
+    oldPassword: joi.string().min(6).required(),
+  }),
+
   createAccountSchema: joi.object().keys({
     'account type': joi.string().valid(['savings', 'current']).insensitive().required(),
     'account name': joi.string().regex(/^[a-zA-Z][-\sa-zA-Z]+$/).required(),
