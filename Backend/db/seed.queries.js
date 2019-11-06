@@ -8,8 +8,8 @@ const userValues3 = ['Johnna', 'Lockdown', 'johnna@yahoo.com', 'staff', bcrypt.h
 const accountText = 'INSERT INTO accounts(createdon, owner, type, accountname) VALUES($1, $2, $3, $4)';
 const accountValues1 = [new Date(), 1, 'current', 'John Wick'];
 const accountValues2 = [new Date(), 2, 'current', 'James Dean'];
-const transactionText = 'INSERT INTO transactions(createdon, type, accountnumber, cashier, amount, oldbalance, newbalance) VALUES($1, $2, $3, $4, $5, $6, $7)';
-const transactionValues = [new Date(), 'credit', 30772001, 1, 100.00, 0.00, 100.00];
+const transactionText = 'INSERT INTO transactions(createdon, type, remark, accountnumber, cashier, amount, oldbalance, newbalance) VALUES($1, $2, $3, $4, $5, $6, $7, $8)';
+const transactionValues = [new Date(), 'credit', 'Card Maintenace Fee', 30772001, 1, 100.00, 0.00, 100.00];
 
 const seedTables = async (query, values) => {
   try {

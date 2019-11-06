@@ -101,9 +101,11 @@ export default class Util {
       },
       'string.regex.base': {
         msg: `invalid ${path}`,
+        field: path,
       },
       'number.base': {
         msg: `invalid ${path}`,
+        field: path,
       },
       'number.min': {
         msg: `invalid ${path}`,
@@ -164,18 +166,19 @@ export default class Util {
   static async getUserById(res, id) {
     const text = 'SELECT * FROM users WHERE id = $1';
     const value = [id];
-    try {
-      const { rows } = await database.query(text, value);
-      if (!rows[0]) {
-        return false;
-      }
-      return rows[0];
-    } catch (err) {
-      return res.status(500).json({
-        status: 500,
-        error: err.message,
-      });
+    const { rows } = await database.query(text, value);
+    if (!rows[0]) {
+      return false;
     }
+    return rows[0];
+  }
+
+  static checkProfileOwner(req, userId) {
+    const { id } = Util.getInfoFromToken(req);
+    if (id === Number(userId)) {
+      return true;
+    }
+    return false;
   }
 
   static async ownerInfo(req, res) {

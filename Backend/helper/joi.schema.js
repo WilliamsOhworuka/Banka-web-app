@@ -18,6 +18,7 @@ export default {
 
   transactionSchema: joi.object().keys({
     amount: joi.number().min(0.1).required(),
+    remark: joi.string().regex(/(?!^\d.+$)^[a-z0-9]*[a-z0-9].+$/i).required(),
     'account number': joi.number().integer().min(30772001).max(30999999),
   }),
 
@@ -39,6 +40,21 @@ export default {
     'account type': joi.string().valid(['savings', 'current']).insensitive(),
     'transaction id': joi.number(),
     email: joi.string().email(),
+  }),
+
+  editFullnameSchema: joi.object().keys({
+    firstname: joi.string().regex(/^\S*$/).required(),
+    lastname: joi.string().regex(/^\S*$/).required(),
+  }),
+
+  editEmailSchema: joi.object().keys({
+    email: joi.string().email().required(),
+    password: joi.string().min(6).required(),
+  }),
+
+  changePasswordSchema: joi.object().keys({
+    newPassword: joi.string().min(6).required(),
+    oldPassword: joi.string().min(6).required(),
   }),
 
   createAccountSchema: joi.object().keys({

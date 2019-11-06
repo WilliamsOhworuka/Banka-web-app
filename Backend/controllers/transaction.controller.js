@@ -3,7 +3,7 @@ import Util from '../helper/util.helper';
 
 export default class {
   static async getTransactions(req, res) {
-    const text = 'SELECT id AS transactionId, createdon, type, accountnumber, amount, oldbalance, newbalance FROM transactions WHERE accountnumber = $1';
+    const text = 'SELECT id AS transactionId, createdon, type, remark, accountnumber, amount, oldbalance, newbalance FROM transactions WHERE accountnumber = $1';
     try {
       const { rows } = await database.query(text, [req.params.accountNumber]);
       return res.status(200).json({
@@ -19,7 +19,7 @@ export default class {
   }
 
   static async getTransaction(req, res) {
-    const text = 'SELECT id AS transactionId, createdon, type, accountnumber, amount, oldbalance, newbalance FROM transactions WHERE id = $1';
+    const text = 'SELECT id AS transactionId, createdon, type, remark, accountnumber, amount, oldbalance, newbalance FROM transactions WHERE id = $1';
     try {
       const { rows } = await database.query(text, [req.params.transaction_id]);
       if (!rows[0]) {
@@ -41,7 +41,7 @@ export default class {
   }
 
   static async getUserTransactions(req, res) {
-    const text = `SELECT transactions.createdon,transactions.type,transactions.amount,
+    const text = `SELECT transactions.createdon, transactions.remark, transactions.type,transactions.amount,
                   transactions.accountnumber,transactions.oldbalance, transactions.newbalance 
                   FROM transactions INNER JOIN accounts 
                   ON accounts.accountnumber = transactions.accountnumber

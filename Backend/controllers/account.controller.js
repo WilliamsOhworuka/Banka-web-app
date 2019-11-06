@@ -43,10 +43,11 @@ export default class AccountMiddleware {
     const userInfo = Util.getInfoFromToken(req);
     const acct = await Util.getAccount(res, req.params.accountNumber);
     const newBalance = acct.balance;
-    const text = 'INSERT INTO transactions(createdon, type, accountnumber, cashier, amount, oldbalance, newbalance) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
+    const text = 'INSERT INTO transactions(createdon, type, remark, accountnumber, cashier, amount, oldbalance, newbalance) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *';
     const values = [
       new Date(),
       req.body.type,
+      req.body.remark,
       req.params.accountNumber,
       userInfo.id,
       req.body.amount,
@@ -63,8 +64,9 @@ export default class AccountMiddleware {
           id: transaction.id,
           accountNumber: acct.accountnumber,
           amount: parseFloat(req.body.amount),
+          remark: rows[0].remark,
           cashier: userInfo.id,
-          transactionType: req.body.type,
+          transactionType: rows[0].type,
           accountBalance: acct.balance,
         },
         message: `Account ${req.body.type}ed`,

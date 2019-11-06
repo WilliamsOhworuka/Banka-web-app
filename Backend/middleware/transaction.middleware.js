@@ -7,6 +7,7 @@ export default class TransactionService {
     if (!userInfo.isAdmin) {
       const valid = Util.check(res, {
         amount: req.body.amount,
+        remark: req.body.remark,
         'account number': req.params.accountNumber,
       }, 'transactionSchema');
       if (valid) {
@@ -38,6 +39,7 @@ export default class TransactionService {
     if (!userInfo.isAdmin) {
       const valid = Util.check(res, {
         amount: req.body.amount,
+        remark: req.body.remark,
         'account number': req.params.accountNumber,
       }, 'transactionSchema');
       if (valid) {

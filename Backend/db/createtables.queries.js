@@ -29,6 +29,7 @@ const transactionText = `create table if not exists transactions(
     type varchar(10) not null,
     accountNumber int references accounts(accountnumber) not null,
     cashier int references users(id) not null,
+    remark varchar(10000000) not null,
     amount numeric(10,2) not null,
     oldBalance numeric(10,2) not null,
     newBalance numeric(10,2) not null
