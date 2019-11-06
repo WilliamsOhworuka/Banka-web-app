@@ -41,6 +41,21 @@ export default {
     email: joi.string().email(),
   }),
 
+  editFullnameSchema: joi.object().keys({
+    firstname: joi.string().regex(/^\S*$/).required(),
+    lastname: joi.string().regex(/^\S*$/).required(),
+  }),
+
+  editEmailSchema: joi.object().keys({
+    email: joi.string().email().required(),
+    password: joi.string().min(6).required(),
+  }),
+
+  changePasswordSchema: joi.object().keys({
+    newPassword: joi.string().min(6).required(),
+    oldPassword: joi.string().min(6).required(),
+  }),
+
   createAccountSchema: joi.object().keys({
     'account type': joi.string().valid(['savings', 'current']).insensitive().required(),
     'account name': joi.string().regex(/^[a-zA-Z][-\sa-zA-Z]+$/).required(),
