@@ -1,14 +1,36 @@
 import database from '../db/index';
 import Util from '../helper/util.helper';
+import transactionHelpers from '../helper/transactions.helper';
+
+const {
+  getAccountTransactions, getAllAccountTransactions,
+  getAllAccountTransactionsCount, getAllUserTransactions,
+  getAllUserTransactionsCount, getUserTransactions,
+  getUserTransactionsCount, getAccountTransactionsCount,
+} = transactionHelpers;
 
 export default class {
   static async getTransactions(req, res) {
-    const text = 'SELECT id AS transactionId, createdon, type, remark, accountnumber, amount, oldbalance, newbalance FROM transactions WHERE accountnumber = $1';
+    const { query: { search } } = req;
+
     try {
-      const { rows } = await database.query(text, [req.params.accountNumber]);
+      if (search) {
+        const { 0: { count } } = await getAccountTransactionsCount(req, search);
+        const rows = await getAccountTransactions(req, search);
+
+        return res.status(200).json({
+          status: 200,
+          data: rows,
+          total: count,
+        });
+      }
+      const { 0: { count } } = await getAllAccountTransactionsCount(req);
+      const rows = await getAllAccountTransactions(req);
+
       return res.status(200).json({
         status: 200,
         data: rows,
+        total: count,
       });
     } catch (error) {
       return res.status(500).json({
@@ -41,15 +63,7 @@ export default class {
   }
 
   static async getUserTransactions(req, res) {
-    const text = `SELECT transactions.createdon, transactions.remark, transactions.type,transactions.amount,
-                  transactions.accountnumber,transactions.oldbalance, transactions.newbalance 
-                  FROM transactions INNER JOIN accounts 
-                  ON accounts.accountnumber = transactions.accountnumber
-                  INNER JOIN users ON users.id = accounts.owner
-                  WHERE users.id = $1
-                  LIMIT $2 OFFSET $3`;
-    const values = [req.params.userId, req.query.limit, req.query.offset];
-
+    const { query: { search } } = req;
     const staff = Util.checkStaffAccess(req);
     const owner = Util.getInfoFromToken(req);
 
@@ -59,18 +73,30 @@ export default class {
         error: 'Unauthorized user',
       });
     }
-
     try {
-      const { rows } = await database.query(text, values);
+      if (search) {
+        const { 0: { count } } = await getUserTransactionsCount(req, search);
+        const rows = await getUserTransactions(req, search);
+
+        return res.status(200).json({
+          status: 200,
+          data: rows,
+          total: count,
+        });
+      }
+
+      const { 0: { count } } = await getAllUserTransactionsCount(req);
+      const rows = await getAllUserTransactions(req);
 
       return res.status(200).json({
         status: 200,
         data: rows,
+        total: count,
       });
     } catch (error) {
       return res.status(500).json({
         status: 500,
-        error: 'Something went wrong',
+        error: error.message,
       });
     }
   }

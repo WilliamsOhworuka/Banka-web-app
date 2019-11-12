@@ -76,6 +76,7 @@ export default class TransactionService {
   static async checkOwner(req, res, next) {
     const userinfo = Util.getInfoFromToken(req);
     const user = await Util.getUserById(res, userinfo.id);
+    const staff = Util.checkStaffAccess(req);
     const valid = Util.check(res, { 'account number': req.params.accountNumber }, 'generalSchema');
     if (valid) {
       const account = await Util.getAccount(res, req.params.accountNumber);
@@ -94,7 +95,7 @@ export default class TransactionService {
         });
       }
 
-      if (user.id !== account.owner) {
+      if (user.id !== account.owner && !staff) {
         return res.status(401).json({
           status: 401,
           error: 'unauthorized user',

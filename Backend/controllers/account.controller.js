@@ -1,7 +1,7 @@
 import Util from '../helper/util.helper';
 import database from '../db/index';
 
-export default class AccountMiddleware {
+export default class {
   static async createAccount(req, res) {
     let owner;
 

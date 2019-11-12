@@ -25,7 +25,7 @@ const userText = `create table if not exists users(
 
 const transactionText = `create table if not exists transactions(
     id serial primary key,
-    createdOn date not null,
+    createdOn timestamptz not null,
     type varchar(10) not null,
     accountNumber int references accounts(accountnumber) not null,
     cashier int references users(id) not null,
