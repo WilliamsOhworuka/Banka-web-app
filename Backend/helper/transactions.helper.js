@@ -52,8 +52,13 @@ const getAllUserTransactionsCount = async (req) => {
   return rows;
 };
 
-const getUserTransactions = async (req, param) => {
-  const { query: { limit, order = 'desc', lts }, params: { userId } } = req;
+const getUserTransactions = async (req) => {
+  const {
+    query: {
+      limit, order = 'desc', lts, search,
+    }, params: { userId },
+  } = req;
+  const param = search.toLowerCase();
   let text;
   let values;
   if (lts && order === 'desc') {
@@ -62,7 +67,7 @@ const getUserTransactions = async (req, param) => {
     FROM transactions INNER JOIN accounts 
     ON accounts.accountnumber = transactions.accountnumber
     INNER JOIN users ON users.id = accounts.owner
-    WHERE users.id = $1 AND transactions.createdon <= $3 AND (transactions.remark LIKE '%${param}%' OR transactions.type LIKE '%${param}%'
+    WHERE users.id = $1 AND transactions.createdon <= $3 AND (lower(transactions.remark) LIKE '%${param}%' OR lower(transactions.type) LIKE '%${param}%'
     OR CAST(transactions.createdon as VarChar) LIKE '%${param}%'
     OR CAST(transactions.accountnumber as VarChar) LIKE '%${param}%')
     ORDER BY transactions.createdon DESC
@@ -74,7 +79,7 @@ const getUserTransactions = async (req, param) => {
     FROM transactions INNER JOIN accounts 
     ON accounts.accountnumber = transactions.accountnumber
     INNER JOIN users ON users.id = accounts.owner
-    WHERE users.id = $1 AND transactions.createdon >= $3 AND (transactions.remark LIKE '%${param}%' OR transactions.type LIKE '%${param}%'
+    WHERE users.id = $1 AND transactions.createdon >= $3 AND (lower(transactions.remark) LIKE '%${param}%' OR lower(transactions.type) LIKE '%${param}%'
     OR CAST(transactions.createdon as VarChar) LIKE '%${param}%'
     OR CAST(transactions.accountnumber as VarChar) LIKE '%${param}%')
     ORDER BY transactions.createdon ASC
@@ -86,7 +91,7 @@ const getUserTransactions = async (req, param) => {
     FROM transactions INNER JOIN accounts 
     ON accounts.accountnumber = transactions.accountnumber
     INNER JOIN users ON users.id = accounts.owner
-    WHERE users.id = $1 AND (transactions.remark LIKE '%${param}%' OR transactions.type LIKE '%${param}%'
+    WHERE users.id = $1 AND (lower(transactions.remark) LIKE '%${param}%' OR lower(transactions.type) LIKE '%${param}%'
     OR CAST(transactions.createdon as VarChar) LIKE '%${param}%'
     OR CAST(transactions.accountnumber as VarChar) LIKE '%${param}%')
     ORDER BY transactions.createdon ${order}
@@ -98,15 +103,17 @@ const getUserTransactions = async (req, param) => {
   return rows;
 };
 
-const getUserTransactionsCount = async (req, param) => {
+const getUserTransactionsCount = async (req) => {
+  const { params: { userId }, query: { search } } = req;
+  const param = search.toLowerCase();
   const text = `SELECT COUNT(transactions.id)
                       FROM transactions INNER JOIN accounts 
                       ON accounts.accountnumber = transactions.accountnumber
                       INNER JOIN users ON users.id = accounts.owner
-                      WHERE users.id = $1 AND (transactions.remark LIKE '%${param}%' OR transactions.type LIKE '%${param}%'
+                      WHERE users.id = $1 AND (lower(transactions.remark) LIKE '%${param}%' OR lower(transactions.type) LIKE '%${param}%'
                       OR CAST(transactions.createdon as VarChar) LIKE '%${param}%'
                       OR CAST(transactions.accountnumber as VarChar) LIKE '%${param}%')`;
-  const values = [req.params.userId];
+  const values = [userId];
   const { rows } = await database.query(text, values);
   return rows;
 };
@@ -153,15 +160,20 @@ const getAllAccountTransactionsCount = async (req) => {
   return rows;
 };
 
-const getAccountTransactions = async (req, param) => {
-  const { query: { limit, order = 'DESC', lts } } = req;
+const getAccountTransactions = async (req) => {
+  const {
+    query: {
+      limit, order = 'DESC', lts, search,
+    },
+  } = req;
+  const param = search.toLowerCase();
   let text;
   let values;
   if (lts && order === 'desc') {
     text = `SELECT createdon, remark, type, amount,
     accountnumber,oldbalance, newbalance 
      FROM transactions 
-     WHERE accountnumber = $1 AND createdon <= $3 AND (remark LIKE '%${param}%' OR type LIKE '%${param}%'
+     WHERE accountnumber = $1 AND createdon <= $3 AND (lower(remark) LIKE '%${param}%' OR lower(type) LIKE '%${param}%'
      OR CAST(createdon as VarChar) LIKE '%${param}%'
      OR CAST(accountnumber as VarChar) LIKE '%${param}%')
      order by createdon DESC
@@ -171,7 +183,7 @@ const getAccountTransactions = async (req, param) => {
     text = `SELECT createdon, remark, type, amount,
     accountnumber,oldbalance, newbalance 
      FROM transactions 
-     WHERE accountnumber = $1 AND createdon >= $3 AND (remark LIKE '%${param}%' OR type LIKE '%${param}%'
+     WHERE accountnumber = $1 AND createdon >= $3 AND (lower(remark) LIKE '%${param}%' OR lower(type) LIKE '%${param}%'
      OR CAST(createdon as VarChar) LIKE '%${param}%'
      OR CAST(accountnumber as VarChar) LIKE '%${param}%')
      order by createdon ASC
@@ -181,7 +193,7 @@ const getAccountTransactions = async (req, param) => {
     text = `SELECT createdon, remark, type, amount,
     accountnumber,oldbalance, newbalance 
      FROM transactions 
-     WHERE accountnumber = $1 AND (remark LIKE '%${param}%' OR type LIKE '%${param}%'
+     WHERE accountnumber = $1 AND (lower(remark) LIKE '%${param}%' OR lower(type) LIKE '%${param}%'
      OR CAST(createdon as VarChar) LIKE '%${param}%'
      OR CAST(accountnumber as VarChar) LIKE '%${param}%')
      ORDER BY createdon ${order}
@@ -192,13 +204,15 @@ const getAccountTransactions = async (req, param) => {
   return rows;
 };
 
-const getAccountTransactionsCount = async (req, param) => {
+const getAccountTransactionsCount = async (req) => {
+  const { params: { accountNumber }, query: { search } } = req;
+  const param = search.toLowerCase();
   const text = `SELECT COUNT(transactions.id)
                         FROM transactions 
-                        WHERE accountnumber = $1 AND (remark LIKE '%${param}%' OR type LIKE '%${param}%'
+                        WHERE accountnumber = $1 AND (lower(remark) LIKE '%${param}%' OR lower(type) LIKE '%${param}%'
                         OR CAST(createdon as VarChar) LIKE '%${param}%'
                         OR CAST(accountnumber as VarChar) LIKE '%${param}%')`;
-  const values = [req.params.accountNumber];
+  const values = [accountNumber];
   const { rows } = await database.query(text, values);
   return rows;
 };
