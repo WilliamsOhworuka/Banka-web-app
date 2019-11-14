@@ -7,29 +7,61 @@ const {
   getAllAccountTransactionsCount, getAllUserTransactions,
   getAllUserTransactionsCount, getUserTransactions,
   getUserTransactionsCount, getAccountTransactionsCount,
+  getAccountTypeTransactions, getAccountTypeTransactionsCount,
+  getUserTypeTransactions, getUserTypeTransactionsCount,
+  getCurrentAccountTransactionsCount, getCurrentUserTransactionsCount,
 } = transactionHelpers;
 
 export default class {
   static async getTransactions(req, res) {
-    const { query: { search } } = req;
+    const {
+      query: {
+        search, lts, type, limit,
+      },
+    } = req;
 
     try {
-      if (search) {
-        const { 0: { count } } = await getAccountTransactionsCount(req, search);
-        const rows = await getAccountTransactions(req, search);
+      if (type) {
+        const { 0: { count } } = await getAccountTypeTransactionsCount(req);
+        const rows = await getAccountTypeTransactions(req);
+        const next = rows ? rows[rows.length - 1].createdon : null;
+        const current = limit < count ? limit : count;
+        const currentCount = lts ? await getCurrentAccountTransactionsCount(req) : current;
 
         return res.status(200).json({
           status: 200,
           data: rows,
+          next,
+          currentCount,
+          total: count,
+        });
+      }
+      if (search) {
+        const { 0: { count } } = await getAccountTransactionsCount(req);
+        const rows = await getAccountTransactions(req);
+        const next = rows ? rows[rows.length - 1].createdon : null;
+        const current = limit < count ? limit : count;
+        const currentCount = lts ? await getCurrentAccountTransactionsCount(req) : current;
+
+        return res.status(200).json({
+          status: 200,
+          data: rows,
+          next,
+          currentCount,
           total: count,
         });
       }
       const { 0: { count } } = await getAllAccountTransactionsCount(req);
       const rows = await getAllAccountTransactions(req);
+      const next = rows ? rows[rows.length - 1].createdon : null;
+      const current = limit < count ? limit : count;
+      const currentCount = lts ? await getCurrentAccountTransactionsCount(req) : current;
 
       return res.status(200).json({
         status: 200,
         data: rows,
+        next,
+        currentCount,
         total: count,
       });
     } catch (error) {
@@ -63,7 +95,11 @@ export default class {
   }
 
   static async getUserTransactions(req, res) {
-    const { query: { search } } = req;
+    const {
+      query: {
+        search, type, limit, lts,
+      },
+    } = req;
     const staff = Util.checkStaffAccess(req);
     const owner = Util.getInfoFromToken(req);
 
@@ -74,23 +110,48 @@ export default class {
       });
     }
     try {
-      if (search) {
-        const { 0: { count } } = await getUserTransactionsCount(req, search);
-        const rows = await getUserTransactions(req, search);
+      if (type) {
+        const { 0: { count } } = await getUserTypeTransactionsCount(req);
+        const rows = await getUserTypeTransactions(req);
+        const next = rows ? rows[rows.length - 1].createdon : null;
+        const current = limit < count ? limit : count;
+        const currentCount = lts ? await getCurrentUserTransactionsCount(req) : current;
 
         return res.status(200).json({
           status: 200,
           data: rows,
+          next,
+          currentCount,
+          total: count,
+        });
+      }
+      if (search) {
+        const { 0: { count } } = await getUserTransactionsCount(req);
+        const rows = await getUserTransactions(req);
+        const next = rows ? rows[rows.length - 1].createdon : null;
+        const current = limit < count ? limit : count;
+        const currentCount = lts ? await getCurrentUserTransactionsCount(req) : current;
+
+        return res.status(200).json({
+          status: 200,
+          data: rows,
+          next,
+          currentCount,
           total: count,
         });
       }
 
       const { 0: { count } } = await getAllUserTransactionsCount(req);
       const rows = await getAllUserTransactions(req);
+      const next = rows ? rows[rows.length - 1].createdon : null;
+      const current = limit < count ? limit : count;
+      const currentCount = lts ? await getCurrentUserTransactionsCount(req) : current;
 
       return res.status(200).json({
         status: 200,
         data: rows,
+        next,
+        currentCount,
         total: count,
       });
     } catch (error) {
